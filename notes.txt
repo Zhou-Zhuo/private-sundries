@@ -1,0 +1,58 @@
+* Connect to VPN：
+ 1.install client:
+   $ sudo apt-get install pptp-linux
+ 2.connect:
+   $ sudo pptpsetup --create connection --server x.x.x.x --username user --encrypt 
+
+* Change Chinese directory name in /home/user to English:
+ export LANG=en_US
+ xdg-user-dirs-gtk-update
+ export LANG=zh_CN
+
+* vim tips
+  press '#' or '*' to search the word under the cursor
+
+* Use USB in VirtualBox
+  1.install extention package
+  2.add current user to group vboxusers:
+    $ usermod -a -G vboxusers username
+	
+  Note that the version of Virtualbox,GuestAdditions and Extentions should
+  be the same!
+
+* tmux keys:
+  escape: C-a
+  select window: C-a-[hjkl]
+  resize window: C-a-[<up><down><left><right>]
+  scroll: C-a,[
+
+* Change your gnome theme:
+  Install gnome-shell-extentions, and gnome-tweak-tool. Enable "User Theme" 
+  in gnome-tweak-tool.
+  Move your theme directory into ~/.theme or /usr/share/theme. Then you can
+  select your theme in gnome-tweak-tool.
+  NOTE the version of gnome!
+
+  Icons: Move your icons directory into ~/.icons. Select your icon theme in
+  gnome-tweak-tool.
+
+  My current theme:
+  Gnome-shell: White
+  WM: OS X Capitan
+  Icon: Vivacious-Colors
+
+* Run 32-bit programs on 64-bit Ubuntu:
+  Install lib32z1 and lib32stdc++6
+
+* Add and remove PPA:
+  Add:
+	  $ sudo add-apt-repository ppa:what/ppa
+  Remove:
+	  $ sudo add-apt-repository --remove ppa:what/ppa
+
+* Cannot connect Android device via ADB?
+  Edit /etc/udev/rule.d/xx.rule.
+  Maybe the version of adb is too low.
+  Still not work? Check if your USB port is taken by any virtual machine.
+
+* GTK program exit with error? Try to reconfig your gtk-theme.
