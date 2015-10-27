@@ -58,3 +58,7 @@
 * GTK program exit with error? Try to reconfig your gtk-theme.
 
 * When use 'ln -s path symbol', 'path' should be the absolute path of file.
+
+* To display the fancy theme of oh-my-zsh normally, the PATCHED powerline 
+  font must be installed, and the terminal font should be set to a 
+  for-powerline one.

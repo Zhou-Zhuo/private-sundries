@@ -10,6 +10,12 @@ set smarttab
 set cindent
 set nu
 
+" setting for powerline status-line
+" set guifont=PowerlineSymbols\ for\ Powerline
+" set nocompatible 
+" set t_Co=256
+" let g:Powerline_symbols='fancy'
+
 " highlight current line
 set cul
 hi CursorLine   cterm=NONE ctermbg=grey ctermfg=none
@@ -50,27 +56,28 @@ call vundle#rc()
 
 " let Vundle manage Vundle  
 " required!   
-" Bundle 'gmarik/vundle'  
+Plugin 'gmarik/vundle'  
 
 " 可以通过以下四种方式指定插件的来源  
 " a) 指定Github中vim-scripts仓库中的插件，直接指定插件名称即可，插件明中的空格使用“-”代替。  
-" Bundle 'L9'  
+" Plugin 'L9'  
 
 " b) 指定Github中其他用户仓库的插件，使用“用户名/插件名称”的方式指定  
-" Bundle 'tpope/vim-fugitive'  
-" Bundle 'Lokaltog/vim-easymotion'  
-" Bundle 'rstacruz/sparkup', {'rtp': 'vim/'}  
-" Bundle 'tpope/vim-rails.git'  
+" Plugin 'tpope/vim-fugitive'  
+" Plugin 'Lokaltog/vim-easymotion'  
+" Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}  
+" Plugin 'tpope/vim-rails.git'  
 
-" Bundle 'Conque-Shell'
+Plugin 'Conque-Shell'
 Plugin 'scrooloose/nerdtree'
 Plugin 'Xuyuanp/nerdtree-git-plugin'
-" Bundle 'NERDTree'
+Plugin 'bling/vim-airline'
+" Plugin 'Lokaltog/vim-powerline'
 
 " c) 指定非Github的Git仓库的插件，需要使用git地址  
-" Bundle 'git://git.wincent.com/command-t.git'  
+" Plugin 'git://git.wincent.com/command-t.git'  
 
 " d) 指定本地Git仓库中的插件  
-" Bundle 'file:///Users/gmarik/path/to/plugin'  
+" Plugin 'file:///Users/gmarik/path/to/plugin'  
 
 filetype plugin indent on     " required!  
