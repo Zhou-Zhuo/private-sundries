@@ -36,6 +36,9 @@ filetype plugin indent on     " required!
 " scheme
 colorscheme desert
 
+" set font
+set guifont=Bitstream\ Vera\ Sans\ Mono\ 11
+
 " tab setting
 set tabstop=4
 set softtabstop=4
