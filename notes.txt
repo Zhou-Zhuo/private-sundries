@@ -56,3 +56,5 @@
   Still not work? Check if your USB port is taken by any virtual machine.
 
 * GTK program exit with error? Try to reconfig your gtk-theme.
+
+* When use 'ln -s path symbol', 'path' should be the absolute path of file.
