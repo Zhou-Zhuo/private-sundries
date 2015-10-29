@@ -62,3 +62,10 @@
 * To display the fancy theme of oh-my-zsh normally, the PATCHED powerline 
   font must be installed, and the terminal font should be set to a 
   for-powerline one.
+
+* 'cut' is a awsome command when you want to get a field from a string.
+  For instance, when you type
+	  $ echo "f1 f2 f3"|cut -d' ' -f 2
+  you get
+	  f2
+  
