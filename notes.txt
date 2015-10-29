@@ -1,3 +1,54 @@
+* 使用">"符号使输出重定向,如:
+    ls > /tmp/temp.log 2>&1 
+  这样一来,ls可以在temp.log中查看ls输出信息.
+
+* qt中,信号槽机制仅QObject可以使用,而且必须声明Q_OBJCT宏.
+
+* QDialog用exec(),调用完后会阻塞,不会退出程序.
+
+* QList的append()会拷贝添加待内容．
+
+* QObject为保证slot等的唯一性，不允许拷贝．
+
+* list packages:
+    $ dpkg -l
+
+* 查看内核版本:
+    $ uname -a
+
+* 提示/boot 空间不足时,执行 dpkg --get-selections|grep linux 列出所有内核,再
+ apt-get purge 旧的内核
+
+* Show a file opened by which process:
+    $ lsof +d /DIR/
+    $ lsof +D /DIR/   
+
+* 用unar解压不会出现中文乱码。另，unar -e 选项可设定解压文件名的字符集。
+
+* Edit /etc/systemd/logind.conf to change power states.
+
+* 当系统从睡眠（休眠大概一样）中唤醒，亦会启动服务进程，大概init.d/目录下的
+ 都会启动。并且睡眠时ssh连接不会中断，只是不响应。
+
+* 用那些查看服务的命令找不到vsftpd,是因为vsftpd damon的启动机制不同，须修改
+ /etc/init/vsftpd.conf文件以禁止其自启。
+  Linux有两种机制用于启动服务，一个是源于Unix的System V Initialization,一个
+  是Upstart。vsftpd的启动便属于后者。前者的启动脚本放在/etc/init.d/中，且在
+  rcx.d文件夹中有这些脚本的软链接,在Ubuntu上用sysv-rc-conf命令可配置其自启。
+  后者的启动脚本放在/etc/init/中。
+
+* 执行 adb devices 前要先执行 sudo adb start-server
+
+* 开发板nfs连接PC：
+	$ mount -t nfs -o nolock,tcp ipaddr:/remote/dir /local/dir/
+  nfs服务器的配置文件在/etc/export。打开nfs服务：
+    $ service rpcbind start
+	$ service nfs-kernel-server start
+
+* kde无法启动，move ./kde/ away .
+
+* Use dcfldd instead of dd, to show the process of writing.
+
 * Connect to VPN：
  1.install client:
    $ sudo apt-get install pptp-linux
