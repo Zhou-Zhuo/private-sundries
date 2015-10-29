@@ -100,7 +100,7 @@ set timeoutlen=50
 
 " highlight current line
 set cul
-hi CursorLine cterm=NONE ctermbg=darkblue ctermfg=none
+hi CursorLine cterm=NONE ctermbg=0 ctermfg=none
 
 " add file path to window title
 set title
