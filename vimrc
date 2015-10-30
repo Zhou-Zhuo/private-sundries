@@ -26,7 +26,7 @@ Plugin 'bling/vim-airline'
 " To show git status in vim status line, vim-fugitive must be installed!!
 Plugin 'tpope/vim-fugitive'
 Plugin 'altercation/vim-colors-solarized'
-
+Plugin 'Valloric/YouCompleteMe'
 " c) 指定非Github的Git仓库的插件，需要使用git地址
 " Plugin 'git://git.wincent.com/command-t.git'
 
@@ -101,6 +101,9 @@ set timeoutlen=50
 " highlight current line
 set cul
 hi CursorLine cterm=NONE ctermbg=18 ctermfg=none
+
+" Popup menu color
+hi Pmenu ctermfg=15 ctermbg=13 guibg=Magenta
 
 " add file path to window title
 set title
