@@ -62,6 +62,9 @@
 
 * vim tips
   press '#' or '*' to search the word under the cursor
+  to let backspace work normally, add
+	set bs=2
+  to your vimrc
 
 * Use USB in VirtualBox
   1.install extention package
