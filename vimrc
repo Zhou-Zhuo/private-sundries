@@ -94,6 +94,8 @@ let g:airline_mode_map = {
 "let g:airline_section_b = '%{getcwd()}'
 "let g:airline_section_a = airline#section#create(['hunks', 'branch'])
 "let g:airline_section_b =
+" warning line is such an annoyrance
+let g:airline_section_warning = ''
 let g:airline#extensions#hunks#enabled=0
 let g:airline#extensions#branch#enabled=1
 
@@ -141,5 +143,5 @@ map <F2> :NERDTree<CR>
 map <F3> :NERDTreeToggle<CR>
 
 " find .ycm_extra.conf for YCM
-let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
+let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/examples/.ycm_extra_conf.py'
 
