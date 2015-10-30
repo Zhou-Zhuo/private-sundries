@@ -39,8 +39,14 @@ filetype plugin indent on     " required!
 " ron, slate. It seems that ron act better in C
 colorscheme ron
 
+" syntax highlight 
+syntax on
+
 " set font
 set guifont=Bitstream\ Vera\ Sans\ Mono\ 11
+
+" let backspace work normally
+set bs=2
 
 " tab setting
 set tabstop=4
@@ -133,4 +139,7 @@ set tags=tags;
 " NERDTree key-bind
 map <F2> :NERDTree<CR>
 map <F3> :NERDTreeToggle<CR>
+
+" find .ycm_extra.conf for YCM
+let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
 
