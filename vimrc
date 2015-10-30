@@ -107,6 +107,7 @@ set title
 
 set autowrite
 
+
 " restore cursor position in previous editing
 function! ResCur()
 	if line("'\"") <= line("$")
@@ -127,5 +128,6 @@ set hls
 set tags=tags;
 
 " NERDTree key-bind
+map <F2> :NERDTree<CR>
 map <F3> :NERDTreeToggle<CR>
 
