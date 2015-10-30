@@ -101,6 +101,7 @@ set timeoutlen=50
 " highlight current line
 set cul
 hi CursorLine cterm=NONE ctermbg=0 ctermfg=none
+hi Pmenu ctermfg=15 ctermbg=13 guibg=Magenta
 
 " add file path to window title
 set title
