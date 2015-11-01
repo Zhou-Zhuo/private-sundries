@@ -42,6 +42,9 @@ colorscheme ron
 " syntax highlight 
 syntax on
 
+" ignore case when search
+set ignorecase
+
 " set font
 set guifont=Bitstream\ Vera\ Sans\ Mono\ 11
 
@@ -109,6 +112,9 @@ set timeoutlen=50
 " highlight current line
 set cul
 hi CursorLine cterm=NONE ctermbg=18 ctermfg=none
+
+" Disable YCM syntax check
+let g:ycm_register_as_syntastic_checker=0
 
 " Popup menu color
 hi Pmenu ctermfg=15 ctermbg=13 guibg=Magenta

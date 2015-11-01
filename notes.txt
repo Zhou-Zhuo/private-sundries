@@ -123,3 +123,9 @@
   you get
 	  f2
   
+* Use lightdm instead of gdm, then everything works, but why?
+
+* To change the greeter of lightdm, set 
+	  [SeatDefaults]
+	  greeter-session=name
+  in /etc/lightdm.conf
