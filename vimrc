@@ -45,6 +45,7 @@ syntax on
 " ron, slate. It seems that ron act better in C
 set t_Co=256
 let g:solarized_termcolors=256
+let g:solarized_contract='high'
 set background=dark
 colorscheme solarized
 
