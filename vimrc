@@ -27,7 +27,7 @@ Plugin 'bling/vim-airline'
 " To show git status in vim status line, vim-fugitive must be installed!!
 Plugin 'tpope/vim-fugitive'
 Plugin 'altercation/vim-colors-solarized'
-Plugin 'Valloric/YouCompleteMe'
+"Plugin 'Valloric/YouCompleteMe'
 Plugin 'kien/ctrlp.vim'
  
 " c) 指定非Github的Git仓库的插件，需要使用git地址
@@ -152,8 +152,8 @@ nnoremap <F2> :NERDTree<CR>
 nnoremap <F3> :NERDTreeToggle<CR>
 nnoremap <F4> :TlistToggle<CR>
 
-nnoremap <C-j> :YcmCompleter GoToDefinitionElseDeclaration<CR>
-nnoremap <C-k> :b#<CR>
+"nnoremap <C-j> :YcmCompleter GoToDefinitionElseDeclaration<CR>
+"nnoremap <C-k> :b#<CR>
 
 
 " find .ycm_extra.conf for YCM

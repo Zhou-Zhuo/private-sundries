@@ -129,3 +129,9 @@
 	  [SeatDefaults]
 	  greeter-session=name
   in /etc/lightdm.conf
+
+* Fetch or clone specific tag from remote repo:
+	$ git fetch origin +refs/tags/vx.x.x --depth=1
+  or
+	$ git clone -b vx.x.x --depth 1
+
