@@ -12,6 +12,7 @@ Plugin 'gmarik/vundle'
 " 可以通过以下四种方式指定插件的来源
 " a) 指定Github中vim-scripts仓库中的插件，直接指定插件名称即可，插件明中的空格使用“-”代替。
 " Plugin 'L9'
+Plugin 'taglist.vim'
 
 " b) 指定Github中其他用户仓库的插件，使用“用户名/插件名称”的方式指定
 " Plugin 'tpope/vim-fugitive'
@@ -27,6 +28,8 @@ Plugin 'bling/vim-airline'
 Plugin 'tpope/vim-fugitive'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'Valloric/YouCompleteMe'
+Plugin 'kien/ctrlp.vim'
+ 
 " c) 指定非Github的Git仓库的插件，需要使用git地址
 " Plugin 'git://git.wincent.com/command-t.git'
 
@@ -145,8 +148,13 @@ set hls
 set tags=tags;
 
 " NERDTree key-bind
-map <F2> :NERDTree<CR>
-map <F3> :NERDTreeToggle<CR>
+nnoremap <F2> :NERDTree<CR>
+nnoremap <F3> :NERDTreeToggle<CR>
+nnoremap <F4> :TlistToggle<CR>
+
+nnoremap <C-j> :YcmCompleter GoToDefinitionElseDeclaration<CR>
+nnoremap <C-k> :b#<CR>
+
 
 " find .ycm_extra.conf for YCM
 let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/examples/.ycm_extra_conf.py'
