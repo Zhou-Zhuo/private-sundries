@@ -40,7 +40,7 @@ filetype plugin indent on     " required!
 
 " scheme
 " ron, slate. It seems that ron act better in C
-colorscheme ron
+colorscheme desert
 
 " syntax highlight 
 syntax on
