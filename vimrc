@@ -13,6 +13,8 @@ Plugin 'gmarik/vundle'
 " a) 指定Github中vim-scripts仓库中的插件，直接指定插件名称即可，插件明中的空格使用“-”代替。
 " Plugin 'L9'
 Plugin 'taglist.vim'
+" Too slow!
+" Plugin 'dkprice/vim-easygrep'
 
 " b) 指定Github中其他用户仓库的插件，使用“用户名/插件名称”的方式指定
 " Plugin 'tpope/vim-fugitive'
@@ -27,7 +29,7 @@ Plugin 'bling/vim-airline'
 " To show git status in vim status line, vim-fugitive must be installed!!
 Plugin 'tpope/vim-fugitive'
 Plugin 'altercation/vim-colors-solarized'
-"Plugin 'Valloric/YouCompleteMe'
+Plugin 'Valloric/YouCompleteMe'
 Plugin 'kien/ctrlp.vim'
  
 " c) 指定非Github的Git仓库的插件，需要使用git地址
@@ -110,7 +112,8 @@ let g:airline_symbols.branch = ''
 let g:airline_symbols.readonly = ''
 let g:airline_symbols.linenr = ''
 
-set timeoutlen=50
+set timeoutlen=500
+set ttimeoutlen=50
 
 " highlight current line
 set cul
@@ -152,8 +155,8 @@ nnoremap <F2> :NERDTree<CR>
 nnoremap <F3> :NERDTreeToggle<CR>
 nnoremap <F4> :TlistToggle<CR>
 
-"nnoremap <C-j> :YcmCompleter GoToDefinitionElseDeclaration<CR>
-"nnoremap <C-k> :b#<CR>
+nnoremap <C-j> :YcmCompleter GoToDefinitionElseDeclaration<CR>
+nnoremap <C-k> :b#<CR>
 
 
 " find .ycm_extra.conf for YCM
