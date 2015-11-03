@@ -1,0 +1,1 @@
+git config --global alias.lgb "log --graph --oneline --branches --tags --decorate"
