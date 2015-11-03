@@ -31,6 +31,7 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'kien/ctrlp.vim'
+Plugin 'scrooloose/syntastic'
  
 " c) 指定非Github的Git仓库的插件，需要使用git地址
 " Plugin 'git://git.wincent.com/command-t.git'
