@@ -69,6 +69,9 @@ set nu
 " setting for airline status-line
 set laststatus=2
 
+" show command typing in normal mode on status-line
+set showcmd
+
 " Problem maybe in vim-airline/autoload/airline/highlighter.vim:116
 " And do not use hybrid theme
 
@@ -115,6 +118,13 @@ let g:airline_symbols.linenr = ''
 
 set timeoutlen=500
 set ttimeoutlen=50
+
+let mapleader=','
+nnoremap <leader>co :copen<CR>
+nnoremap <leader>cx :cclose<CR>
+nnoremap <leader>m :nohls<CR>
+nnoremap <leader>n :cn<CR>
+nnoremap <C-n> :cn<CR>
 
 " highlight current line
 set cul

@@ -135,3 +135,9 @@
   or
 	$ git clone -b vx.x.x --depth 1
 
+* Use --exclude=GLOB option in grep to skip file whose name match pattern 
+  CLOB. For example:
+	$ grep 'pattern' -r . --exclude=tags
+
+* Press <C-s> in vim will lock it, to unlock, press <C-q>.
+
