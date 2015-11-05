@@ -141,3 +141,5 @@
 
 * Press <C-s> in vim will lock it, to unlock, press <C-q>.
 
+* If sudo could not find command, try to edit secure_path with 
+  'sudo visudo'

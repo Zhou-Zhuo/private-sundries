@@ -66,6 +66,7 @@ set smarttab
 set cindent
 set nu
 
+
 " setting for airline status-line
 set laststatus=2
 
@@ -119,12 +120,15 @@ let g:airline_symbols.linenr = ''
 set timeoutlen=500
 set ttimeoutlen=50
 
-let mapleader=','
-nnoremap <leader>co :copen<CR>
+let mapleader=';'
+nnoremap <leader>cc :copen<CR>
 nnoremap <leader>cx :cclose<CR>
 nnoremap <leader>m :nohls<CR>
 nnoremap <leader>n :cn<CR>
 nnoremap <C-n> :cn<CR>
+" the grep trick
+nnoremap <leader>gg :execute "grep \'\\<".shellescape(expand("<cword>"))."\\>\' -r ."<CR>
+
 
 " highlight current line
 set cul
