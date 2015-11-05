@@ -143,3 +143,6 @@
 
 * If sudo could not find command, try to edit secure_path with 
   'sudo visudo'
+
+* Want to halt after a job done? Just execute:
+	$ jobcommand;poweroff

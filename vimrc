@@ -125,9 +125,11 @@ nnoremap <leader>cc :copen<CR>
 nnoremap <leader>cx :cclose<CR>
 nnoremap <leader>m :nohls<CR>
 nnoremap <leader>n :cn<CR>
-nnoremap <C-n> :cn<CR>
+" work strange when I try to choose from quickfix window
+" nnoremap <C-N> :cn<CR>
+" nnoremap <C-M> :cp<CR>
 " the grep trick
-nnoremap <leader>gg :execute "grep \'\\<".shellescape(expand("<cword>"))."\\>\' -r ."<CR>
+nnoremap <leader>gg :execute "grep \'\\<".shellescape(expand("<cword>"))."\\>\' -r . --exclude=tags --exclude-dir=.git"<CR>
 
 
 " highlight current line
