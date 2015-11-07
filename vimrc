@@ -129,7 +129,8 @@ nnoremap <leader>n :cn<CR>
 " nnoremap <C-N> :cn<CR>
 " nnoremap <C-M> :cp<CR>
 " the grep trick
-nnoremap <leader>gg :execute "grep \'\\<".shellescape(expand("<cword>"))."\\>\' -r . --exclude=tags --exclude-dir=.git"<CR>
+nnoremap <leader>g : silent execute "grep \'\\<".shellescape(expand("<cword>"))."\\>\' -r . --exclude=tags --exclude-dir=.git "
+nnoremap <leader>gg : silent execute "grep \'\\<".shellescape(expand("<cword>"))."\\>\' -r . --exclude=tags --exclude-dir=.git "<CR>:copen<CR>
 
 
 " highlight current line
