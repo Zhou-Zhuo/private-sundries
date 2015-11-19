@@ -82,13 +82,20 @@ let g:airline_powerline_fonts = 1
 let g:bufferline_echo = 0
 let g:airline_theme = 'solarized'
 " AirlineTheme hybrid
-let g:airline_left_sep = ''
-let g:airline_left_alt_sep = ''
-let g:airline_right_sep = ''
-let g:airline_rght_alt_sep = ''
+"let g:airline_left_sep = ''
+"let g:airline_left_alt_sep = ''
+"let g:airline_right_sep = ''
+"let g:airline_rght_alt_sep = ''
+let g:airline_left_sep = '⮀'
+let g:airline_left_alt_sep = '⮁'
+let g:airline_right_sep = '⮂'
+let g:airline_right_alt_sep = '⮃'
 if !exists('g:airline_symbols')
 	let g:airline_symbols = {}
 endif
+let g:airline_symbols.branch = '⭠'
+let g:airline_symbols.readonly = '⭤'
+let g:airline_symbols.linenr = '⭡'
 
 let g:airline_mode_map = {
   \ '__' : '-',
@@ -114,9 +121,9 @@ let g:airline#extensions#hunks#enabled=0
 let g:airline#extensions#branch#enabled=1
 
 " TODO: Make branch status visiable
-let g:airline_symbols.branch = ''
-let g:airline_symbols.readonly = ''
-let g:airline_symbols.linenr = ''
+"let g:airline_symbols.branch = ''
+"let g:airline_symbols.readonly = ''
+"let g:airline_symbols.linenr = ''
 
 set timeoutlen=500
 set ttimeoutlen=50
