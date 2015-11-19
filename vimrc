@@ -31,7 +31,7 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'kien/ctrlp.vim'
-Plugin 'scrooloose/syntastic'
+" Plugin 'scrooloose/syntastic'
  
 " c) 指定非Github的Git仓库的插件，需要使用git地址
 " Plugin 'git://git.wincent.com/command-t.git'
@@ -77,9 +77,10 @@ set showcmd
 " And do not use hybrid theme
 
 set t_Co=256
+colorscheme solarized
 let g:airline_powerline_fonts = 1
 let g:bufferline_echo = 0
-let g:airline_theme = 'light'
+let g:airline_theme = 'solarized'
 " AirlineTheme hybrid
 let g:airline_left_sep = ''
 let g:airline_left_alt_sep = ''
@@ -135,13 +136,13 @@ nnoremap <leader>gg : silent execute "grep \'\\<".shellescape(expand("<cword>"))
 
 " highlight current line
 set cul
-hi CursorLine cterm=NONE ctermbg=18 ctermfg=none
+hi CursorLine cterm=NONE ctermbg=0 ctermfg=none
 
 " Disable YCM syntax check
 let g:ycm_register_as_syntastic_checker=0
 
 " Popup menu color
-hi Pmenu ctermfg=15 ctermbg=13 guibg=Magenta
+hi Pmenu ctermfg=29 ctermbg=15 guibg=Magenta
 
 " add file path to window title
 set title
