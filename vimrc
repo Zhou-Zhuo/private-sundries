@@ -135,6 +135,7 @@ nnoremap <leader>n :cn<CR>
 nnoremap <leader>g : silent execute "grep \'\\<".shellescape(expand("<cword>"))."\\>\' -r . --exclude=tags --exclude-dir=.git "
 nnoremap <leader>gg : silent execute "grep \'\\<".shellescape(expand("<cword>"))."\\>\' -r . --exclude=tags --exclude-dir=.git "<CR>:copen<CR>
 
+nnoremap <leader>w i/*  */<ESC>2hi
 
 " highlight current line
 set cul
