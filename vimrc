@@ -43,7 +43,7 @@ filetype plugin indent on     " required!
 
 " scheme
 " ron, slate. It seems that ron act better in C
-colorscheme desert
+" colorscheme solarized
 
 " syntax highlight 
 syntax on
@@ -76,7 +76,9 @@ set showcmd
 " Problem maybe in vim-airline/autoload/airline/highlighter.vim:116
 " And do not use hybrid theme
 
+set background=dark
 set t_Co=256
+let g:solarized_termcolor=256
 colorscheme solarized
 let g:airline_powerline_fonts = 1
 let g:bufferline_echo = 0
@@ -181,3 +183,5 @@ nnoremap <C-k> :b#<CR>
 " find .ycm_extra.conf for YCM
 let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/examples/.ycm_extra_conf.py'
 
+" need ?
+"let g:ycm_filetype_whitelist = { 'cpp': 1, 'c': 1, 'python':1 }
