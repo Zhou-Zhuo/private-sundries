@@ -153,6 +153,7 @@ set title
 
 set autowrite
 
+set background=dark
 
 " restore cursor position in previous editing
 function! ResCur()
