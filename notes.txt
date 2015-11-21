@@ -150,3 +150,5 @@
 * Large file in git repo make it very slow to execute 'git status', which 
   seems to be why it's so slow to show the oh-my-zsh-themed prompt in a git 
   work directory whose repo contains large tags file.
+
+* Press = in visual mode, autoindent the choosen code.

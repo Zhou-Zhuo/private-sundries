@@ -31,7 +31,7 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'kien/ctrlp.vim'
-Plugin 'scrooloose/syntastic'
+" Plugin 'scrooloose/syntastic'
  
 " c) 指定非Github的Git仓库的插件，需要使用git地址
 " Plugin 'git://git.wincent.com/command-t.git'
@@ -58,9 +58,9 @@ set guifont=Bitstream\ Vera\ Sans\ Mono\ 11
 set bs=2
 
 " tab setting
-set tabstop=4
-set softtabstop=4
-set shiftwidth=4
+set tabstop=8
+set softtabstop=8
+set shiftwidth=8
 set noexpandtab
 set smarttab
 set cindent
@@ -76,26 +76,26 @@ set showcmd
 " Problem maybe in vim-airline/autoload/airline/highlighter.vim:116
 " And do not use hybrid theme
 
+set background=dark
+"set t_Co=256
+"let g:solarized_termcolor=256
+"colorscheme solarized
 set t_Co=16
-"let g:solarized_termcolors = 256
 let g:airline_powerline_fonts = 1
 let g:bufferline_echo = 0
 let g:airline_theme = 'solarized'
-" AirlineTheme hybrid
-"let g:airline_left_sep = ''
-"let g:airline_left_alt_sep = ''
-"let g:airline_right_sep = ''
-"let g:airline_rght_alt_sep = ''
-let g:airline_left_sep = '⮀'
-let g:airline_left_alt_sep = '⮁'
-let g:airline_right_sep = '⮂'
-let g:airline_right_alt_sep = '⮃'
+let g:airline_left_sep = '>'
+"let g:airline_left_sep = '▶'
+let g:airline_left_sep = ''
+let g:airline_right_sep = '<'
+"let g:airline_right_sep = '◀'
+let g:airline_right_sep = ''
 if !exists('g:airline_symbols')
 	let g:airline_symbols = {}
 endif
-let g:airline_symbols.branch = '⭠'
-let g:airline_symbols.readonly = '⭤'
-let g:airline_symbols.linenr = '⭡'
+let g:airline_symbols.linenr = '␤'
+let g:airline_symbols.branch = '⎇'
+let g:airline_symbols.readonly = ''
 
 let g:airline_mode_map = {
   \ '__' : '-',
@@ -120,11 +120,6 @@ let g:airline_section_warning = ''
 let g:airline#extensions#hunks#enabled=0
 let g:airline#extensions#branch#enabled=1
 
-" TODO: Make branch status visiable
-"let g:airline_symbols.branch = ''
-"let g:airline_symbols.readonly = ''
-"let g:airline_symbols.linenr = ''
-
 set timeoutlen=500
 set ttimeoutlen=50
 
@@ -140,16 +135,17 @@ nnoremap <leader>n :cn<CR>
 nnoremap <leader>g : silent execute "grep \'\\<".shellescape(expand("<cword>"))."\\>\' -r . --exclude=tags --exclude-dir=.git "
 nnoremap <leader>gg : silent execute "grep \'\\<".shellescape(expand("<cword>"))."\\>\' -r . --exclude=tags --exclude-dir=.git "<CR>:copen<CR>
 
+nnoremap <leader>w i/*  */<ESC>2hi
 
 " highlight current line
 set cul
-hi CursorLine cterm=NONE ctermbg=0 ctermfg=none
+"hi CursorLine cterm=NONE ctermbg=8 ctermfg=none
 
 " Disable YCM syntax check
 let g:ycm_register_as_syntastic_checker=0
 
 " Popup menu color
-hi Pmenu ctermfg=15 ctermbg=13 guibg=Magenta
+hi Pmenu ctermfg=29 ctermbg=15 guibg=Magenta
 
 " add file path to window title
 set title
@@ -189,3 +185,5 @@ nnoremap <C-k> :b#<CR>
 " find .ycm_extra.conf for YCM
 let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/examples/.ycm_extra_conf.py'
 
+" need ?
+let g:ycm_filetype_whitelist = { 'cpp': 1, 'c': 1, 'python':1 }
