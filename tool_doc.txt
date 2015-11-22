@@ -1,0 +1,69 @@
+下载流程：
+1.片内下载，分区表为空，下载驻留程序prog_emmc_firehose_8909_ddr.mbn到芯片。这一步与工具交互的是芯片内部固化的引导程序
+	* 这一步失败可能是下载工具有问题，或者分区表已存在，可擦除分区表后重试
+2.下载工具解析rawprogram_unsparse.xml并根据此文件中的信息下载分区表、boot.img(注意此时的boot.img是个空文件，这样一来下一步bootloader找不到内核才会进入fastboot模式)和bootloader(emmc_appsboot.mbn文件)等，完成后解析patch0.xml调整分区表大小。这一步与工具交互的是上一步下载的驻留程序
+	* 这一步失败原因可能性比较多，可能是工具问题，可能是rawprogram_unsparse.xml或patch0.xml文件的问题，也可能是上一步加载的驻留程序文件有问题。这一步失败后必须擦除分区表，并从第一步重新开始下载
+3.fastboot模式下的下载，bootloader找不到内核后进入fastboot模式，下载工具调用emmc_update_all_factory.bat批处理程序下载boot.img、system.img等文件到芯片(具体下载了哪些文件可以用记事本打开这个批处理程序查看)。这一步与工具交互的是上一步下载的bootloader
+	* 这一步失败可能是上一步下载的文件的问题，或者rawprogram_unsparse.xml或patch0.xml文件的问题，也可能是emmc_update_all.bat批处理程序的问题。这一步失败后应检查上一步刷入文件以及bat程序是否正确，检查无误后重新进行此步骤即可
+
+下面解释一下下载工具中一些比较重要的文件的作用
+.
+├── adb.exe
+├── AdbWinUsbApi.dll
+├── emmc_update_all.bat -- 用于fastboot升级，组装升级时调用此文件
+├── emmc_update_all_factory.bat -- 用于fastboot升级，完成片内加载后调用此文件
+├── emmc_update_all.sh
+├── fastboot.exe
+├── image -- 各个下载步骤中用到的镜像
+│   ├── android -- 组装升级时用到的镜像
+│   │   ├── boot.img -- 内核镜像
+│   │   ├── cache.img -- 
+│   │   ├── emmc_appsboot.mbn -- bootloader，内核引导器，进入fastboot模式必不可少
+│   │   ├── persist.img
+│   │   ├── recovery.img -- recovery包，进入recovery模式必不可少
+│   │   ├── splash.img -- 开机画面
+│   │   ├── system.img -- 系统镜像
+│   │   ├── unsigned-ota
+│   │   │   └── V16S1-target_files-eng.builder.zip
+│   │   ├── update-self.zip -- 组装升级包
+│   │   ├── userdata.img
+│   │   ├── V16S1-update-EVOLVEO_20151113_V4.0.zip
+│   │   └── vmlinux -- 内核原始文件，用于生成boot.img
+│   ├── factory -- 需要片内加载时用到的镜像
+│   │   ├── boot.img -- 内核镜像，上面提到过此处应为空内核
+│   │   ├── emmc_appsboot.mbn -- bootloader
+│   │   ├── gpt_backup0.bin -- gpt备份区
+│   │   ├── gpt_main0.bin -- gpt分区表头部(gpt是android手机使用的分区表，具体请自行查询)，第二步时刷入
+│   │   ├── patch0.xml -- 第二步刷如分区表完成后下载工具解析此文件进行分区大小调整
+│   │   ├── prog_emmc_firehose_8909_ddr.mbn -- 第一步时加载的firehose文件
+│   │   ├── rawprogram_unsparse.xml -- 第二步时下载工具解析此文件刷入分区表等信息
+│   │   ├── rpm.mbn
+│   │   ├── sbl1.mbn
+│   │   └── tz.mbn
+│   └── modem
+│       ├── fs_image.tar.gz.mbn.img
+│       ├── fs_image.tar.gz.mbn.img-20150817.zip
+│       ├── gpt_backup0.bin
+│       ├── gpt_both0.bin
+│       ├── gpt_main0.bin
+│       ├── M89098909.genns.prodQ0000.elf
+│       ├── mba.mbn
+│       ├── NON-HLOS.bin
+│       ├── orig_MODEM_PROC_IMG_8909.genns.prodQ.elf
+│       ├── orig_MODEM_PROC_IMG_8909.genns.prodQ.elf.lcs
+│       ├── orig_MODEM_PROC_IMG_8909.genns.prodQ.elf.map
+│       ├── patch0.xml
+│       ├── rawprogram0.xml
+│       ├── rawprogram_unsparse.xml
+│       ├── RPM_AAAAANAAR.elf
+│       ├── RPM_AAAAANAAR_rpm.elf
+│       ├── rpm.mbn
+│       ├── sbl1.mbn
+│       ├── sec.dat
+│       ├── tz.elf
+│       ├── tz.mbn
+│       └── zero.bin
+└── test
+    ├── hw_report
+    └── sw_report
+
