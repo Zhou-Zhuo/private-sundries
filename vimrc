@@ -136,6 +136,7 @@ nnoremap <leader>g : silent execute "grep \'\\<".shellescape(expand("<cword>")).
 nnoremap <leader>gg : silent execute "grep \'\\<".shellescape(expand("<cword>"))."\\>\' -r . --exclude=tags --exclude-dir=.git "<CR>:copen<CR>
 
 nnoremap <leader>w i/*  */<ESC>2hi
+nnoremap <leader>ww i/*<CR><CR>/<ESC>ka<SPACE>
 
 " highlight current line
 set cul
@@ -185,4 +186,4 @@ nnoremap <C-k> :b#<CR>
 let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/examples/.ycm_extra_conf.py'
 
 " need ?
-let g:ycm_filetype_whitelist = { 'cpp': 1, 'c': 1, 'python':1 }
+" let g:ycm_filetype_whitelist = { 'cpp': 1, 'c': 1, 'python':1, 'make':1 }
