@@ -83,8 +83,10 @@ set background=dark
 set t_Co=16
 let g:airline_powerline_fonts = 1
 let g:bufferline_echo = 0
-let g:airline_theme = 'solarized'
+let g:airline_theme = 'base16'
 let g:airline_left_sep = '>'
+let g:airline_left_alt_sep = '│'
+let g:airline_right_alt_sep = '│'
 "let g:airline_left_sep = '▶'
 let g:airline_left_sep = ''
 let g:airline_right_sep = '<'
@@ -124,7 +126,7 @@ set timeoutlen=500
 set ttimeoutlen=50
 
 let mapleader=';'
-nnoremap <leader>cc :copen<CR>
+nnoremap <leader>c :copen<CR>
 nnoremap <leader>cx :cclose<CR>
 nnoremap <leader>m :nohls<CR>
 nnoremap <leader>n :cn<CR>
