@@ -139,6 +139,8 @@ nnoremap <leader>gg : silent execute "grep \'\\<".shellescape(expand("<cword>"))
 
 nnoremap <leader>w i/*  */<ESC>2hi
 nnoremap <leader>ww i/*<CR><CR>/<ESC>ka<SPACE>
+nnoremap <C-h> <pageup>
+nnoremap <C-l> <pagedown>
 
 " highlight current line
 set cul
