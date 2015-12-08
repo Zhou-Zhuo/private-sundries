@@ -152,3 +152,5 @@
   work directory whose repo contains large tags file.
 
 * Press = in visual mode, autoindent the choosen code.
+
+* Fail to find 32-bit lib in archlinux? Try to install muiltlib/libxx
