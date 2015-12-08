@@ -1,4 +1,5 @@
 ##reset
+
 `git reset HEAD -- <paths>` :  Just discard changes made by `git add <paths>`. Make no change to staged zone or ref.
 
 3 changes might be made by git reset:
@@ -13,6 +14,8 @@
 `git reset --soft <commit>` : Execute 1.
 `git reset [--mixed] <commit>` : Execute 1, 2.
 
+You can use `git reflog` to get back your lost commit.
+
 * `git commit --amend` is equal to:
 
 ```
@@ -21,9 +24,14 @@ $ git commit -e -F .git/COMMIT_EDITMSG
 ```
 
 ##checkout
-`git checkout -- .` or `git checkout -- <file>` : Overwrite file(s) in work directory with file(s) in staged zone.
 
-`git checkout HEAD .` or `git checkout HEAD <file>` : Overwrite file(s) both in your staged zone and work directory with file(s) from the branch that HEAD point to.
+`git checkout` move HEAD, not touch ref.
 
-* -- is to distinguish file name from ref name or commit name.
+Sometimes your will see you are in a "detached HEAD" state, this actually means HEAD is not pointing to a ref, but a specific commit ID.
+
+`git checkout [--] <paths>` : Overwrite files in work directory with files in staged zone. Will not change HEAD.
+
+`git checkout <commit> [--] <paths>` : Overwrite files in work directory and staged zone with files in specific `<commit>`. Will not change HEAD.
+
+* `--` is to distinguish file name from ref name or commit name.
 

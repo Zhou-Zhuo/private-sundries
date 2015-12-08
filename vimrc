@@ -184,7 +184,7 @@ nnoremap <F3> :NERDTreeToggle<CR>
 nnoremap <F4> :TlistToggle<CR>
 
 nnoremap <C-j> :YcmCompleter GoToDefinitionElseDeclaration<CR>
-nnoremap <C-k> :b#<CR>
+"nnoremap <C-k> :b#<CR>
 
 
 " find .ycm_extra.conf for YCM
