@@ -27,4 +27,4 @@ $ git reset --soft HEAD^
 $ git commit -e -F .git/COMMIT_EDITMSG
 ```
 
-
+this will be remove
