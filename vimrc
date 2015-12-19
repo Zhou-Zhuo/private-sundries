@@ -203,7 +203,7 @@ if has("cscope")
 	let cscope_db_recursion_level = 4
 	let cscope_db_file = "cscope.out"
 	while cscope_db_recursion_level >= 0
-		if filereadable(g:cscope_db_file)
+		if filereadable(cscope_db_file)
 		    execute "cs add ".cscope_db_file
 		endif
 		let cscope_db_file = "../".cscope_db_file
