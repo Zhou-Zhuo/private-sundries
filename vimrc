@@ -192,3 +192,25 @@ let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/
 
 " need ?
 " let g:ycm_filetype_whitelist = { 'cpp': 1, 'c': 1, 'python':1, 'make':1 }
+
+" cscope
+if has("cscope")
+	set csprg=/usr/bin/cscope
+	set csto=0
+	set cst
+	set nocsverb
+	" add any database in current directory
+	let cscope_db_recursion_level = 4
+	let cscope_db_file = "cscope.out"
+	while cscope_db_recursion_level >= 0
+		echo cscope_db_file
+		if filereadable(g:cscope_db_file)
+		    execute "cs add ".cscope_db_file
+		endif
+		let cscope_db_file = "../".cscope_db_file
+		let cscope_db_recursion_level -= 1
+	endwhile
+	set csverb
+endif
+
+set cscopequickfix=s-,c-,d-,i-,t-,e-
