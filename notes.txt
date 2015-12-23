@@ -154,3 +154,11 @@
 * Press = in visual mode, autoindent the choosen code.
 
 * Fail to find 32-bit lib in archlinux? Try to install muiltlib/libxx
+
+* change commit message:
+	$ git commit --amend
+  merge commit histoty:
+	$ git rebase -i <commit>
+	then replace 'pick' by 'squash'
+	
+* Ctrl-o in vim!!
