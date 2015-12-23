@@ -130,6 +130,7 @@ nnoremap <leader>c :copen<CR>
 nnoremap <leader>cx :cclose<CR>
 nnoremap <leader>m :nohls<CR>
 nnoremap <leader>n :cn<CR>
+nnoremap <leader>b :cp<CR>
 " work strange when I try to choose from quickfix window
 " nnoremap <C-N> :cn<CR>
 " nnoremap <C-M> :cp<CR>
@@ -183,7 +184,6 @@ nnoremap <F2> :NERDTree<CR>
 nnoremap <F3> :NERDTreeToggle<CR>
 nnoremap <F4> :TlistToggle<CR>
 
-nnoremap <C-j> :YcmCompleter GoToDefinitionElseDeclaration<CR>
 "nnoremap <C-k> :b#<CR>
 
 
@@ -193,14 +193,18 @@ let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/
 " need ?
 " let g:ycm_filetype_whitelist = { 'cpp': 1, 'c': 1, 'python':1, 'make':1 }
 
+"set autochdir
+
 " cscope
 if has("cscope")
 	set csprg=/usr/bin/cscope
 	set csto=0
 	set cst
 	set nocsverb
-	" add any database in current directory
-	let cscope_db_recursion_level = 4
+	nnoremap <C-j> :execute "cs find c ".expand("<cword>")<CR>
+	nnoremap <C-f> :execute "cs find s ".expand("<cword>")<CR>
+	" recursion add any database in current directory
+	let cscope_db_recursion_level = 10
 	let cscope_db_file = "cscope.out"
 	while cscope_db_recursion_level >= 0
 		if filereadable(cscope_db_file)
@@ -212,4 +216,4 @@ if has("cscope")
 	set csverb
 endif
 
-set cscopequickfix=s-,c-,d-,i-,t-,e-
+set cscopequickfix=s-,c-,d-,i-,t-,e-,g-

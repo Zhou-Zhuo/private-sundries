@@ -11,7 +11,9 @@
 ```
 
 `git reset --hard <commit>` : Execute 1, 2, 3.
+
 `git reset --soft <commit>` : Execute 1.
+
 `git reset [--mixed] <commit>` : Execute 1, 2.
 
 You can use `git reflog` to get back your lost commit.
