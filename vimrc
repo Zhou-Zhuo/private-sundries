@@ -217,3 +217,13 @@ if has("cscope")
 endif
 
 set cscopequickfix=s-,c-,d-,i-,t-,e-,g-
+
+
+function! Syn_chk()
+	let l:src_filename = expand('%:p')
+	let l:obj_filename = '/tmp/syn_chk_obj'
+	let l:makefile_name = '/tmp/syn_chk_makefile'
+	let l:comp_options = ""
+	execute '!echo -n "'.l:obj_filename.':";echo '.l:src_filename.';echo "	\$(CC) \$< -o \$@ '.l:comp_options.'"'
+endfunction
+

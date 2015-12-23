@@ -37,3 +37,11 @@ Sometimes your will see you are in a "detached HEAD" state, this actually means 
 
 * `--` is to distinguish file name from ref name or commit name.
 
+##merge
+
+Don't want to add history commits in your topic branch to your master branch when merge? Try this:
+
+```
+$ git merge --squash topic
+$ git commit -m "merged from topic"
+```
