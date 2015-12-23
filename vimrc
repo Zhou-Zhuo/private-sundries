@@ -126,7 +126,7 @@ set timeoutlen=500
 set ttimeoutlen=50
 
 let mapleader=';'
-nnoremap <leader>c :copen<CR>
+nnoremap <leader>c :copen 5<CR>
 nnoremap <leader>cx :cclose<CR>
 nnoremap <leader>m :nohls<CR>
 nnoremap <leader>n :cn<CR>
@@ -136,7 +136,7 @@ nnoremap <leader>b :cp<CR>
 " nnoremap <C-M> :cp<CR>
 " the grep trick
 nnoremap <leader>g : silent execute "grep \'\\<".shellescape(expand("<cword>"))."\\>\' -r . --exclude=tags --exclude-dir=.git "
-nnoremap <leader>gg : silent execute "grep \'\\<".shellescape(expand("<cword>"))."\\>\' -r . --exclude=tags --exclude-dir=.git "<CR>:copen<CR>
+nnoremap <leader>gg : silent execute "grep \'\\<".shellescape(expand("<cword>"))."\\>\' -r . --exclude=tags --exclude-dir=.git "<CR>:redraw!<CR>:copen 5<CR>
 
 nnoremap <leader>w i/*  */<ESC>2hi
 nnoremap <leader>ww i/*<CR><CR>/<ESC>ka<SPACE>
@@ -222,12 +222,20 @@ endif
 
 set cscopequickfix=s-,c-,d-,i-,t-,e-,g-
 
-
 function! Syn_chk()
 	let l:src_filename = expand('%:p')
 	let l:obj_filename = '/tmp/syn_chk_obj'
 	let l:makefile_name = '/tmp/syn_chk_makefile'
 	let l:comp_options = ""
-	execute '!echo -n "'.l:obj_filename.':";echo '.l:src_filename.';echo "	\$(CC) \$< -o \$@ '.l:comp_options.'"'
+	silent execute '!echo -n "'.l:obj_filename.':" >'.l:makefile_name.';echo '.l:src_filename.'>>'.l:makefile_name.';echo -n "	@\$(CC) \$< -o \$@ ">>'.l:makefile_name.';if [ -f .synchk_comp_opt ];then; cat .synchk_comp_opt >> '.l:makefile_name.';fi'
+	execute 'silent make -f '.l:makefile_name
+	silent execute '!rm -f '.l:obj_filename
+	redraw!
+	try
+			cc
+	catch
+			echo "No error!"
+	endtry
 endfunction
 
+nnoremap <F5> :call Syn_chk()<CR>
