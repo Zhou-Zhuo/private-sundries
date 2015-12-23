@@ -142,10 +142,10 @@ nnoremap <leader>ww i/*<CR><CR>/<ESC>ka<SPACE>
 inoremap <C-o> <CR>
 nnoremap <C-h> <pageup>
 nnoremap <C-l> <pagedown>
-nnoremap j gj
-nnoremap k gk
-vnoremap j gj
-vnoremap k gk
+"nnoremap j gj
+"nnoremap k gk
+"vnoremap j gj
+"vnoremap k gk
 
 set wrap lbr
 set fo+=mM
