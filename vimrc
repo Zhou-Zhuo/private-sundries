@@ -58,7 +58,7 @@ set guifont=Bitstream\ Vera\ Sans\ Mono\ 11
 set bs=2
 
 " tab setting
-set tabstop=4
+set tabstop=8
 set softtabstop=8
 set shiftwidth=8
 set noexpandtab
@@ -222,19 +222,30 @@ endif
 
 set cscopequickfix=s-,c-,d-,i-,t-,e-,g-
 
+let syn_inc_search_depth = 10
+let synmake_inc = '.synchk_inc.mk'
+let synmake_inc_path = './'
+while syn_inc_search_depth >= 0
+	if filereadable(synmake_inc_path.synmake_inc)
+		execute 'cd '.synmake_inc_path
+		break
+	endif
+	let synmake_inc_path = synmake_inc_path."../"
+	let syn_inc_search_depth -= 1
+endwhile
+
 function! Syn_chk()
 	let l:src_filename = expand('%:p')
 	let l:obj_filename = '/tmp/syn_chk_obj'
 	let l:makefile_name = '/tmp/syn_chk_makefile'
-	let l:comp_options = ""
-	silent execute '!echo -n "'.l:obj_filename.':" >'.l:makefile_name.';echo '.l:src_filename.'>>'.l:makefile_name.';echo -n "	@\$(CC) \$< -o \$@ ">>'.l:makefile_name.';if [ -f .synchk_comp_opt ];then; cat .synchk_comp_opt >> '.l:makefile_name.';fi'
-	execute 'silent make -f '.l:makefile_name
+	silent execute '!if [ -f '.synmake_inc.' ];then; echo "include '.synmake_inc.'">'.l:makefile_name.';else; echo ""> '.l:makefile_name.';fi;echo -n "'.l:obj_filename.':" >>'.l:makefile_name.';echo '.l:src_filename.'>>'.l:makefile_name.';echo -n "	@\$(CC) \$< -o \$@ \$(CFLAGS)">>'.l:makefile_name
+	silent execute 'make -f '.l:makefile_name
 	silent execute '!rm -f '.l:obj_filename
 	redraw!
 	try
-			cc
+		cc
 	catch
-			echo "No error!"
+		echo "No error!"
 	endtry
 endfunction
 
