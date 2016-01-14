@@ -122,8 +122,8 @@ let g:airline_section_warning = ''
 let g:airline#extensions#hunks#enabled=0
 let g:airline#extensions#branch#enabled=1
 
-set timeoutlen=500
-set ttimeoutlen=50
+set timeoutlen=180
+set ttimeoutlen=180
 
 let mapleader=';'
 nnoremap <leader>c :copen 5<CR>
@@ -159,10 +159,9 @@ hi Pmenu ctermfg=29 ctermbg=15 guibg=Magenta
 
 " add file path to window title
 set title
-
 set autowrite
-
 set background=dark
+set incsearch
 
 " restore cursor position in previous editing
 function! ResCur()
@@ -203,10 +202,11 @@ let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/
 if has("cscope")
 	set csprg=/usr/bin/cscope
 	set csto=0
-	set cst
+"	set cst
 	set nocsverb
 	nnoremap <C-j> :execute "cs find c ".expand("<cword>")<CR>
 	nnoremap <C-f> :execute "cs find s ".expand("<cword>")<CR>
+	nnoremap <C-g> :execute "cs find g ".expand("<cword>")<CR>
 	" recursion add any database in current directory
 	let cscope_db_recursion_level = 10
 	let cscope_db_file = "cscope.out"
@@ -222,15 +222,16 @@ endif
 
 set cscopequickfix=s-,c-,d-,i-,t-,e-,g-
 
+
 let syn_inc_search_depth = 10
-let synmake_inc = '.synchk_inc.mk'
-let synmake_inc_path = './'
+let b:synmake_inc = '.synchk_inc.mk'
+let synmake_inc_path = expand('%:p:h').'/'
 while syn_inc_search_depth >= 0
-	if filereadable(synmake_inc_path.synmake_inc)
+	if filereadable(synmake_inc_path.b:synmake_inc)
 		execute 'cd '.synmake_inc_path
 		break
 	endif
-	let synmake_inc_path = synmake_inc_path."../"
+	let synmake_inc_path = synmake_inc_path.'../'
 	let syn_inc_search_depth -= 1
 endwhile
 
@@ -238,7 +239,7 @@ function! Syn_chk()
 	let l:src_filename = expand('%:p')
 	let l:obj_filename = '/tmp/syn_chk_obj'
 	let l:makefile_name = '/tmp/syn_chk_makefile'
-	silent execute '!if [ -f '.synmake_inc.' ];then; echo "include '.synmake_inc.'">'.l:makefile_name.';else; echo ""> '.l:makefile_name.';fi;echo -n "'.l:obj_filename.':" >>'.l:makefile_name.';echo '.l:src_filename.'>>'.l:makefile_name.';echo -n "	@\$(CC) \$< -o \$@ \$(CFLAGS)">>'.l:makefile_name
+	silent execute '!if [ -f '.b:synmake_inc.' ];then; echo "include '.b:synmake_inc.'">'.l:makefile_name.';else; echo ""> '.l:makefile_name.';fi;echo "'.l:obj_filename.': '.l:src_filename.'">>'.l:makefile_name.';echo "	@\$(CC) \$< -Wall -c -o \$@ \$(CFLAGS)">>'.l:makefile_name
 	silent execute 'make -f '.l:makefile_name
 	silent execute '!rm -f '.l:obj_filename
 	redraw!
@@ -250,3 +251,8 @@ function! Syn_chk()
 endfunction
 
 nnoremap <F5> :call Syn_chk()<CR>
+
+inoremap ( ()<Esc>i
+inoremap { {<CR> <CR>}<Esc>k$xa
+inoremap () ()
+inoremap {} {}
