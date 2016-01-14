@@ -202,8 +202,8 @@ let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/
 " cscope
 if has("cscope")
 	set csprg=/usr/bin/cscope
-	set csto=0
-	set cst
+	"set csto=0
+	"set cst
 	set nocsverb
 	nnoremap <C-j> :execute "cs find c ".expand("<cword>")<CR>
 	nnoremap <C-f> :execute "cs find s ".expand("<cword>")<CR>
