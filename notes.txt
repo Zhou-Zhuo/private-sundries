@@ -162,3 +162,16 @@
 	then replace 'pick' by 'squash'
 	
 * Ctrl-o in vim!!
+
+* Kernel hacking:
+	Pass bootargs via dtb: use "chosen" node.
+	chosen {
+		bootargs = "console=ttyS0,115200 loglevel=8";
+		initrd-start = <0xc8000000>;
+		initrd-end = <0xc8200000>;
+	};
+
+* When you partition a loopdev with fdisk, you may not find /dev/loop0p1, even after
+  you run partprobe, then try 'kpartx -a /dev/loop0' to create a map. And don't
+  forget to 'kpartx -d /dev/loop0' or you can't delete that loopdev.
+
