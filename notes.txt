@@ -175,3 +175,6 @@
   you run partprobe, then try 'kpartx -a /dev/loop0' to create a map. And don't
   forget to 'kpartx -d /dev/loop0' or you can't delete that loopdev.
 
+* inotifywait!!
+
+* Use grep -P to match non-ASCII characters.
