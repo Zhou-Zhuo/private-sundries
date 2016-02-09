@@ -29,7 +29,6 @@ Plugin 'altercation/vim-colors-solarized'
 "Plugin 'Valloric/YouCompleteMe'
 Plugin 'kien/ctrlp.vim'
 Plugin 'easymotion/vim-easymotion'
-Plugin 'davidhalter/jedi-vim'
 " Plugin 'scrooloose/syntastic'
  
 " plugins not in github
