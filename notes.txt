@@ -178,3 +178,7 @@
 
 * It says 'No such file or dictinary' when you execute some command even 
   though it exists? maybe it reles on some shared libs.
+
+* inotifywait!!
+
+* Use grep -P to match non-ASCII characters.

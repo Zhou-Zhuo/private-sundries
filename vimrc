@@ -9,14 +9,11 @@ call vundle#rc()
 " required!
 Plugin 'gmarik/vundle'
 
-" 可以通过以下四种方式指定插件的来源
-" a) 指定Github中vim-scripts仓库中的插件，直接指定插件名称即可，插件明中的空格使用“-”代替。
 " Plugin 'L9'
 Plugin 'taglist.vim'
 " Too slow!
 " Plugin 'dkprice/vim-easygrep'
 
-" b) 指定Github中其他用户仓库的插件，使用“用户名/插件名称”的方式指定
 " Plugin 'tpope/vim-fugitive'
 " Plugin 'Lokaltog/vim-easymotion'
 " Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
@@ -35,10 +32,10 @@ Plugin 'easymotion/vim-easymotion'
 Plugin 'davidhalter/jedi-vim'
 " Plugin 'scrooloose/syntastic'
  
-" c) 指定非Github的Git仓库的插件，需要使用git地址
+" plugins not in github
 " Plugin 'git://git.wincent.com/command-t.git'
 
-" d) 指定本地Git仓库中的插件
+" plugins in local path:
 " Plugin 'file:///Users/gmarik/path/to/plugin'
 
 filetype plugin indent on     " required!
@@ -128,23 +125,26 @@ set timeoutlen=180
 set ttimeoutlen=180
 
 let mapleader=';'
-nnoremap <leader>c :copen 5<CR>
-nnoremap <leader>cx :cclose<CR>
-nnoremap <leader>m :nohls<CR>
-nnoremap <leader>n :cn<CR>
-nnoremap <leader>b :cp<CR>
+nnoremap <Leader>c :copen 5<CR>
+nnoremap <Leader>cx :cclose<CR>
+nnoremap <Leader>m :nohls<CR>
+nnoremap <Leader>n :cn<CR>
+nnoremap <Leader>b :cp<CR>
 " work strange when I try to choose from quickfix window
 " nnoremap <C-N> :cn<CR>
 " nnoremap <C-M> :cp<CR>
 " the grep trick
-nnoremap <leader>g : silent execute "grep \'\\<".shellescape(expand("<cword>"))."\\>\' -r . --exclude=tags --exclude-dir=.git "
-nnoremap <leader>gg : silent execute "grep \'\\<".shellescape(expand("<cword>"))."\\>\' -r . --exclude=tags --exclude-dir=.git "<CR>:redraw!<CR>:copen 5<CR>
+nnoremap <Leader>g : silent execute "grep \'\\<".shellescape(expand("<cword>"))."\\>\' -r . --exclude=tags --exclude-dir=.git "
+nnoremap <Leader>gg : silent execute "grep \'\\<".shellescape(expand("<cword>"))."\\>\' -r . --exclude=tags --exclude-dir=.git "<CR>:redraw!<CR>:copen 5<CR>
 
-nnoremap <leader>w i/*  */<ESC>2hi
-nnoremap <leader>ww i/*<CR><CR>/<ESC>ka<SPACE>
+nnoremap <Leader>w i/*  */<ESC>2hi
+nnoremap <Leader>ww i/*<CR><CR>/<ESC>ka<SPACE>
 inoremap <C-o> <CR>
 nnoremap <C-h> <pageup>
 nnoremap <C-l> <pagedown>
+
+map <Leader>f <Plug>(easymotion-f)
+map <Leader><Leader>f <Plug>(easymotion-F)
 
 " set wrap lbr
 " set fo+=mM
