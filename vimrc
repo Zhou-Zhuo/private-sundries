@@ -26,7 +26,7 @@ Plugin 'bling/vim-airline'
 " To show git status in vim status line, vim-fugitive must be installed!!
 Plugin 'tpope/vim-fugitive'
 Plugin 'altercation/vim-colors-solarized'
-Plugin 'Valloric/YouCompleteMe'
+"Plugin 'Valloric/YouCompleteMe'
 Plugin 'kien/ctrlp.vim'
 Plugin 'easymotion/vim-easymotion'
 " Plugin 'scrooloose/syntastic'
@@ -253,7 +253,29 @@ endfunction
 
 nnoremap <F5> :call Syn_chk()<CR>
 
-inoremap ( ()<Left>
-inoremap { {<CR> <CR>}<Up><End><Backspace>
-inoremap () ()
-inoremap {} {}
+" for C
+for extention in ["c", "cc", "cpp", "cxx"]
+	if extention == expand("%:e")
+		inoremap ( ()<Left>
+		inoremap { {<CR> <CR>}<Up><End><Backspace>
+		inoremap () ()
+		inoremap {} {}
+		inoremap " ""<Left>
+		inoremap "" ""
+		inoremap [ []<Left>
+		inoremap [] []
+	endif
+	break
+endfor
+
+" for python
+if "py" == expand("%:e")
+	inoremap ( ()<Left>
+	inoremap () ()
+	inoremap " ""<Left>
+	inoremap "" ""
+	inoremap ' ''<Left>
+	inoremap '' ''
+	inoremap [ []<Left>
+	inoremap [] []
+endif

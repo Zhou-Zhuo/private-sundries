@@ -171,9 +171,13 @@
 		initrd-end = <0xc8200000>;
 	};
 
-* When you partition a loopdev with fdisk, you may not find /dev/loop0p1, even after
-  you run partprobe, then try 'kpartx -a /dev/loop0' to create a map. And don't
-  forget to 'kpartx -d /dev/loop0' or you can't delete that loopdev.
+* When you partition a loopdev with fdisk, you may not find /dev/loop0p1,
+  even after you run partprobe, then try 'kpartx -a /dev/loop0' to create a
+  map. And don't forget to 'kpartx -d /dev/loop0' or you can't delete that
+  loopdev.
+
+* It says 'No such file or dictinary' when you execute some command even 
+  though it exists? maybe it reles on some shared libs.
 
 * inotifywait!!
 
