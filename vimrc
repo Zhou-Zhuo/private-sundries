@@ -136,8 +136,8 @@ nnoremap <Leader>b :cp<CR>
 nnoremap <Leader>g : silent execute "grep \'\\<".shellescape(expand("<cword>"))."\\>\' -r . --exclude=tags --exclude-dir=.git "
 nnoremap <Leader>gg : silent execute "grep \'\\<".shellescape(expand("<cword>"))."\\>\' -r . --exclude=tags --exclude-dir=.git "<CR>:redraw!<CR>:copen 5<CR>
 
-nnoremap <Leader>w i/*  */<ESC>2hi
-nnoremap <Leader>ww i/*<CR><CR>/<ESC>ka<SPACE>
+nnoremap <Leader>w O/*  */<ESC>2hi
+nnoremap <Leader>ww O/*<CR><CR>/<ESC>ka<SPACE>
 inoremap <C-o> <CR>
 nnoremap <C-h> <pageup>
 nnoremap <C-l> <pagedown>
