@@ -26,7 +26,7 @@ Plugin 'bling/vim-airline'
 " To show git status in vim status line, vim-fugitive must be installed!!
 Plugin 'tpope/vim-fugitive'
 Plugin 'altercation/vim-colors-solarized'
-"Plugin 'Valloric/YouCompleteMe'
+Plugin 'Valloric/YouCompleteMe'
 Plugin 'kien/ctrlp.vim'
 Plugin 'easymotion/vim-easymotion'
 " Plugin 'scrooloose/syntastic'
