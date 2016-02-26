@@ -182,3 +182,6 @@
 * inotifywait!!
 
 * Use grep -P to match non-ASCII characters.
+
+* vimrc runs BEFORE vim open a file, so it hold an empty buffer when vimrc
+  runs.

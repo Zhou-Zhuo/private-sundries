@@ -71,6 +71,9 @@ set laststatus=2
 " show command typing in normal mode on status-line
 set showcmd
 
+" nobackup file
+set nobackup
+
 " Problem maybe in vim-airline/autoload/airline/highlighter.vim:116
 " And do not use hybrid theme
 
@@ -154,6 +157,8 @@ set cul
 
 " Disable YCM syntax check
 let g:ycm_register_as_syntastic_checker=0
+
+set completeopt-=preview
 
 " Popup menu color
 hi Pmenu ctermfg=29 ctermbg=15 guibg=Magenta
@@ -253,9 +258,22 @@ endfunction
 
 nnoremap <F5> :call Syn_chk()<CR>
 
+" FIXME: in normal mode it cannot tell if the cursor is on $ or $-1
+"function! Par_comp()
+"	let l:c = getline('.')[col('.') - 1]
+"	if l:c == ''
+"		normal! a()
+"		normal! h
+"	else
+"		normal! i(
+"	endif
+"endfunction
+
 " for C
-for extention in ["c", "cc", "cpp", "cxx"]
+for extention in ["c", "cc", "cpp", "cxx", "h"]
 	if extention == expand("%:e")
+		" See FIXME
+		"inoremap ( <C-o>:call Par_comp()<CR>
 		inoremap ( ()<Left>
 		inoremap { {<CR> <CR>}<Up><End><Backspace>
 		inoremap () ()
@@ -268,14 +286,23 @@ for extention in ["c", "cc", "cpp", "cxx"]
 	break
 endfor
 
+" put python header to empty script file
+function! PyAddHeader()
+	if line('$') == 1 && getline(1) == ''
+		silent call append(0, '#!/usr/sbin/env python')
+		normal! G
+	endif
+	let $PYTHONPATH .= '/usr/lib/python3.5/site-packages'
+endfunction
+
+autocmd BufNewFile *.py :call PyAddHeader()
+
 " for python
 if "py" == expand("%:e")
 	inoremap ( ()<Left>
 	inoremap () ()
-	inoremap " ""<Left>
-	inoremap "" ""
-	inoremap ' ''<Left>
-	inoremap '' ''
 	inoremap [ []<Left>
 	inoremap [] []
+	" See FIXME
+	" inoremap ( <C-o>:call Par_comp()<CR><Right>
 endif
