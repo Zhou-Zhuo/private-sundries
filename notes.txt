@@ -185,3 +185,5 @@
 
 * vimrc runs BEFORE vim open a file, so it hold an empty buffer when vimrc
   runs.
+
+* Be careful when using lock in muilti-thread programming!
