@@ -1,2 +1,9 @@
-* How to build .ko in Android Build System.
+TODO: *  SOLVED: o
+o How to build .ko in Android Build System.
 * The whole process of turnning on LCD with key pressing.
+* Kernel PM, process of suspending and resuming.
+* Input subsys, report event just once.
+  - If key value == 1?
+* Learn Cpp and OO.
+ * Design pattern.
+  * Binder's inplement.

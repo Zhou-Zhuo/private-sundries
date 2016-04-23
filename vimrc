@@ -139,9 +139,7 @@ nnoremap <Leader>b :cp<CR>
 nnoremap <Leader>g : silent execute "grep \'\\<".shellescape(expand("<cword>"))."\\>\' -r . --exclude=tags --exclude-dir=.git "
 nnoremap <Leader>gg : silent execute "grep \'\\<".shellescape(expand("<cword>"))."\\>\' -r . --exclude=tags --exclude-dir=.git "<CR>:redraw!<CR>:copen 5<CR>
 
-nnoremap <Leader>w O/*  */<ESC>2hi
-nnoremap <Leader>ww O/*<CR><CR>/<ESC>ka<SPACE>
-inoremap <C-o> <CR>
+"inoremap <C-o> <CR>
 nnoremap <C-h> <pageup>
 nnoremap <C-l> <pagedown>
 
@@ -258,23 +256,28 @@ endfunction
 
 nnoremap <F5> :call Syn_chk()<CR>
 
-" FIXME: in normal mode it cannot tell if the cursor is on $ or $-1
-"function! Par_comp()
-"	let l:c = getline('.')[col('.') - 1]
-"	if l:c == ''
-"		normal! a()
-"		normal! h
-"	else
-"		normal! i(
-"	endif
-"endfunction
+python << EOF
+import vim
+def par_comp():
+	cw = vim.current.window
+	cb = vim.current.buffer
+	(row, col) = cw.cursor
+	insert = '()'
+	if col+1!=len(cb[row-1]):
+		if cb[row-1][col+1].isalnum():
+			insert = '('
+	pref = cb[row-1][:col]
+	suff = cb[row-1][col+1:]
+	cb[row-1] = pref+insert+suff
+	cw.cursor = (row, col+1)
+EOF
 
 " for C
 for extention in ["c", "cc", "cpp", "cxx", "h"]
 	if extention == expand("%:e")
-		" See FIXME
-		"inoremap ( <C-o>:call Par_comp()<CR>
-		inoremap ( ()<Left>
+		" XXX: vim cannot tell $ from $-1, so a <space> should be
+		" inserted
+		inoremap ( (<Left><C-o>:py par_comp()<CR>
 		inoremap { {<CR> <CR>}<Up><End><Backspace>
 		inoremap () ()
 		inoremap {} {}
@@ -282,14 +285,16 @@ for extention in ["c", "cc", "cpp", "cxx", "h"]
 		inoremap "" ""
 		inoremap [ []<Left>
 		inoremap [] []
+		nnoremap <Leader>w O/*  */<ESC>2hi
+		nnoremap <Leader>ww O/*<CR><CR>/<ESC>ka<SPACE>
+		break
 	endif
-	break
 endfor
 
 " put python header to empty script file
 function! PyAddHeader()
 	if line('$') == 1 && getline(1) == ''
-		silent call append(0, '#!/usr/sbin/env python')
+		silent call append(0, '#!/usr/bin/env python')
 		normal! G
 	endif
 	let $PYTHONPATH .= '/usr/lib/python3.5/site-packages'
@@ -299,7 +304,7 @@ autocmd BufNewFile *.py :call PyAddHeader()
 
 " for python
 if "py" == expand("%:e")
-	inoremap ( ()<Left>
+	inoremap ( (<Left><C-o>:py par_comp()<CR>
 	inoremap () ()
 	inoremap [ []<Left>
 	inoremap [] []

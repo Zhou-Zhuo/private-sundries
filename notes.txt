@@ -123,7 +123,7 @@
   you get
 	  f2
   
-* Use lightdm instead of gdm, then everything works, but why?
+* Use lightdm instead of gdm, then everything works(in ArchLinux), but why?
 
 * To change the greeter of lightdm, set 
 	  [SeatDefaults]
@@ -177,7 +177,7 @@
   loopdev.
 
 * It says 'No such file or dictinary' when you execute some command even 
-  though it exists? maybe it reles on some shared libs.
+  though it exists? maybe it relis on some shared libs.
 
 * inotifywait!!
 
