@@ -1,22 +1,25 @@
-dtb-y=$(DTB_LIST)
-KERNEL_DIR :=$(OUT)/obj/KERNEL_OBJ
 AWK=awk
+MKBOOTIMG=mkbootimg
+DTBTOOL=dtbTool
+SPLIT_BOOTIMG=split_bootimg.pl
 
+ifeq ($(OUT),)
+    $(error "*** var OUT not set yet!")
+endif
 BOOTIMG=$(OUT)/boot.img-new
 OLD_BOOTIMG=$(OUT)/boot.img
 ZIMAGE=$(OUT)/boot.img-kernel
 RDIMG=$(OUT)/boot.img-ramdisk.gz
 DTIMG=$(OUT)/boot.img-dt
 
-# Must have '/' at tail, or dtbTool cannot parse
+# Must have '/' at tail, dtbTool dose not append it automatically
 DTB_DIR=$(KERNEL_DIR)/arch/arm/boot/dts/
+KERNEL_DIR :=$(OUT)/obj/KERNEL_OBJ
 
-MKBOOTIMG=mkbootimg
-DTBTOOL=dtbTool
-SPLIT_BOOTIMG=split_bootimg.pl
 SPLIT_OUT=$(OUT)/.tmp.split_out
 
-new_boot: clean $(BOOTIMG)
+newboot: clean $(BOOTIMG)
+	@echo Done.
 
 $(BOOTIMG): $(DTIMG) $(ZIMAGE)
 	$(MKBOOTIMG) --kernel $(ZIMAGE) --ramdisk $(RDIMG) --cmdline "$(CMDLINE)" --dt $(DTIMG) -o $@ --pagesize $(PAGESIZE)
@@ -35,7 +38,6 @@ $(ZIMAGE):
 	@rm $(SPLIT_OUT)
 
 PWD=$(shell pwd)
-$(warning dtb-y: $(dtb-y))
 
 dtblob:
 	make ARCH=arm -C $(KERNEL_DIR) SUBDIRS=$(PWD) dtbs
@@ -43,4 +45,3 @@ dtblob:
 clean:
 	@rm -f $(ZIMAGE) $(RDIMG) $(BOOTIMG) $(DTIMG)
 
-clean-files := *.dtb
