@@ -187,3 +187,5 @@
   runs.
 
 * Be careful when using lock in muilti-thread programming!
+
+* vim load configuration from local dir when 'exrc' set in ~/.vimrc.
