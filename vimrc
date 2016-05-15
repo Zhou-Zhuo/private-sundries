@@ -80,7 +80,6 @@ set nobackup
 set background=dark
 "set t_Co=256
 "let g:solarized_termcolor=256
-"colorscheme solarized
 set t_Co=16
 let g:airline_powerline_fonts = 1
 let g:bufferline_echo = 0
@@ -140,8 +139,8 @@ nnoremap <Leader>g : silent execute "grep \'\\<".shellescape(expand("<cword>")).
 nnoremap <Leader>gg : silent execute "grep \'\\<".shellescape(expand("<cword>"))."\\>\' -r . --exclude=tags --exclude-dir=.git "<CR>:redraw!<CR>:copen 5<CR>
 
 "inoremap <C-o> <CR>
-nnoremap <C-h> <pageup>
-nnoremap <C-l> <pagedown>
+"nnoremap <C-h> <pageup>
+"nnoremap <C-l> <pagedown>
 
 map <Leader>f <Plug>(easymotion-f)
 map <Leader><Leader>f <Plug>(easymotion-F)
@@ -191,8 +190,8 @@ nnoremap <F2> :NERDTree<CR>
 nnoremap <F3> :NERDTreeToggle<CR>
 nnoremap <F4> :TlistToggle<CR>
 
-"nnoremap <C-k> :b#<CR>
-
+nnoremap <C-h> gT
+nnoremap <C-l> gt
 
 " find .ycm_extra.conf for YCM
 let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/examples/.ycm_extra_conf.py'
@@ -241,9 +240,17 @@ endwhile
 
 function! Syn_chk()
 	let l:src_filename = expand('%:p')
+	let l:file_suffix = expand("%:e")
+"	if l:file_suffix == 'c'
+"		l:compile_cmd = 'CC'
+"	elseif l:file_suffix == 'cc'
+"		l:compile_cmd = 'CXX'
+"	else
+"		return
+"	endif
 	let l:obj_filename = '/tmp/syn_chk_obj'
 	let l:makefile_name = '/tmp/syn_chk_makefile'
-	silent execute '!if [ -f '.b:synmake_inc.' ];then; echo "include '.b:synmake_inc.'">'.l:makefile_name.';else; echo ""> '.l:makefile_name.';fi;echo "'.l:obj_filename.': '.l:src_filename.'">>'.l:makefile_name.';echo "	@\$(CC) \$< -Wall -c -o \$@ \$(CFLAGS)">>'.l:makefile_name
+	silent execute '!if [ -f '.b:synmake_inc.' ];then; echo "include '.b:synmake_inc.'">'.l:makefile_name.';else; echo ""> '.l:makefile_name.';fi;echo "'.l:obj_filename.': '.l:src_filename.'">>'.l:makefile_name.';echo "	@\$(CXX) \$< -Wall -c -o \$@ \$(CFLAGS)">>'.l:makefile_name
 	silent execute 'make -f '.l:makefile_name
 	silent execute '!rm -f '.l:obj_filename
 	redraw!
@@ -258,33 +265,107 @@ nnoremap <F5> :call Syn_chk()<CR>
 
 python << EOF
 import vim
-def par_comp():
+def par_complete(insert):
 	cw = vim.current.window
 	cb = vim.current.buffer
 	(row, col) = cw.cursor
-	insert = '()'
-	if col+1!=len(cb[row-1]):
-		if cb[row-1][col+1].isalnum():
-			insert = '('
 	pref = cb[row-1][:col]
 	suff = cb[row-1][col+1:]
+	if len(suff) > 0:
+		if suff[0].isalnum():
+			insert = insert[0]
 	cb[row-1] = pref+insert+suff
 	cw.cursor = (row, col+1)
+
+def par_enclose(insert):
+	cw = vim.current.window
+	cb = vim.current.buffer
+	(row, col) = cw.cursor
+	pref = cb[row-1][:col]
+	suff = cb[row-1][col+1:]
+	if len(suff) > 0:
+		if suff[0] == insert:
+			insert = ''
+	cb[row-1] = pref+insert+suff
+	cw.cursor = (row, col+1)
+
+def quo_complete(quote):
+	cw = vim.current.window
+	cb = vim.current.buffer
+	(row, col) = cw.cursor
+	if col == 0:
+		pref = ''
+		suff = cb[row-1]
+	else:
+		pref = cb[row-1][:col+1]
+		suff = cb[row-1][col+1:]
+	if col+1 < len(cb[row-1]):
+		if cb[row-1][col+1] == quote:
+			quote = ''
+		else:
+			if not cb[row-1][col+1].isalnum():
+				quote = quote+quote
+	else:
+		quote = quote+quote
+	cb[row-1] = pref+quote+suff
+	cw.cursor = (row, col+2)
 EOF
 
+function Par_complete(insert)
+	let ch = getline('.')[col('.')-1]
+	if (ch >= 'a' && ch <= 'z') || (ch >= 'A' && ch <= 'Z') || (ch >= '0' && ch <= '9')
+		return a:insert[0]
+	endif
+	return a:insert."\<Left>"
+endf
+
+function Par_enclose(char)
+	if getline('.')[col('.')-1] == a:char
+		return "\<Right>"
+	else
+		return a:char
+	endif
+endf
+
+function Quo_complete(quote)
+	let ch = getline('.')[col('.')-1]
+	if ch == a:quote
+		return "\<Right>"
+	endif
+	if (ch >= 'a' && ch <= 'z') || (ch >= 'A' && ch <= 'Z') || (ch >= '0' && ch <= '9')
+		return a:quote
+	endif
+	return a:quote.a:quote."\<Left>"
+endf
+
+function Py_Quo_complete(quote)
+	let ch = getline('.')[col('.')-1]
+	if ch == a:quote
+		return "\<Right>"
+	endif
+	if (ch >= 'a' && ch <= 'z') || (ch >= 'A' && ch <= 'Z') || (ch >= '0' && ch <= '9')
+		return a:quote
+	endif
+	let pref = getline('.')[col('.')-3:col('.')-2]
+	if pref == a:quote.a:quote
+		return a:quote.a:quote.a:quote.a:quote."\<Left>\<Left>\<Left>"
+	endif
+	return a:quote.a:quote."\<Left>"
+endf
+
 " for C
-for extention in ["c", "cc", "cpp", "cxx", "h"]
+for extention in ["c", "cc", "cpp", "cxx", "h", "lua"]
 	if extention == expand("%:e")
 		" XXX: vim cannot tell $ from $-1, so a <space> should be
 		" inserted
-		inoremap ( (<Left><C-o>:py par_comp()<CR>
+		inoremap ( <C-r>=Par_complete('()')<CR>
+		inoremap ) <C-r>=Par_enclose(')')<CR>
+		inoremap " <C-r>=Quo_complete('"')<CR>
+		inoremap ' <C-r>=Quo_complete("'")<CR>
+		inoremap [ <C-r>=Par_complete('[]')<CR>
+		inoremap ] <C-r>=Par_enclose(']')<CR>
 		inoremap { {<CR> <CR>}<Up><End><Backspace>
-		inoremap () ()
 		inoremap {} {}
-		inoremap " ""<Left>
-		inoremap "" ""
-		inoremap [ []<Left>
-		inoremap [] []
 		nnoremap <Leader>w O/*  */<ESC>2hi
 		nnoremap <Leader>ww O/*<CR><CR>/<ESC>ka<SPACE>
 		break
@@ -304,10 +385,14 @@ autocmd BufNewFile *.py :call PyAddHeader()
 
 " for python
 if "py" == expand("%:e")
-	inoremap ( (<Left><C-o>:py par_comp()<CR>
-	inoremap () ()
-	inoremap [ []<Left>
-	inoremap [] []
+	inoremap ( <C-r>=Par_complete('()')<CR>
+	inoremap ) <C-r>=Par_enclose(')')<CR>
+	inoremap [ <C-r>=Par_complete('[]')<CR>
+	inoremap ] <C-r>=Par_enclose(']')<CR>
+	inoremap " <C-r>=Py_Quo_complete('"')<CR>
+	inoremap ' <C-r>=Py_Quo_complete("'")<CR>
 	" See FIXME
-	" inoremap ( <C-o>:call Par_comp()<CR><Right>
+	" inoremap ( <C-o>:call par_complete()<CR><Right>
 endif
+
+set fileencodings=utf-8,gbk,latin1
