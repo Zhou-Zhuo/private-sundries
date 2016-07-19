@@ -185,6 +185,9 @@ set hls
 " ctags auto search
 set tags=tags;
 
+" undo after file close
+set undofile
+
 " NERDTree key-bind
 nnoremap <F2> :NERDTree<CR>
 nnoremap <F3> :NERDTreeToggle<CR>
@@ -221,9 +224,8 @@ if has("cscope")
 		let cscope_db_recursion_level -= 1
 	endwhile
 	set csverb
+	set cscopequickfix=s-,c-,d-,i-,t-,e-,g-
 endif
-
-set cscopequickfix=s-,c-,d-,i-,t-,e-,g-
 
 
 let syn_inc_search_depth = 10
@@ -354,7 +356,7 @@ function Py_Quo_complete(quote)
 endf
 
 " for C
-for extention in ["c", "cc", "cpp", "cxx", "h", "lua"]
+for extention in ["c", "cc", "cpp", "cxx", "h", "lua", "java"]
 	if extention == expand("%:e")
 		" XXX: vim cannot tell $ from $-1, so a <space> should be
 		" inserted
