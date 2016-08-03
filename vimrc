@@ -355,8 +355,17 @@ function Py_Quo_complete(quote)
 	return a:quote.a:quote."\<Left>"
 endf
 
+function Ext_CR()
+	let ch1 = getline('.')[col('.')-2]
+	let ch2 = getline('.')[col('.')-1]
+	if (ch1 == '{' && ch2 == '}')
+		return "\<CR>	\<CR>\<Up>\<End>"
+	endif
+	return "\<CR>"
+endfunction
+
 " for C
-for extention in ["c", "cc", "cpp", "cxx", "h", "lua", "java"]
+for extention in ["c", "cc", "cpp", "cxx", "h", "lua", "java", "pl"]
 	if extention == expand("%:e")
 		" XXX: vim cannot tell $ from $-1, so a <space> should be
 		" inserted
@@ -366,8 +375,11 @@ for extention in ["c", "cc", "cpp", "cxx", "h", "lua", "java"]
 		inoremap ' <C-r>=Quo_complete("'")<CR>
 		inoremap [ <C-r>=Par_complete('[]')<CR>
 		inoremap ] <C-r>=Par_enclose(']')<CR>
-		inoremap { {<CR> <CR>}<Up><End><Backspace>
-		inoremap {} {}
+"		inoremap { {<CR> <CR>}<Up><End><Backspace>
+"		inoremap {} {}
+		inoremap { <C-r>=Par_complete('{}')<CR>
+		inoremap } <C-r>=Par_enclose('}')<CR>
+		inoremap <CR> <C-r>=Ext_CR()<CR>
 		nnoremap <Leader>w O/*  */<ESC>2hi
 		nnoremap <Leader>ww O/*<CR><CR>/<ESC>ka<SPACE>
 		break
