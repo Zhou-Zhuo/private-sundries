@@ -364,19 +364,14 @@ function Ext_CR()
 	return "\<CR>"
 endfunction
 
-" for C
 for extention in ["c", "cc", "cpp", "cxx", "h", "lua", "java", "pl"]
 	if extention == expand("%:e")
-		" XXX: vim cannot tell $ from $-1, so a <space> should be
-		" inserted
 		inoremap ( <C-r>=Par_complete('()')<CR>
 		inoremap ) <C-r>=Par_enclose(')')<CR>
 		inoremap " <C-r>=Quo_complete('"')<CR>
 		inoremap ' <C-r>=Quo_complete("'")<CR>
 		inoremap [ <C-r>=Par_complete('[]')<CR>
 		inoremap ] <C-r>=Par_enclose(']')<CR>
-"		inoremap { {<CR> <CR>}<Up><End><Backspace>
-"		inoremap {} {}
 		inoremap { <C-r>=Par_complete('{}')<CR>
 		inoremap } <C-r>=Par_enclose('}')<CR>
 		inoremap <CR> <C-r>=Ext_CR()<CR>
@@ -386,16 +381,17 @@ for extention in ["c", "cc", "cpp", "cxx", "h", "lua", "java", "pl"]
 	endif
 endfor
 
-" put python header to empty script file
-function! PyAddHeader()
+" put header to empty script file
+function! AddHeader(header)
 	if line('$') == 1 && getline(1) == ''
-		silent call append(0, '#!/usr/bin/env python')
+		silent call append(0, a:header)
 		normal! G
 	endif
-	let $PYTHONPATH .= '/usr/lib/python3.5/site-packages'
 endfunction
 
-autocmd BufNewFile *.py :call PyAddHeader()
+autocmd BufNewFile *.py :call AddHeader('#!/usr/bin/env python')
+autocmd BufNewFile *.pl :call AddHeader('#!/usr/bin/env perl')
+autocmd BufNewFile *.sh :call AddHeader('#!/bin/bash')
 
 " for python
 if "py" == expand("%:e")
@@ -405,8 +401,7 @@ if "py" == expand("%:e")
 	inoremap ] <C-r>=Par_enclose(']')<CR>
 	inoremap " <C-r>=Py_Quo_complete('"')<CR>
 	inoremap ' <C-r>=Py_Quo_complete("'")<CR>
-	" See FIXME
-	" inoremap ( <C-o>:call par_complete()<CR><Right>
+	let $PYTHONPATH .= '/usr/lib/python3.5/site-packages'
 endif
 
 set fileencodings=utf-8,gbk,latin1
