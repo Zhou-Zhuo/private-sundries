@@ -29,7 +29,10 @@ Plugin 'altercation/vim-colors-solarized'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'kien/ctrlp.vim'
 Plugin 'easymotion/vim-easymotion'
-" Plugin 'scrooloose/syntastic'
+" Evernote on vim!
+Plugin 'neilagabriel/vim-geeknote'
+Plugin 'kakkyz81/evervim'
+
  
 " plugins not in github
 " Plugin 'git://git.wincent.com/command-t.git'
@@ -364,22 +367,30 @@ function Ext_CR()
 	return "\<CR>"
 endfunction
 
-for extention in ["c", "cc", "cpp", "cxx", "h", "lua", "java", "pl"]
-	if extention == expand("%:e")
-		inoremap ( <C-r>=Par_complete('()')<CR>
-		inoremap ) <C-r>=Par_enclose(')')<CR>
-		inoremap " <C-r>=Quo_complete('"')<CR>
-		inoremap ' <C-r>=Quo_complete("'")<CR>
-		inoremap [ <C-r>=Par_complete('[]')<CR>
-		inoremap ] <C-r>=Par_enclose(']')<CR>
-		inoremap { <C-r>=Par_complete('{}')<CR>
-		inoremap } <C-r>=Par_enclose('}')<CR>
-		inoremap <CR> <C-r>=Ext_CR()<CR>
-		nnoremap <Leader>w O/*  */<ESC>2hi
-		nnoremap <Leader>ww O/*<CR><CR>/<ESC>ka<SPACE>
-		break
-	endif
-endfor
+function! Profile4C()
+	inoremap ( <C-r>=Par_complete('()')<CR>
+	inoremap ) <C-r>=Par_enclose(')')<CR>
+	inoremap " <C-r>=Quo_complete('"')<CR>
+	inoremap ' <C-r>=Quo_complete("'")<CR>
+	inoremap [ <C-r>=Par_complete('[]')<CR>
+	inoremap ] <C-r>=Par_enclose(']')<CR>
+	inoremap { <C-r>=Par_complete('{}')<CR>
+	inoremap } <C-r>=Par_enclose('}')<CR>
+	inoremap <CR> <C-r>=Ext_CR()<CR>
+	nnoremap <Leader>w O/*  */<ESC>2hi
+	nnoremap <Leader>ww O/*<CR><CR>/<ESC>ka<SPACE>
+endfunction
+
+" for python
+function! Profile4Py()
+	inoremap ( <C-r>=Par_complete('()')<CR>
+	inoremap ) <C-r>=Par_enclose(')')<CR>
+	inoremap [ <C-r>=Par_complete('[]')<CR>
+	inoremap ] <C-r>=Par_enclose(']')<CR>
+	inoremap " <C-r>=Py_Quo_complete('"')<CR>
+	inoremap ' <C-r>=Py_Quo_complete("'")<CR>
+	let $PYTHONPATH .= '/usr/lib/python3.5/site-packages'
+endfunction
 
 " put header to empty script file
 function! AddHeader(header)
@@ -392,16 +403,26 @@ endfunction
 autocmd BufNewFile *.py :call AddHeader('#!/usr/bin/env python')
 autocmd BufNewFile *.pl :call AddHeader('#!/usr/bin/env perl')
 autocmd BufNewFile *.sh :call AddHeader('#!/bin/bash')
-
-" for python
-if "py" == expand("%:e")
-	inoremap ( <C-r>=Par_complete('()')<CR>
-	inoremap ) <C-r>=Par_enclose(')')<CR>
-	inoremap [ <C-r>=Par_complete('[]')<CR>
-	inoremap ] <C-r>=Par_enclose(']')<CR>
-	inoremap " <C-r>=Py_Quo_complete('"')<CR>
-	inoremap ' <C-r>=Py_Quo_complete("'")<CR>
-	let $PYTHONPATH .= '/usr/lib/python3.5/site-packages'
-endif
+autocmd BufReadPre *.c :call Profile4C()
+autocmd BufReadPre *.cc :call Profile4C()
+autocmd BufReadPre *.cpp :call Profile4C()
+autocmd BufReadPre *.cxx :call Profile4C()
+autocmd BufReadPre *.h :call Profile4C()
+autocmd BufReadPre *.lua :call Profile4C()
+autocmd BufReadPre *.java :call Profile4C()
+autocmd BufReadPre *.pl :call Profile4C()
+autocmd BufReadPre *.py :call Profile4Py()
+autocmd BufNewFile *.c :call Profile4C()
+autocmd BufNewFile *.cc :call Profile4C()
+autocmd BufNewFile *.cpp :call Profile4C()
+autocmd BufNewFile *.cxx :call Profile4C()
+autocmd BufNewFile *.h :call Profile4C()
+autocmd BufNewFile *.lua :call Profile4C()
+autocmd BufNewFile *.java :call Profile4C()
+autocmd BufNewFile *.pl :call Profile4C()
+autocmd BufNewFile *.py :call Profile4Py()
 
 set fileencodings=utf-8,gbk,latin1
+
+" for geek-note
+let g:GeeknoteFormat="markdown"

@@ -188,7 +188,7 @@ struct dentry {
 
 ```
 
-一个疑问: 按照我的理解, 从`dentry_hashtable`中找到bucket后如果事先判断其bucket中-
-只有一个元素应该就可以确定hash不存在碰撞了, 也就不用再去比较字符串了, 然而内核里-
+一个疑问: 按照我的理解, 从`dentry_hashtable`中找到bucket后如果事先判断其bucket中
+只有一个元素应该就可以确定hash不存在碰撞了, 也就不用再去比较字符串了, 然而内核里
 面却不是这样做的( `__d_lookup_rcu` => `dentry_cmp` ) (并且还专门写了个
 `dentry_string_cmp`).
