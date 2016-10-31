@@ -1,4 +1,4 @@
-## Hash
+### *Hash*
 
 内核用一个链表数组的方式实现一个hash table,寻址用数组,之所以要用链表是为了处理
 地址碰撞(地址碰撞的元素链在一个list上).所以寻址过程除了用hash key索引到目的链表
@@ -66,6 +66,42 @@ mount一个新的device大致可分为两步:
 
 * 将新的device加入到path tree里面, 为path walking提供条件
 
+### *RCU*
+
+以链表为例,在若干线程读取一个节点时,另一个线程删除该节点,删除线程将节点移除链表,却不
+马上销毁,真正的销毁操作需等到读取线程释放节点的引用时才进行.从删除操作到销毁操作中间
+的时间称为宽限期(grace period).相关API: `rcu_read_(un)lock`,`synchronize_rcu`
+
+同样,在插入节点时需保证读取线程读到的是完整的节点,这需要rcu API的指针相关操作(如
+`rcu_assign_pointer`,`rcu_dereference - fetch RCU-protected pointer for
+dereferencing`), 这些操作往往封装了内存屏障.
+
+### *seqlock*
+
+除非已有writer thread加锁, 否则writer thread直接获取lock, 不管是否已被reader thread
+加锁. reader thread在退出临界区时判断临界区内是否有writer thread, 如果有则retry read
+操作. 实现方法是维持一个seq counter, 初始化为0, write lock和unlock操作均令其加一,
+reader等seq为偶数时才允许进入临界区, reader离开临界区时判断seq是否改变, 如果改变说明
+期间有writer更新了seq, 则重试.
+
+```c
+
+void reader_thread()
+{
+	do {
+		seq = read_seqbegin(&seqlock);
+		// do reader stuff
+	} while (read_seqretry(&seqlock, seq));
+}
+
+void writer_thread()
+{
+	write_seqlock(&seqlock);
+	// do writer stuff
+	write_sequnlock(&seqlock);
+}
+
+```
 
 ## Path Walking
 
@@ -74,7 +110,8 @@ mount一个新的device大致可分为两步:
 
 path resolution: 以path name解析path, open()及stat()时进行.
 
-方法: walking namespace tree, 从第一个已知的dentry (root or cwd)开始，不断walk child
+方法: walking namespace tree, 从第一个已知的dentry (root or cwd)开始，不断walk
+child.对于已经walk到的dentry, 会以dcache的方式加速下次resolution (见下面代码注释).
 
 path walking 遇到mount point 时就会change到child的vfsmount, 从mount point处的path切
 换到对应vfsmount的root path.
@@ -96,12 +133,14 @@ struct qstr {
 	const unsigned char *name;
 };
 
+/* path reslution 过程中存储状态的结构变量 */
 struct nameidata {
 	/* 当前walk到的目录,这个域会随path walking过程行进而更新.
 	 * flag AT_FDCWD置位时被初始化为pwd */
 	struct path     path;
 
-	/* quick string -- 包含string本身和其hash */
+	/* quick string -- 包含string本身和其hash. dcache hashtable
+	 * 用tuple (parent, qstr->hash)作key */
 	struct qstr     last;
 	struct path     root;
 	struct inode    *inode; /* path.dentry.d_inode */
@@ -119,8 +158,7 @@ struct dentry {
 
 	/* dentry_hashtable(也即dcache-hash table)中的bucket, key为
 	   tuple (parent, name), 其中parent是parent dentry, name并非raw name
-	   而是qstr类型name的hash. 这个域组成的hash table是dcache的关键.
-	   dcache的关键 */
+	   而是qstr类型name的hash. 这个域组成的hash table是dcache的关键. */
 	struct hlist_bl_node d_hash;    /* lookup hash list */
 	struct dentry *d_parent;        /* parent directory */
 	struct qstr d_name;
