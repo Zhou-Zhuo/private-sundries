@@ -4,8 +4,6 @@
 地址碰撞(地址碰撞的元素链在一个list上).所以寻址过程除了用hash key索引到目的链表
 表头,如果链表中不止一个元素,还要沿着链表比较raw key.
 
----
-
 ## Mount
 
 相关数据结构:
@@ -68,8 +66,6 @@ mount一个新的device大致可分为两步:
 
 * 将新的device加入到path tree里面, 为path walking提供条件
 
----
-
 ### *RCU*
 
 以链表为例,在若干线程读取一个节点时,另一个线程删除该节点,删除线程将节点移除链表,却不
@@ -79,8 +75,6 @@ mount一个新的device大致可分为两步:
 同样,在插入节点时需保证读取线程读到的是完整的节点,这需要rcu API的指针相关操作(如
 `rcu_assign_pointer`,`rcu_dereference - fetch RCU-protected pointer for
 dereferencing`), 这些操作往往封装了内存屏障.
-
----
 
 ### *seqlock*
 
@@ -194,7 +188,7 @@ struct dentry {
 
 ```
 
-一个疑问: 按照我的理解, 从`dentry_hashtable`中找到bucket后如果事先判断其bucket中
-只有一个元素应该就可以确定hash不存在碰撞了, 也就不用再去比较字符串了, 然而内核里
+一个疑问: 按照我的理解, 从`dentry_hashtable`中找到bucket后如果事先判断其bucket中-
+只有一个元素应该就可以确定hash不存在碰撞了, 也就不用再去比较字符串了, 然而内核里-
 面却不是这样做的( `__d_lookup_rcu` => `dentry_cmp` ) (并且还专门写了个
 `dentry_string_cmp`).
