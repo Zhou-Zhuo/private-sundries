@@ -1,4 +1,4 @@
-### *Hash*
+##### *Hash*
 
 内核用一个链表数组的方式实现一个hash table,寻址用数组,之所以要用链表是为了处理
 地址碰撞(地址碰撞的元素链在一个list上).所以寻址过程除了用hash key索引到目的链表
@@ -53,6 +53,9 @@ struct mount {
 
 ```
 
+* **A path is represented as a (dentry, vfsmount) tuple, 也就是说，单靠一个dentry
+是无法表示一个path的信息的，我们还需要知道path属于哪个mount.**
+
 mount一个新的device大致可分为两步:
 
 1. load superblock and root inode, 从root inode中创建root dentry; (`vfs_kern_mount`)
@@ -66,7 +69,7 @@ mount一个新的device大致可分为两步:
 
 * 将新的device加入到path tree里面, 为path walking提供条件
 
-### *RCU*
+#### *RCU*
 
 以链表为例,在若干线程读取一个节点时,另一个线程删除该节点,删除线程将节点移除链表,却不
 马上销毁,真正的销毁操作需等到读取线程释放节点的引用时才进行.从删除操作到销毁操作中间
@@ -76,7 +79,7 @@ mount一个新的device大致可分为两步:
 `rcu_assign_pointer`,`rcu_dereference - fetch RCU-protected pointer for
 dereferencing`), 这些操作往往封装了内存屏障.
 
-### *seqlock*
+#### *seqlock*
 
 除非已有writer thread加锁, 否则writer thread直接获取lock, 不管是否已被reader thread
 加锁. reader thread在退出临界区时判断临界区内是否有writer thread, 如果有则retry read
@@ -103,10 +106,7 @@ void writer_thread()
 
 ```
 
-## Path Walking
-
-* **A path is represented as a (dentry, vfsmount) tuple, 也就是说，单靠一个dentry
-是无法表示一个path的信息的，我们还需要知道path属于哪个mount.**
+## Path Resolution and Dcache
 
 path resolution: 以path name解析path, open()及stat()时进行.
 

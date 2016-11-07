@@ -59,14 +59,30 @@ set guifont=Bitstream\ Vera\ Sans\ Mono\ 11
 set bs=2
 
 " tab setting
-set tabstop=8
-set softtabstop=8
-set shiftwidth=8
-set noexpandtab
-set smarttab
 set cindent
-set nu
 
+function! Usetab(tab)
+	if (a:tab == 0)
+		set tabstop=4
+		set softtabstop=4
+		set shiftwidth=4
+		set expandtab
+		set smarttab
+	else
+		set tabstop=8
+		set softtabstop=8
+		set shiftwidth=8
+		set noexpandtab
+		set smarttab
+	endif
+endf
+
+command Usetab call Usetab(1)
+command Usespace call Usetab(0)
+
+Usetab
+
+set nu
 
 " setting for airline status-line
 set laststatus=2
@@ -379,6 +395,11 @@ function! Profile4C()
 	inoremap <CR> <C-r>=Ext_CR()<CR>
 	nnoremap <Leader>w O/*  */<ESC>2hi
 	nnoremap <Leader>ww O/*<CR><CR>/<ESC>ka<SPACE>
+	if (0 == search('^\t', 'n'))
+		call Usetab(0)
+	else
+		call Usetab(1)
+	endif
 endfunction
 
 " for python
@@ -403,15 +424,15 @@ endfunction
 autocmd BufNewFile *.py :call AddHeader('#!/usr/bin/env python')
 autocmd BufNewFile *.pl :call AddHeader('#!/usr/bin/env perl')
 autocmd BufNewFile *.sh :call AddHeader('#!/bin/bash')
-autocmd BufReadPre *.c :call Profile4C()
-autocmd BufReadPre *.cc :call Profile4C()
-autocmd BufReadPre *.cpp :call Profile4C()
-autocmd BufReadPre *.cxx :call Profile4C()
-autocmd BufReadPre *.h :call Profile4C()
-autocmd BufReadPre *.lua :call Profile4C()
-autocmd BufReadPre *.java :call Profile4C()
-autocmd BufReadPre *.pl :call Profile4C()
-autocmd BufReadPre *.py :call Profile4Py()
+autocmd BufReadPost *.c :call Profile4C()
+autocmd BufReadPost *.cc :call Profile4C()
+autocmd BufReadPost *.cpp :call Profile4C()
+autocmd BufReadPost *.cxx :call Profile4C()
+autocmd BufReadPost *.h :call Profile4C()
+autocmd BufReadPost *.lua :call Profile4C()
+autocmd BufReadPost *.java :call Profile4C()
+autocmd BufReadPost *.pl :call Profile4C()
+autocmd BufReadPost *.py :call Profile4Py()
 autocmd BufNewFile *.c :call Profile4C()
 autocmd BufNewFile *.cc :call Profile4C()
 autocmd BufNewFile *.cpp :call Profile4C()
