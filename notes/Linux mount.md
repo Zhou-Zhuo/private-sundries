@@ -133,7 +133,7 @@ struct qstr {
 	const unsigned char *name;
 };
 
-/* path reslution 过程中存储状态的结构变量 */
+/* path reslution 过程中存储状态的变量 */
 struct nameidata {
 	/* 当前walk到的目录,这个域会随path walking过程行进而更新.
 	 * flag AT_FDCWD置位时被初始化为pwd */

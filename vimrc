@@ -61,24 +61,20 @@ set bs=2
 " tab setting
 set cindent
 
-function! Usetab(tab)
+function! Usetab(tab, w)
+	set smarttab
+	let &tabstop=a:w
+	let &softtabstop=a:w
+	let &shiftwidth=a:w
 	if (a:tab == 0)
-		set tabstop=4
-		set softtabstop=4
-		set shiftwidth=4
 		set expandtab
-		set smarttab
 	else
-		set tabstop=8
-		set softtabstop=8
-		set shiftwidth=8
 		set noexpandtab
-		set smarttab
 	endif
 endf
 
-command Usetab call Usetab(1)
-command Usespace call Usetab(0)
+command Usetab call Usetab(1, 8)
+command Usespace call Usetab(0, 4)
 
 Usetab
 
@@ -163,6 +159,9 @@ nnoremap <Leader>gg : silent execute "grep \'\\<".shellescape(expand("<cword>"))
 
 map <Leader>f <Plug>(easymotion-f)
 map <Leader><Leader>f <Plug>(easymotion-F)
+
+" search visually selected text
+vnoremap // y/<C-R>"<CR>
 
 " set wrap lbr
 " set fo+=mM
@@ -383,7 +382,7 @@ function Ext_CR()
 	return "\<CR>"
 endfunction
 
-function! Profile4C()
+function! Profile4C(...)
 	inoremap ( <C-r>=Par_complete('()')<CR>
 	inoremap ) <C-r>=Par_enclose(')')<CR>
 	inoremap " <C-r>=Quo_complete('"')<CR>
@@ -396,9 +395,13 @@ function! Profile4C()
 	nnoremap <Leader>w O/*  */<ESC>2hi
 	nnoremap <Leader>ww O/*<CR><CR>/<ESC>ka<SPACE>
 	if (0 == search('^\t', 'n'))
-		call Usetab(0)
+		call Usetab(0, 4)
 	else
-		call Usetab(1)
+		if (a:0 > 0)
+			call Usetab(1, a:1)
+		else
+			call Usetab(1, 8)
+		endif
 	endif
 endfunction
 
@@ -426,7 +429,7 @@ autocmd BufNewFile *.pl :call AddHeader('#!/usr/bin/env perl')
 autocmd BufNewFile *.sh :call AddHeader('#!/bin/bash')
 autocmd BufReadPost *.c :call Profile4C()
 autocmd BufReadPost *.cc :call Profile4C()
-autocmd BufReadPost *.cpp :call Profile4C()
+autocmd BufReadPost *.cpp :call Profile4C(4)
 autocmd BufReadPost *.cxx :call Profile4C()
 autocmd BufReadPost *.h :call Profile4C()
 autocmd BufReadPost *.lua :call Profile4C()
