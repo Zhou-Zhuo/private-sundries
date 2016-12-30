@@ -21,7 +21,7 @@ Plugin 'taglist.vim'
 
 Plugin 'Conque-Shell'
 Plugin 'scrooloose/nerdtree'
-Plugin 'Xuyuanp/nerdtree-git-plugin'
+" Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'bling/vim-airline'
 " To show git status in vim status line, vim-fugitive must be installed!!
 Plugin 'tpope/vim-fugitive'
@@ -411,6 +411,8 @@ function! Profile4Py()
 	inoremap ) <C-r>=Par_enclose(')')<CR>
 	inoremap [ <C-r>=Par_complete('[]')<CR>
 	inoremap ] <C-r>=Par_enclose(']')<CR>
+	inoremap { <C-r>=Par_complete('{}')<CR>
+	inoremap } <C-r>=Par_enclose('}')<CR>
 	inoremap " <C-r>=Py_Quo_complete('"')<CR>
 	inoremap ' <C-r>=Py_Quo_complete("'")<CR>
 	let $PYTHONPATH .= '/usr/lib/python3.5/site-packages'

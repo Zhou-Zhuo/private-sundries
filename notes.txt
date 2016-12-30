@@ -193,3 +193,11 @@
 * Gnome relies on libgl, do not use nvidia-libgl if not using nvidia driver.
 
 * Try <Shift>-<Insert>!
+
+* Use tsocks to perform transparent socks proxying.
+  e.g.:
+      $ sudo tsocks apt-get update
+
+* Seems like someone listenning on the change on the kernel(e.g., the fs
+  interface) and modify something as soon as it is created ?
+  Check ueventd !

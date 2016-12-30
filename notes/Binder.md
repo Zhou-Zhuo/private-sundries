@@ -78,3 +78,19 @@ status_t BnFooService::onTransact(
 }
 
 ```
+
+## Java Layer
+
+Questions:
+
+Who calls onTransact? (where is the "eventloop"?)
+
+```cpp
+
+JavaBBinder::onTransact() {    // JNI Layer
+    execTransact() {           // Call into Java Layer
+        onTransact();          // This is it!
+    }
+}
+
+```

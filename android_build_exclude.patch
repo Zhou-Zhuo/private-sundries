@@ -1,0 +1,63 @@
+diff --git a/core/main.mk b/core/main.mk
+index a96dbe3..db6bcd5 100644
+--- a/core/main.mk
++++ b/core/main.mk
+@@ -513,7 +513,7 @@ ifneq ($(dont_bother),true)
+ # Can't use first-makefiles-under here because
+ # --mindepth=2 makes the prunes not work.
+ subdir_makefiles := \
+-	$(shell build/tools/findleaves.py --prune=$(OUT_DIR) --prune=.repo --prune=.git $(subdirs) Android.mk)
++	$(shell build/tools/findleaves.py --prune=$(OUT_DIR) --prune=.repo --prune=.git --exclude-file=make-$(MAKECMDGOALS)-exclude $(subdirs) Android.mk)
+ 
+ $(foreach mk, $(subdir_makefiles), $(info including $(mk) ...)$(eval include $(mk)))
+ 
+diff --git a/tools/findleaves.py b/tools/findleaves.py
+index 3a9e508..752cf5d 100755
+--- a/tools/findleaves.py
++++ b/tools/findleaves.py
+@@ -23,12 +23,19 @@
+ import os
+ import sys
+ 
+-def perform_find(mindepth, prune, dirlist, filename):
++def perform_find(mindepth, prune, exclude_dirs, dirlist, filename):
+   result = []
+   pruneleaves = set(map(lambda x: os.path.split(x)[1], prune))
+   for rootdir in dirlist:
+     rootdepth = rootdir.count("/")
+     for root, dirs, files in os.walk(rootdir, followlinks=True):
++      # exclude
++      i = 0
++      while i < len(dirs):
++        if os.path.join(root, dirs[i]) in exclude_dirs:
++          del dirs[i]
++        else:
++          i += 1
+       # prune
+       check_prune = False
+       for d in dirs:
+@@ -82,6 +89,11 @@ def main(argv):
+       if len(p) == 0:
+         usage()
+       prune.append(p)
++    elif arg.startswith("--exclude-file="):
++      p = arg[len("--exclude-file="):]
++      if len(p) == 0:
++        usage()
++      exclude_file = p
+     else:
+       usage()
+     i += 1
+@@ -89,7 +101,11 @@ def main(argv):
+     usage()
+   dirlist = argv[i:-1]
+   filename = argv[-1]
+-  results = list(set(perform_find(mindepth, prune, dirlist, filename)))
++  try:
++    exclude_dirs = [line.strip() for line in open(exclude_file)]
++  except (IOError ,UnboundLocalError) as e:
++    exclude_dirs = []
++  results = list(set(perform_find(mindepth, prune, exclude_dirs, dirlist, filename)))
+   results.sort()
+   for r in results:
+     print r
