@@ -452,3 +452,6 @@ set fileencodings=utf-8,gbk,latin1
 
 " for geek-note
 let g:GeeknoteFormat="markdown"
+
+set linebreak
+set breakindent

@@ -186,7 +186,7 @@
 * vimrc runs BEFORE vim open a file, so it hold an empty buffer when vimrc
   runs. We may want `autocmd BufReadPost`.
 
-* Be careful when using lock in muilti-thread programming!
+* Be careful when using lock in multi-thread programming!
 
 * vim load configuration from local dir when 'exrc' set in ~/.vimrc.
 
@@ -201,3 +201,5 @@
 * Seems like someone listenning on the change on the kernel(e.g., the fs
   interface) and modify something as soon as it is created ?
   Check ueventd !
+
+* The secret of tsocks' trick -- env var LD_PRELOAD.

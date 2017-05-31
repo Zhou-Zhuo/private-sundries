@@ -23,3 +23,13 @@ Sensors HAL
   从/sys/class/sensors中获得信息填充`SensorContext`, 并获得input event path.
 
 native sensorservice
+
+----
+
+几种架构：
+
+1. `kernel/arch/arm/mach-msm/sensors_adsp.c` + `vendor/qcom/proprietary/sensors/dsps`
+
+2. linux input subsys + `hardware/qcom/sensors`
+
+3. linux iio subsys + `hardware/invensense`
