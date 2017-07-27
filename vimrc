@@ -78,6 +78,19 @@ command Usespace call Usetab(0, 4)
 
 Usetab
 
+function! Usegmove()
+	nnoremap j gj
+	nnoremap k gk
+endf
+
+function! Nousegmove()
+	nunmap j
+	nunmap k
+endf
+
+command Usegmove call Usegmove()
+command Nousegmove call Nousegmove()
+
 set nu
 
 " setting for airline status-line

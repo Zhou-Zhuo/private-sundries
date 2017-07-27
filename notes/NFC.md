@@ -208,3 +208,33 @@ nfc_task () {
 }
 
 ```
+
+P2P case - when 2 devices touch back to back
+
+``` java
+
+nfaConnectionCallback(NFA_LLCP_ACTIVATED_EVT) {
+    PeerToPeer.llcpActivatedHandler() {
+        notifyLlcpLinkActivation(device : P2pDevice) {
+            NfcService.mListener.onLlcpLinkActivated(device) {
+                sendMessage(MSG_LLCP_LINK_ACTIVATION, device);
+            }
+        }
+    }
+}
+
+NfcServiceHandler.handleMessage(MSG_LLCP_LINK_ACTIVATION, device) {
+    sendBroadcast("com.android.nfc.action.LLCP_UP");
+    llcpActivated((NfcDepEndpoint) device) {
+        if (device.getMode() == MODE_P2P_TARGET) {
+            P2pLinkManager.onLlcpActivated() {
+                // Start taking a screenshot
+                P2pEventListener.onP2pInRange();
+                // beam stuff.. llcp stuff ...
+            }
+        } else if (device.getMode() == MODE_P2P_INITIATOR) {
+        }
+    }
+}
+
+```

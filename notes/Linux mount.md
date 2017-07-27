@@ -192,3 +192,28 @@ struct dentry {
 只有一个元素应该就可以确定hash不存在碰撞了, 也就不用再去比较字符串了, 然而内核里
 面却不是这样做的( `__d_lookup_rcu` => `dentry_cmp` ) (并且还专门写了个
 `dentry_string_cmp`).
+
+
+---
+
+* How do we get path (dentry) related to inode? Mind this call path, it's all
+  in it:
+
+```c
+
+path_openat() {
+	link_path_walk() {
+		walk_comonent() {
+			lookup_slow() {
+				__lookup_hash() {
+					lookup_real() {
+						// fs call
+						->i_op->lookup();
+					}
+				}
+			}
+		}
+	}
+}
+
+```
