@@ -203,3 +203,14 @@
   Check ueventd !
 
 * The secret of tsocks' trick -- env var LD_PRELOAD.
+
+* EIP attack < W^X < ret2libc < ASLR < ret2plt
+
+* make -nd
+  set -x
+
+* wrapper command:
+ function cmd()
+ {
+	 command cmd "$@"
+ }

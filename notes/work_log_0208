@@ -1,0 +1,47 @@
+2017.2.8
+
+K: FA5301 NFC问题
+
+P: 分别测试NFC的三种模式：
+
+    1. CE：可以被pos机识别为卡；
+
+    2. P2P：用Q908的机子测试，靠近时可以看到有log输出，但Android Beam并没有响应；
+
+    3. R/W：贴IC卡没有log输出
+
+T: 从NCI spec 5.2 State Machine一节得知：
+
+    1. Data Messages的交互发生在POLL_ACTIVE state；
+
+    2. DISCOVERY state发现Remote NFC Endpointi并确定protocol后激活之，然后发送INTF_ACTIVATED_NTF给DH，进入POLL_ACTIVE state；protocol激活失败则发送CORE_GENERIC_ERROR_NTF
+
+   从今天测试的log中看，NFCC始终没有进入POLL_ACTIVE state。后面发现昨晚保存的log中竟然有成功discovery tag并进入POLL_ACTIVE state的情况，诡异
+
+P: 继续查spec,抓log,跟代码
+
+
+2017.2.7
+
+K: 1. i1 电源灯问题：GPIO93问题系平台BUG，讨论后将需求修改为预充电时四个白灯不断闪烁。已修改验证
+
+    2. FA5301 NFC代码导入：一开始碰到NFC设置无法使能的问题，跟踪log和代码发现原因是少了一个配置文件(felica.cfg)。配置文件加入后NFC可以使能，从log上看是开始工作了，但功能应用上仍有问题
+
+P:
+
+T:
+
+P: 把NFC相关代码再系统地阅读一遍
+
+
+2017.2.6
+
+K: 1. i1_d项目battery LED需求的SBL1部分
+
+    2. 阅读MSM8953 sensor架构文档
+
+P: battery red LED（对应GPIO93）在SBL1里无法开启
+
+T: 从邢彦超那里了解到GPIO93开机默认为高
+
+P: 尝试把开LED的程序加到其他位置

@@ -32,6 +32,7 @@ Plugin 'easymotion/vim-easymotion'
 " Evernote on vim!
 Plugin 'neilagabriel/vim-geeknote'
 Plugin 'kakkyz81/evervim'
+Plugin 'lyuts/vim-rtags'
 
  
 " plugins not in github
@@ -235,29 +236,6 @@ let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/
 
 "set autochdir
 
-" cscope
-if has("cscope")
-	set csprg=/usr/bin/cscope
-	set csto=0
-"	set cst
-	set nocsverb
-	nnoremap <C-j> :execute "cs find c ".expand("<cword>")<CR>
-	nnoremap <C-f> :execute "cs find s ".expand("<cword>")<CR>
-	nnoremap <C-g> :execute "cs find g ".expand("<cword>")<CR>
-	" recursion add any database in current directory
-	let cscope_db_recursion_level = 10
-	let cscope_db_file = "cscope.out"
-	while cscope_db_recursion_level >= 0
-		if filereadable(cscope_db_file)
-		    execute "cs add ".cscope_db_file
-		endif
-		let cscope_db_file = "../".cscope_db_file
-		let cscope_db_recursion_level -= 1
-	endwhile
-	set csverb
-	set cscopequickfix=s-,c-,d-,i-,t-,e-,g-
-endif
-
 
 let syn_inc_search_depth = 10
 let b:synmake_inc = '.synchk_inc.mk'
@@ -395,6 +373,18 @@ function Ext_CR()
 	return "\<CR>"
 endfunction
 
+function! Profile4TXT(...)
+	if (0 == search('^\t', 'n'))
+		call Usetab(0, 4)
+	else
+		if (a:0 > 0)
+			call Usetab(1, a:1)
+		else
+			call Usetab(1, 8)
+		endif
+	endif
+endfunction
+
 function! Profile4C(...)
 	inoremap ( <C-r>=Par_complete('()')<CR>
 	inoremap ) <C-r>=Par_enclose(')')<CR>
@@ -439,6 +429,8 @@ function! AddHeader(header)
 	endif
 endfunction
 
+autocmd BufNewFile *.txt :Usespace
+
 autocmd BufNewFile *.py :call AddHeader('#!/usr/bin/env python')
 autocmd BufNewFile *.pl :call AddHeader('#!/usr/bin/env perl')
 autocmd BufNewFile *.sh :call AddHeader('#!/bin/bash')
@@ -468,3 +460,51 @@ let g:GeeknoteFormat="markdown"
 
 set linebreak
 set breakindent
+
+function! Usertags()
+	nmap <C-]> ;rj
+	nmap <C-f> ;rf
+	nmap <C-t> ;rb
+endf
+
+function! Usectags()
+	try
+	unmap <C-]>
+	unmap <C-f>
+	unmap <C-t>
+	catch
+	endtry
+	if has("cscope")
+		set csprg=/usr/bin/cscope
+		set csto=0
+		"	set cst
+		set nocsverb
+		nnoremap <C-j> :execute "cs find c ".expand("<cword>")<CR>
+		nnoremap <C-f> :execute "cs find s ".expand("<cword>")<CR>
+		nnoremap <C-g> :execute "cs find g ".expand("<cword>")<CR>
+		" recursion add any database in current directory
+		let cscope_db_recursion_level = 10
+		let cscope_db_file = "cscope.out"
+		while cscope_db_recursion_level >= 0
+			if filereadable(cscope_db_file)
+				execute "cs add ".cscope_db_file
+			endif
+			let cscope_db_file = "../".cscope_db_file
+			let cscope_db_recursion_level -= 1
+		endwhile
+		set csverb
+		set cscopequickfix=s-,c-,d-,i-,t-,e-,g-
+	endif
+endf
+" rtags
+let g:rtagsUseLocationList = 0
+let g:rtagsRcCmd = "~/.vim/bundle/vim-rtags/rtags/bin/rc"
+set completefunc=RtagsCompleteFunc
+let rtags_index = system(g:rtagsRcCmd.' -T '.@%)
+let rtags_index = substitute(rtags_index, '^[\s\n]*\(.\{-}\)[\s\n]*$', '\1', '')
+if (rtags_index == 'indexed')
+	call Usertags()
+else
+	call Usectags()
+endif
+

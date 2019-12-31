@@ -1,0 +1,4192 @@
+20190717
+
+sdx24 phy
+
+---
+
+20190715
+
+sdx24 thermal
+
+---
+
+20190621
+
+libcurl test CURLOPT_WRITEFUNCTION [Done]
+
+---
+
+20190620
+
+privkey exporting
+k8a comm_prox source issue
+libcurl test CURLOPT_WRITEFUNCTION
+ - start to bore me, time to leave
+libjsoncpp test
+
+backlog:
+libcurl test CURLOPT_WRITEFUNCTION
+cpp base64 test
+repair activation http req part
+k8a mode switch documentation
+
+---
+
+20190617
+
+MR1200_2.4G password: 
+
+---
+
+20190613
+
+android boot optimization - bootchart
+
+---
+
+20190611
+
+20:20 k8a-4g - 几个问题的解答
+
+---
+
+20190606
+
+10:10 activation - multiTuple android o porting
+
+---
+
+20190605
+
+09:06 activation -
+TODO: 1. 写test, 不同service下handleServer的流程
+      2. 写加service条件的handleServer(), 通过两种service情况的test
+      3. 重构handleServer()
+14:20 lantern的代理是怎么回事?thunderbird邮箱用不了了
+
+---
+
+20190604
+
+14:38 始终记得两顶帽子
+15:10 activation - client fd在哪里关的???
+15:25 activation - 调整策略:用丑的方式实现,但确保正确.省下时间用来重写
+15:53 activation - 写了又推翻,大部分时间就这么耗掉了.维护烂代码的隐性工作量远超过别人看起来的
+17:16 activation - 现在不是为了兼容,而是为了复用老代码.既然已经不顾兼容了,完成后就整个推翻重来
+
+---
+
+20190603
+
+11:40 Do it! Not now? Then when?
+11:59 activation - 建立本地测试 - 碰到挫折: openssl兼容问题
+                                           - solved, static lib
+15:00 mind the fucking warnning!!!
+15:18 XXX: struct alignment in C++ ? (Not in C)
+16:46 单元测试驱动式开发 - 有种一切都在自己掌控之中的感觉
+18:12 TODO: libsiminfo_storage.a [DONE] 
+20:54 TODO: extract certkey & siminfo content, assert
+            and test cases:
+	    1. normal, with ki card
+	    2. normal, without ki card, with phy imsi
+	    3. without ki card, without phy imsi
+	    4. device served
+	    5. device served, OK->DONE
+	    6. client store fail
+
+---
+
+20190601
+
+10:22 activation - m2没起来，谁知道他妈的怎么回事
+10:35 维修：依赖开发人员看log排查问题．傻瓜式的排查方式？
+11:00 activation - 适可而止，不一定都要抽出来，只要不影响我添加功能即可
+11:40 activation - vsim检测,m2 vsim读到imsi,但m1 gsm.imsi.m2.slot1为空 -> m2 modem没起来,baseband没报过来,校准流程不到位 FTM NV453
+                 - So, vsim检测步骤是有意义的,能检出modem没起来的问题
+14:50 member life cycle, state ?
+14:58 耦合在一起的状态交替 -> 层次分明,逻辑分明的对象
+15:45 违反小踏步原则的代价--人肉检查
+16:43 activation - 没那么可怕,只要遵循小踏步原则
+
+---
+
+20190531
+
+10:00 activation - libvendorconn.so 卡住的概率变得那么高了吗?
+            - remove it , ok
+10:59 分解的必要性： testability
+11:05 activation - handleServer重构得有点重了，注意行为一致性的可测试性
+17:27 先无脑重构，该抽象出来的概念自己会浮现出来
+17:42 TODO: 割接设备维修擦除 - 865832021862008
+
+---
+
+20190521
+
+多学着用一些现代化的工具吧
+11:39 activation - handleServer
+          对照一下重构列表才知道这个函数有多臭不可闻.多花点时间重构此函数时值得的
+16:16 refactor - 为什么要replace temp with query? 因为局部变量的作用域会引导你写出更长的函数
+17:46 k8a-4g - apk decompiler ~/work/k8a-4g/jadx/bin/jadx
+
+---
+
+20190518
+
+activation - 动早了,一部分要推翻
+           - 唉,顺序啊
+	   - 还好后面几天没做什么
+	   - 就当测试先行开发练习了,反正前几天的积极性也源于此
+	   - 好在新方案倒也好改. 还是要利用整体的力量
+	   - 还真不是没有意义,对重构思想和重构手段的练习绝对是有利的,现在就用得上.
+	     起码面对屎代码也有信心了,不会轻易心态崩溃
+	   - 代码是用来解放人的负担的
+16:59 activation - TODO: How do I handle clt_fd accepted from different server sockets?
+
+---
+
+20190517
+
+14:56 google救了我,fuck,早就应该google了
+      define a virtual method or decleare it as pure virtual, or you get:
+      undefined reference to `vtable for className'
+      https://stackoverflow.com/questions/23255256/undefined-reference-to-vtable-for-class-constructor
+
+---
+
+20190515
+
+11:39 activation - TODO: 增加的class 加上constructor - clear member
+                         boost trim
+14:38
+echo 'update device_bind set state="exported" where sn="351502100812809";' | sqlite3 scripts/20190115/certkey_ki_devinfo.test.db
+echo 'select state from device_bind where sn="351502100812809";' | sqlite3 scripts/20190115/certkey_ki_devinfo.test.db
+-> 1
+
+echo 'update device_bind set state="exporte" where sn="351502100812809";' | sqlite3 scripts/20190115/certkey_ki_devinfo.test.db
+echo 'select state from device_bind where sn="351502100812809";' | sqlite3 scripts/20190115/certkey_ki_devinfo.test.db
+-> exporte
+
+BUG ????????????????????????????????? WTFFFFFFFFF ??????????
+
+SQL语法?????? 单引号'和双引号"的差异?????????
+16:03 补一下C++继承的基础知识,fuck
+      固然蛋疼,但这是使用C++这种底层OO语言的代价
+
+---
+
+20190514
+
+10:54 activation - 按照dong的思路,resources和device_bind都以单独的int id来标识和索引,想法很美好,然而我的sqlite数据库并不是独一的,且相互之间无法感知,如果我需要动态地将他们attach起来,何解?
+资源的生成,结束后device_bind的合并必须中心化管理?只有中间的产线过程是相互无感知的?
+或者,即使在中间过程中,也周期性地同步device_bind到中心DB? - 产线解绑何解?
+无论如何,想方设法尽可能地中心化管理,肯定是一个有效的思路
+
+18:08 activation - TODO: complete DeviceBindToolHandler and test
+                         select resource by name
+
+---
+
+20190513
+
+10:48 activation - 这两天维修激活改动的地方:
+hw_id逻辑: TupleVirtKi, ResourceDB
+KeyValuePair
+15:09 程序员有大量时间和心力会耗在改动造成后果的担忧上,可测试性和单元测试是用来解放这种担忧的
+18:06 activation - TODO: write ActivationOptions test
+20:50 activation - TODO: complete test
+21:17 activation make: *** [test] Segmentation fault (core dumped)
+
+---
+
+20190512
+
+纠结个屁,解放人重要还是解放机器重要?
+注意"两顶帽子",记住自己戴的是哪一顶,即使是变量名的纠结,开发的时候也别管,放到重构里
+
+---
+
+20190511
+
+15:28 推测性设计总是试图在任何一行代码诞生之前就先让系统拥有所有优秀质量,然后程序员将代码塞进这个强健的骨架里就行了.这个过程的危险之处在于:太容易猜错.
+
+---
+
+20190510
+
+16:13:
+If you
+git apply -3 --directory=./dir filename
+you get
+error: ./dir/filename: does not exist in index
+
+But if you
+git apply -3 --directory=dir filename
+you succeed.
+See ?
+
+16:37 先总结下这周干了些啥:
+1. apns-conf.xml问题.花了挺多时间去搞清楚inherit-product的行为,最后得出那个解决方案,被dong否了(well,搞清楚inherit-product的行为,时间花的也是值得的),但是问题的确是存在,不是他说的没有问题
+2. libsiminfo_storage.a问题,花了一些时间把openssl部分接口代码塞进libsiminfo_storage的源码,太麻烦,最后弃了.改成连接libcrypto_static.a(rather than libcrypto.so)
+3. K8A导补丁
+4. 导补丁自动化脚本 - 这个要不要报告呢
+5. 读<重构> - I'm not gonna report this
+
+---
+
+20190509
+
+10:21 activation - 因libvendorconn.so失败数次
+10:37 小心脚本中表示路径的变量里有空格, escape
+15:25 可靠的测试手段 + 快速的烂一点也没关系的代码 + 重构
+      - 这一点对脚本是不是也一样呢?
+
+---
+
+20190508
+
+改变应对deadline的方式
+再急给我等着
+理智驱动,而非压力驱动
+
+11:13 老基线编,对啊!退后一步找解决问题的办法.因为压力和情绪也会陷进去.所以旁人反而容易指出
+
+---
+
+20190507
+
+10:27 有人指派了时间点的任务,如果有更紧急的就提前跟他说清楚
+      昨天在搞别的
+      其实也有信息不对等吧,他可能并不知道我搞apns-conf的问题搞了一天.周报时说清楚吧.按照我自己的方式来
+10:42 activation - 不要纠结EVP_SealInit接口了,看看怎么重新实现RSA_encrypt()就行了,存储兼容不应该有问题的
+11:13 BoringSSL没有OpenSSL的EVP_SealInit接口,candidate solutions:
+. https://github.com/sonyxperiadev/boringssl-compat/blob/master/p_seal.c
+  LD_PRELOAD
+. https://boringssl.googlesource.com/boringssl/+/HEAD/PORTING.md
+
+14:42 - TODO: learn about TDD -
+https://www.jianshu.com/p/62f16cd4fef3
+Mind the references -
+    《有效的单元测试》
+    《代码整洁之道》
+    《重构》
+    Transformation Priority Premise
+    《Test-Driven Development by Example》
+    《Growing Object-Oriented Software, Guided by Tests》
+
+- 一点启发 - 先别急着纠结设计和结构,写脏点,快点,轻松点,跑过测试后再单独考虑重构.
+
+一次把事情做完善 VS 在迭代中把事情完善
+
+- 搞半天不行，接口找不到，草，大意了，顺序搞错
+
+- __write_chk reference not found
+  为什么我这里编不出这个错误?
+   - 正常来说是会有链接错误的,优化掉了?
+    - .mk写的有问题?
+   - 但是但是但是,按理说libc.so作为一个动态库暴露出的应该只有common的write接口啊,啊不对,我的libsiminfo_storage.a里面的确有__write_chk的字符串. write or __write_chk二选一的可能性? linker在有时会选择__write_chk而有时不会???有这种机制吗?
+
+   - 并未真正地调用write?优化? objdump siminfo_compil_verify
+
+---
+
+20190506
+
+09:34 k8a-4g - onPower -
+dong:
+1. ctl主动获取ukey电量(在绑定后第一次)
+2. ukey电量变化后上报，没有固定时间间隔（早期好像是定期上报，功耗偏高，后来我们要求修改为变化后上报）
+10:02 k8a-4g - apns-conf.xml问题
+20:29 k8a-4g - SN问题,custom.prop ??
+
+---
+
+20190505
+
+09:08 k8a-4g - 打补丁 - 不一定能用打补丁的方法:
+             - 问题：冲突
+             - 可能要把老的和新的涉及到的src tree给过去
+10:46 k8a-4g - 公司(可能没钱)的联通卡,空三角
+             - 岑工的移动卡,有4G信号
+10:53 k8a-4g - XXX: 4G,路由偶现设置失败?
+14:07 3139 - TODO: 基线迁移编译问题 -
+vendor/goso-common/multiTuple/crypto/rsa_crypto.c:60: error: undefined reference to 'EVP_SealInit'
+vendor/goso-common/multiTuple/crypto/rsa_crypto.c:83: error: undefined reference to 'EVP_SealFinal'
+vendor/goso-common/multiTuple/crypto/rsa_crypto.c:153: error: undefined reference to 'EVP_OpenInit'
+vendor/goso-common/multiTuple/crypto/rsa_crypto.c:171: error: undefined reference to 'EVP_OpenFinal'
+
+扯淡呢吧,根本没有这个源码路径怎么会有这个问题?
+哦,链接问题?需要重编相应的binary or lib?懂了
+编了一遍PWF39,没出现问题
+
+知道了,dong编proxy-pipe时引用我的库出现的问题
+TODO: 找一个新旧版本common的API替代EVP_*
+      预计需要6h,改动,测试
+      目前只需不影响编译,功能完全可以bringup后再说,优先看K8A
+
+15:38 k8a-4g - 系统里编出的apns-conf.xml是这个 -
+               ./device/generic/goldfish/data/etc/apns-conf.xml
+               又是一个没测试临时仓促发出的
+               领域性的东西,要善于利用老员工的经验
+        PRODUCT_COPY_FILES vendor/qcom/proprietary/common/etc/apns-conf.xml:system/etc/apns-conf.xml ignored.
+         - 搞清楚PRODUCT_COPY_FILES的行为
+	  - 先定义的有效, no override ?
+	   - so, 搞清楚是哪里先定义了system/etc/apns-conf.xml
+	   - 等等,makefile有个override函数不是吗? 不过还是要搞清楚哪里先定义了
+	    - build/target/product/full_base_telephony.mk:31
+	   --- 20190506 ---
+	   - 不对啊
+               PRODUCT_COPY_FILES := $(APN_PATH)/apns-conf.xml:system/etc/apns-conf.xml $(APN_PATH)/spn-conf.xml:system/etc/spn-conf.xml $(PRODUCT_COPY_FILES)
+	     这应该是在前面啊
+	     难道后面还有什么地方定义了???
+	     自己所花的几个小时只是为了在一个远古Android版本中按照Android的机制和规范以及并不人性化或documented的编译系统中塞进去一个vendor文件,bullshit
+	   - inherit-product - mind this!
+	    - 赋值了PRODUCT_*变量,但是你在里面加的log不会打出来!
+	     - 那这种问题该怎么查呢?
+	   - 一个困惑,很长时间没处理Android build的东西,怎么把相关知识快速捡回来?
+           - inherit-product - behaviour ? 似乎变量的变化没有马上生效?
+	    - 问题不是这个,期望生效的是vendor/goso-common/device-vendor.mk而非vendor/qcom/proprietary/common/config/device-vendor.mk,但$(SRC_TARGET_DIR)/product/full_base_telephony.mk就是在它前面
+	   - ok,现在怎么把vendor/goso-common/device-vendor.mk里面的PRODUCT_COPY_FILES加到前面.回到inherit-product的行为
+	   - 说白了,我是在解老项目编译系统的BUG
+	   - Makefile简直不是给人读的,真他妈晦涩
+	   - ./vendor/goso-common/common.mk里调的
+	       $(call inherit-product-if-exists, $(LOCAL_PATH)/device-vendor.mk)
+	     那为什么他妈的这里的log可以打出来??
+
+
+define inherit-product
+  $(foreach v,$(_product_var_list), \
+      $(eval $(v) := $($(v)) $(INHERIT_TAG)$(strip $(1))) \
+      $(if $(filter PRODUCT_COPY_FILES,$(strip $(v))), \
+         $(warning PRODUCT_COPY_FILES=$(PRODUCT_COPY_FILES)),)) \
+  $(eval inherit_var := \
+      PRODUCTS.$(strip $(word 1,$(_include_stack))).INHERITS_FROM) \
+      $(warning _include_stack=$(_include_stack)) \
+  $(eval $(inherit_var) := $(sort $($(inherit_var)) $(strip $(1)))) \
+      $(warning $(inherit_var)=$($(inherit_var))) \
+  $(eval inherit_var:=) \
+  $(eval ALL_PRODUCTS := $(sort $(ALL_PRODUCTS) $(word 1,$(_include_stack))))
+endef
+
+得log
+vendor/goso-common/common.mk:12: PRODUCT_COPY_FILES=@inherit:device/qcom/msm8974/msm8974.mk
+vendor/goso-common/common.mk:12: _include_stack=vendor/ErenEben/k8a/k8a.mk 
+vendor/goso-common/common.mk:12: PRODUCTS.vendor/ErenEben/k8a/k8a.mk.INHERITS_FROM=device/qcom/msm8974/msm8974.mk
+vendor/goso-common/common.mk:16: PRODUCT_COPY_FILES=@inherit:device/qcom/msm8974/msm8974.mk @inherit:vendor/goso-common/device-vendor.mk
+vendor/goso-common/common.mk:16: _include_stack=vendor/ErenEben/k8a/k8a.mk 
+vendor/goso-common/common.mk:16: PRODUCTS.vendor/ErenEben/k8a/k8a.mk.INHERITS_FROM=device/qcom/msm8974/msm8974.mk vendor/goso-common/device-vendor.mk
+device/qcom/msm8974/msm8974.mk:19: PRODUCT_COPY_FILES=device/qcom/msm8974/media/media_profiles_8974.xml:system/etc/media_profiles.xml device/qcom/msm8974/media/media_codecs_8974.xml:system/etc/media_codecs.xml @inherit:device/qcom/common/common.mk
+device/qcom/msm8974/msm8974.mk:19: _include_stack=device/qcom/msm8974/msm8974.mk vendor/ErenEben/k8a/k8a.mk 
+device/qcom/msm8974/msm8974.mk:19: PRODUCTS.device/qcom/msm8974/msm8974.mk.INHERITS_FROM=device/qcom/common/common.mk
+device/qcom/common/common.mk:717: inherit vendor/qcom/proprietary/common/config/device-vendor.mk and build/target/product/full_base_telephony.mk
+device/qcom/common/common.mk:718: PRODUCT_COPY_FILES=vendor/qcom/proprietary/common/etc/apns-conf.xml:system/etc/apns-conf.xml frameworks/native/data/etc/android.hardware.camera.flash-autofocus.xml:system/etc/permissions/android.hardware.camera.flash-autofocus.xml frameworks/native/data/etc/android.hardware.camera.front.xml:system/etc/permissions/android.hardware.camera.front.xml frameworks/native/data/etc/android.hardware.telephony.gsm.xml:system/etc/permissions/android.hardware.telephony.gsm.xml frameworks/native/data/etc/android.hardware.telephony.cdma.xml:system/etc/permissions/android.hardware.telephony.cdma.xml frameworks/native/data/etc/android.hardware.location.gps.xml:system/etc/permissions/android.hardware.location.gps.xml frameworks/native/data/etc/android.hardware.touchscreen.multitouch.jazzhand.xml:system/etc/permissions/android.hardware.touchscreen.multitouch.jazzhand.xml frameworks/native/data/etc/android.hardware.wifi.xml:system/etc/permissions/android.hardware.wifi.xml frameworks/native/data/etc/android.hardware.wifi.direct.xml:system/etc/permissions/android.hardware.wifi.direct.xml frameworks/native/data/etc/android.software.sip.voip.xml:system/etc/permissions/android.software.sip.voip.xml frameworks/native/data/etc/handheld_core_hardware.xml:system/etc/permissions/handheld_core_hardware.xml frameworks/native/data/etc/android.hardware.sensor.proximity.xml:system/etc/permissions/android.hardware.sensor.proximity.xml frameworks/native/data/etc/android.hardware.sensor.light.xml:system/etc/permissions/android.hardware.sensor.light.xml frameworks/native/data/etc/android.hardware.sensor.gyroscope.xml:system/etc/permissions/android.hardware.sensor.gyroscope.xml frameworks/native/data/etc/android.hardware.usb.accessory.xml:system/etc/permissions/android.hardware.usb.accessory.xml frameworks/native/data/etc/android.hardware.usb.host.xml:system/etc/permissions/android.hardware.usb.host.xml packages/wallpapers/LivePicker/android.software.live_wallpaper.xml:system/etc/permissions/android.software.live_wallpaper.xml frameworks/native/data/etc/android.hardware.bluetooth_le.xml:system/etc/permissions/android.hardware.bluetooth_le.xml  system/bluetooth/data/audio.conf:system/etc/bluetooth/audio.conf system/bluetooth/data/auto_pairing.conf:system/etc/bluetooth/auto_pairing.conf system/bluetooth/data/blacklist.conf:system/etc/bluetooth/blacklist.conf system/bluetooth/data/input.conf:system/etc/bluetooth/input.conf system/bluetooth/data/network.conf:system/etc/bluetooth/network.conf  device/qcom/common/sec_config:system/etc/sec_config device/qcom/common/media/media_profiles.xml:system/etc/media_profiles.xml device/qcom/common/media/media_codecs.xml:system/etc/media_codecs.xml @inherit:vendor/qcom/proprietary/common/config/device-vendor.mk
+device/qcom/common/common.mk:718: _include_stack=device/qcom/common/common.mk device/qcom/msm8974/msm8974.mk vendor/ErenEben/k8a/k8a.mk 
+device/qcom/common/common.mk:718: PRODUCTS.device/qcom/common/common.mk.INHERITS_FROM=vendor/qcom/proprietary/common/config/device-vendor.mk
+device/qcom/common/common.mk:719: PRODUCT_COPY_FILES=vendor/qcom/proprietary/common/etc/apns-conf.xml:system/etc/apns-conf.xml frameworks/native/data/etc/android.hardware.camera.flash-autofocus.xml:system/etc/permissions/android.hardware.camera.flash-autofocus.xml frameworks/native/data/etc/android.hardware.camera.front.xml:system/etc/permissions/android.hardware.camera.front.xml frameworks/native/data/etc/android.hardware.telephony.gsm.xml:system/etc/permissions/android.hardware.telephony.gsm.xml frameworks/native/data/etc/android.hardware.telephony.cdma.xml:system/etc/permissions/android.hardware.telephony.cdma.xml frameworks/native/data/etc/android.hardware.location.gps.xml:system/etc/permissions/android.hardware.location.gps.xml frameworks/native/data/etc/android.hardware.touchscreen.multitouch.jazzhand.xml:system/etc/permissions/android.hardware.touchscreen.multitouch.jazzhand.xml frameworks/native/data/etc/android.hardware.wifi.xml:system/etc/permissions/android.hardware.wifi.xml frameworks/native/data/etc/android.hardware.wifi.direct.xml:system/etc/permissions/android.hardware.wifi.direct.xml frameworks/native/data/etc/android.software.sip.voip.xml:system/etc/permissions/android.software.sip.voip.xml frameworks/native/data/etc/handheld_core_hardware.xml:system/etc/permissions/handheld_core_hardware.xml frameworks/native/data/etc/android.hardware.sensor.proximity.xml:system/etc/permissions/android.hardware.sensor.proximity.xml frameworks/native/data/etc/android.hardware.sensor.light.xml:system/etc/permissions/android.hardware.sensor.light.xml frameworks/native/data/etc/android.hardware.sensor.gyroscope.xml:system/etc/permissions/android.hardware.sensor.gyroscope.xml frameworks/native/data/etc/android.hardware.usb.accessory.xml:system/etc/permissions/android.hardware.usb.accessory.xml frameworks/native/data/etc/android.hardware.usb.host.xml:system/etc/permissions/android.hardware.usb.host.xml packages/wallpapers/LivePicker/android.software.live_wallpaper.xml:system/etc/permissions/android.software.live_wallpaper.xml frameworks/native/data/etc/android.hardware.bluetooth_le.xml:system/etc/permissions/android.hardware.bluetooth_le.xml  system/bluetooth/data/audio.conf:system/etc/bluetooth/audio.conf system/bluetooth/data/auto_pairing.conf:system/etc/bluetooth/auto_pairing.conf system/bluetooth/data/blacklist.conf:system/etc/bluetooth/blacklist.conf system/bluetooth/data/input.conf:system/etc/bluetooth/input.conf system/bluetooth/data/network.conf:system/etc/bluetooth/network.conf  device/qcom/common/sec_config:system/etc/sec_config device/qcom/common/media/media_profiles.xml:system/etc/media_profiles.xml device/qcom/common/media/media_codecs.xml:system/etc/media_codecs.xml @inherit:vendor/qcom/proprietary/common/config/device-vendor.mk @inherit:build/target/product/full_base_telephony.mk
+device/qcom/common/common.mk:719: _include_stack=device/qcom/common/common.mk device/qcom/msm8974/msm8974.mk vendor/ErenEben/k8a/k8a.mk 
+device/qcom/common/common.mk:719: PRODUCTS.device/qcom/common/common.mk.INHERITS_FROM=build/target/product/full_base_telephony.mk vendor/qcom/proprietary/common/config/device-vendor.mk
+device/qcom/common/common.mk:732: PRODUCT_COPY_FILES=vendor/qcom/proprietary/common/etc/apns-conf.xml:system/etc/apns-conf.xml frameworks/native/data/etc/android.hardware.camera.flash-autofocus.xml:system/etc/permissions/android.hardware.camera.flash-autofocus.xml frameworks/native/data/etc/android.hardware.camera.front.xml:system/etc/permissions/android.hardware.camera.front.xml frameworks/native/data/etc/android.hardware.telephony.gsm.xml:system/etc/permissions/android.hardware.telephony.gsm.xml frameworks/native/data/etc/android.hardware.telephony.cdma.xml:system/etc/permissions/android.hardware.telephony.cdma.xml frameworks/native/data/etc/android.hardware.location.gps.xml:system/etc/permissions/android.hardware.location.gps.xml frameworks/native/data/etc/android.hardware.touchscreen.multitouch.jazzhand.xml:system/etc/permissions/android.hardware.touchscreen.multitouch.jazzhand.xml frameworks/native/data/etc/android.hardware.wifi.xml:system/etc/permissions/android.hardware.wifi.xml frameworks/native/data/etc/android.hardware.wifi.direct.xml:system/etc/permissions/android.hardware.wifi.direct.xml frameworks/native/data/etc/android.software.sip.voip.xml:system/etc/permissions/android.software.sip.voip.xml frameworks/native/data/etc/handheld_core_hardware.xml:system/etc/permissions/handheld_core_hardware.xml frameworks/native/data/etc/android.hardware.sensor.proximity.xml:system/etc/permissions/android.hardware.sensor.proximity.xml frameworks/native/data/etc/android.hardware.sensor.light.xml:system/etc/permissions/android.hardware.sensor.light.xml frameworks/native/data/etc/android.hardware.sensor.gyroscope.xml:system/etc/permissions/android.hardware.sensor.gyroscope.xml frameworks/native/data/etc/android.hardware.usb.accessory.xml:system/etc/permissions/android.hardware.usb.accessory.xml frameworks/native/data/etc/android.hardware.usb.host.xml:system/etc/permissions/android.hardware.usb.host.xml packages/wallpapers/LivePicker/android.software.live_wallpaper.xml:system/etc/permissions/android.software.live_wallpaper.xml frameworks/native/data/etc/android.hardware.bluetooth_le.xml:system/etc/permissions/android.hardware.bluetooth_le.xml  system/bluetooth/data/audio.conf:system/etc/bluetooth/audio.conf system/bluetooth/data/auto_pairing.conf:system/etc/bluetooth/auto_pairing.conf system/bluetooth/data/blacklist.conf:system/etc/bluetooth/blacklist.conf system/bluetooth/data/input.conf:system/etc/bluetooth/input.conf system/bluetooth/data/network.conf:system/etc/bluetooth/network.conf  device/qcom/common/sec_config:system/etc/sec_config device/qcom/common/media/media_profiles.xml:system/etc/media_profiles.xml device/qcom/common/media/media_codecs.xml:system/etc/media_codecs.xml @inherit:vendor/qcom/proprietary/common/config/device-vendor.mk @inherit:build/target/product/full_base_telephony.mk @inherit:frameworks/native/build/phone-xhdpi-1024-dalvik-heap.mk
+device/qcom/common/common.mk:732: _include_stack=device/qcom/common/common.mk device/qcom/msm8974/msm8974.mk vendor/ErenEben/k8a/k8a.mk 
+device/qcom/common/common.mk:732: PRODUCTS.device/qcom/common/common.mk.INHERITS_FROM=build/target/product/full_base_telephony.mk frameworks/native/build/phone-xhdpi-1024-dalvik-heap.mk vendor/qcom/proprietary/common/config/device-vendor.mk
+build/target/product/full_base_telephony.mk:31: PRODUCT_COPY_FILES=device/generic/goldfish/data/etc/apns-conf.xml:system/etc/apns-conf.xml
+build/target/product/full_base_telephony.mk:33: PRODUCT_COPY_FILES=device/generic/goldfish/data/etc/apns-conf.xml:system/etc/apns-conf.xml @inherit:build/target/product/aosp_base.mk
+build/target/product/full_base_telephony.mk:33: _include_stack=build/target/product/full_base_telephony.mk device/qcom/common/common.mk device/qcom/msm8974/msm8974.mk vendor/ErenEben/k8a/k8a.mk 
+build/target/product/full_base_telephony.mk:33: PRODUCTS.build/target/product/full_base_telephony.mk.INHERITS_FROM=build/target/product/aosp_base.mk
+build/target/product/full_base_telephony.mk:34: PRODUCT_COPY_FILES=device/generic/goldfish/data/etc/apns-conf.xml:system/etc/apns-conf.xml @inherit:build/target/product/aosp_base.mk @inherit:build/target/product/telephony.mk
+build/target/product/full_base_telephony.mk:34: _include_stack=build/target/product/full_base_telephony.mk device/qcom/common/common.mk device/qcom/msm8974/msm8974.mk vendor/ErenEben/k8a/k8a.mk 
+build/target/product/full_base_telephony.mk:34: PRODUCTS.build/target/product/full_base_telephony.mk.INHERITS_FROM=build/target/product/aosp_base.mk build/target/product/telephony.mk
+build/target/product/aosp_base.mk:16: PRODUCT_COPY_FILES=@inherit:build/target/product/full_base.mk
+build/target/product/aosp_base.mk:16: _include_stack=build/target/product/aosp_base.mk build/target/product/full_base_telephony.mk device/qcom/common/common.mk device/qcom/msm8974/msm8974.mk vendor/ErenEben/k8a/k8a.mk 
+build/target/product/aosp_base.mk:16: PRODUCTS.build/target/product/aosp_base.mk.INHERITS_FROM=build/target/product/full_base.mk
+build/target/product/full_base.mk:56: PRODUCT_COPY_FILES=@inherit:frameworks/base/data/sounds/AllAudio.mk
+build/target/product/full_base.mk:56: _include_stack=build/target/product/full_base.mk build/target/product/aosp_base.mk build/target/product/full_base_telephony.mk device/qcom/common/common.mk device/qcom/msm8974/msm8974.mk vendor/ErenEben/k8a/k8a.mk 
+build/target/product/full_base.mk:56: PRODUCTS.build/target/product/full_base.mk.INHERITS_FROM=frameworks/base/data/sounds/AllAudio.mk
+build/target/product/full_base.mk:59: PRODUCT_COPY_FILES=@inherit:frameworks/base/data/sounds/AllAudio.mk @inherit:external/svox/pico/lang/all_pico_languages.mk
+build/target/product/full_base.mk:59: _include_stack=build/target/product/full_base.mk build/target/product/aosp_base.mk build/target/product/full_base_telephony.mk device/qcom/common/common.mk device/qcom/msm8974/msm8974.mk vendor/ErenEben/k8a/k8a.mk 
+build/target/product/full_base.mk:59: PRODUCTS.build/target/product/full_base.mk.INHERITS_FROM=external/svox/pico/lang/all_pico_languages.mk frameworks/base/data/sounds/AllAudio.mk
+build/target/product/full_base.mk:62: PRODUCT_COPY_FILES=@inherit:frameworks/base/data/sounds/AllAudio.mk @inherit:external/svox/pico/lang/all_pico_languages.mk @inherit:build/target/product/locales_full.mk
+build/target/product/full_base.mk:62: _include_stack=build/target/product/full_base.mk build/target/product/aosp_base.mk build/target/product/full_base_telephony.mk device/qcom/common/common.mk device/qcom/msm8974/msm8974.mk vendor/ErenEben/k8a/k8a.mk 
+build/target/product/full_base.mk:62: PRODUCTS.build/target/product/full_base.mk.INHERITS_FROM=build/target/product/locales_full.mk external/svox/pico/lang/all_pico_languages.mk frameworks/base/data/sounds/AllAudio.mk
+build/target/product/full_base.mk:65: PRODUCT_COPY_FILES=@inherit:frameworks/base/data/sounds/AllAudio.mk @inherit:external/svox/pico/lang/all_pico_languages.mk @inherit:build/target/product/locales_full.mk @inherit:build/target/product/generic_no_telephony.mk
+build/target/product/full_base.mk:65: _include_stack=build/target/product/full_base.mk build/target/product/aosp_base.mk build/target/product/full_base_telephony.mk device/qcom/common/common.mk device/qcom/msm8974/msm8974.mk vendor/ErenEben/k8a/k8a.mk 
+build/target/product/full_base.mk:65: PRODUCTS.build/target/product/full_base.mk.INHERITS_FROM=build/target/product/generic_no_telephony.mk build/target/product/locales_full.mk external/svox/pico/lang/all_pico_languages.mk frameworks/base/data/sounds/AllAudio.mk
+build/target/product/generic_no_telephony.mk:86: PRODUCT_COPY_FILES=frameworks/av/media/libeffects/data/audio_effects.conf:system/etc/audio_effects.conf @inherit:frameworks/base/data/fonts/fonts.mk
+build/target/product/generic_no_telephony.mk:86: _include_stack=build/target/product/generic_no_telephony.mk build/target/product/full_base.mk build/target/product/aosp_base.mk build/target/product/full_base_telephony.mk device/qcom/common/common.mk device/qcom/msm8974/msm8974.mk vendor/ErenEben/k8a/k8a.mk 
+build/target/product/generic_no_telephony.mk:86: PRODUCTS.build/target/product/generic_no_telephony.mk.INHERITS_FROM=frameworks/base/data/fonts/fonts.mk
+build/target/product/generic_no_telephony.mk:87: PRODUCT_COPY_FILES=frameworks/av/media/libeffects/data/audio_effects.conf:system/etc/audio_effects.conf @inherit:frameworks/base/data/fonts/fonts.mk @inherit:external/noto-fonts/fonts.mk
+build/target/product/generic_no_telephony.mk:87: _include_stack=build/target/product/generic_no_telephony.mk build/target/product/full_base.mk build/target/product/aosp_base.mk build/target/product/full_base_telephony.mk device/qcom/common/common.mk device/qcom/msm8974/msm8974.mk vendor/ErenEben/k8a/k8a.mk 
+build/target/product/generic_no_telephony.mk:87: PRODUCTS.build/target/product/generic_no_telephony.mk.INHERITS_FROM=external/noto-fonts/fonts.mk frameworks/base/data/fonts/fonts.mk
+build/target/product/generic_no_telephony.mk:88: PRODUCT_COPY_FILES=frameworks/av/media/libeffects/data/audio_effects.conf:system/etc/audio_effects.conf @inherit:frameworks/base/data/fonts/fonts.mk @inherit:external/noto-fonts/fonts.mk @inherit:external/naver-fonts/fonts.mk
+build/target/product/generic_no_telephony.mk:88: _include_stack=build/target/product/generic_no_telephony.mk build/target/product/full_base.mk build/target/product/aosp_base.mk build/target/product/full_base_telephony.mk device/qcom/common/common.mk device/qcom/msm8974/msm8974.mk vendor/ErenEben/k8a/k8a.mk 
+build/target/product/generic_no_telephony.mk:88: PRODUCTS.build/target/product/generic_no_telephony.mk.INHERITS_FROM=external/naver-fonts/fonts.mk external/noto-fonts/fonts.mk frameworks/base/data/fonts/fonts.mk
+build/target/product/generic_no_telephony.mk:89: PRODUCT_COPY_FILES=frameworks/av/media/libeffects/data/audio_effects.conf:system/etc/audio_effects.conf @inherit:frameworks/base/data/fonts/fonts.mk @inherit:external/noto-fonts/fonts.mk @inherit:external/naver-fonts/fonts.mk @inherit:external/sil-fonts/fonts.mk
+build/target/product/generic_no_telephony.mk:89: _include_stack=build/target/product/generic_no_telephony.mk build/target/product/full_base.mk build/target/product/aosp_base.mk build/target/product/full_base_telephony.mk device/qcom/common/common.mk device/qcom/msm8974/msm8974.mk vendor/ErenEben/k8a/k8a.mk 
+build/target/product/generic_no_telephony.mk:89: PRODUCTS.build/target/product/generic_no_telephony.mk.INHERITS_FROM=external/naver-fonts/fonts.mk external/noto-fonts/fonts.mk external/sil-fonts/fonts.mk frameworks/base/data/fonts/fonts.mk
+build/target/product/generic_no_telephony.mk:90: PRODUCT_COPY_FILES=frameworks/av/media/libeffects/data/audio_effects.conf:system/etc/audio_effects.conf @inherit:frameworks/base/data/fonts/fonts.mk @inherit:external/noto-fonts/fonts.mk @inherit:external/naver-fonts/fonts.mk @inherit:external/sil-fonts/fonts.mk @inherit:frameworks/base/data/keyboards/keyboards.mk
+build/target/product/generic_no_telephony.mk:90: _include_stack=build/target/product/generic_no_telephony.mk build/target/product/full_base.mk build/target/product/aosp_base.mk build/target/product/full_base_telephony.mk device/qcom/common/common.mk device/qcom/msm8974/msm8974.mk vendor/ErenEben/k8a/k8a.mk 
+build/target/product/generic_no_telephony.mk:90: PRODUCTS.build/target/product/generic_no_telephony.mk.INHERITS_FROM=external/naver-fonts/fonts.mk external/noto-fonts/fonts.mk external/sil-fonts/fonts.mk frameworks/base/data/fonts/fonts.mk frameworks/base/data/keyboards/keyboards.mk
+build/target/product/generic_no_telephony.mk:91: PRODUCT_COPY_FILES=frameworks/av/media/libeffects/data/audio_effects.conf:system/etc/audio_effects.conf @inherit:frameworks/base/data/fonts/fonts.mk @inherit:external/noto-fonts/fonts.mk @inherit:external/naver-fonts/fonts.mk @inherit:external/sil-fonts/fonts.mk @inherit:frameworks/base/data/keyboards/keyboards.mk @inherit:frameworks/webview/chromium/chromium.mk
+build/target/product/generic_no_telephony.mk:91: _include_stack=build/target/product/generic_no_telephony.mk build/target/product/full_base.mk build/target/product/aosp_base.mk build/target/product/full_base_telephony.mk device/qcom/common/common.mk device/qcom/msm8974/msm8974.mk vendor/ErenEben/k8a/k8a.mk 
+build/target/product/generic_no_telephony.mk:91: PRODUCTS.build/target/product/generic_no_telephony.mk.INHERITS_FROM=external/naver-fonts/fonts.mk external/noto-fonts/fonts.mk external/sil-fonts/fonts.mk frameworks/base/data/fonts/fonts.mk frameworks/base/data/keyboards/keyboards.mk frameworks/webview/chromium/chromium.mk
+build/target/product/generic_no_telephony.mk:92: PRODUCT_COPY_FILES=frameworks/av/media/libeffects/data/audio_effects.conf:system/etc/audio_effects.conf @inherit:frameworks/base/data/fonts/fonts.mk @inherit:external/noto-fonts/fonts.mk @inherit:external/naver-fonts/fonts.mk @inherit:external/sil-fonts/fonts.mk @inherit:frameworks/base/data/keyboards/keyboards.mk @inherit:frameworks/webview/chromium/chromium.mk @inherit:build/target/product/core.mk
+build/target/product/generic_no_telephony.mk:92: _include_stack=build/target/product/generic_no_telephony.mk build/target/product/full_base.mk build/target/product/aosp_base.mk build/target/product/full_base_telephony.mk device/qcom/common/common.mk device/qcom/msm8974/msm8974.mk vendor/ErenEben/k8a/k8a.mk 
+build/target/product/generic_no_telephony.mk:92: PRODUCTS.build/target/product/generic_no_telephony.mk.INHERITS_FROM=build/target/product/core.mk external/naver-fonts/fonts.mk external/noto-fonts/fonts.mk external/sil-fonts/fonts.mk frameworks/base/data/fonts/fonts.mk frameworks/base/data/keyboards/keyboards.mk frameworks/webview/chromium/chromium.mk
+build/target/product/core.mk:36: PRODUCT_COPY_FILES=@inherit:build/target/product/core_base.mk
+build/target/product/core.mk:36: _include_stack=build/target/product/core.mk build/target/product/generic_no_telephony.mk build/target/product/full_base.mk build/target/product/aosp_base.mk build/target/product/full_base_telephony.mk device/qcom/common/common.mk device/qcom/msm8974/msm8974.mk vendor/ErenEben/k8a/k8a.mk 
+build/target/product/core.mk:36: PRODUCTS.build/target/product/core.mk.INHERITS_FROM=build/target/product/core_base.mk
+build/target/product/core_base.mk:71: PRODUCT_COPY_FILES=@inherit:build/target/product/core_minimal.mk
+build/target/product/core_base.mk:71: _include_stack=build/target/product/core_base.mk build/target/product/core.mk build/target/product/generic_no_telephony.mk build/target/product/full_base.mk build/target/product/aosp_base.mk build/target/product/full_base_telephony.mk device/qcom/common/common.mk device/qcom/msm8974/msm8974.mk vendor/ErenEben/k8a/k8a.mk 
+build/target/product/core_base.mk:71: PRODUCTS.build/target/product/core_base.mk.INHERITS_FROM=build/target/product/core_minimal.mk
+build/target/product/core_minimal.mk:65: PRODUCT_COPY_FILES=@inherit:build/target/product/base.mk
+build/target/product/core_minimal.mk:65: _include_stack=build/target/product/core_minimal.mk build/target/product/core_base.mk build/target/product/core.mk build/target/product/generic_no_telephony.mk build/target/product/full_base.mk build/target/product/aosp_base.mk build/target/product/full_base_telephony.mk device/qcom/common/common.mk device/qcom/msm8974/msm8974.mk vendor/ErenEben/k8a/k8a.mk 
+build/target/product/core_minimal.mk:65: PRODUCTS.build/target/product/core_minimal.mk.INHERITS_FROM=build/target/product/base.mk
+build/target/product/base.mk:110: PRODUCT_COPY_FILES=@inherit:build/target/product/embedded.mk
+build/target/product/base.mk:110: _include_stack=build/target/product/base.mk build/target/product/core_minimal.mk build/target/product/core_base.mk build/target/product/core.mk build/target/product/generic_no_telephony.mk build/target/product/full_base.mk build/target/product/aosp_base.mk build/target/product/full_base_telephony.mk device/qcom/common/common.mk device/qcom/msm8974/msm8974.mk vendor/ErenEben/k8a/k8a.mk 
+build/target/product/base.mk:110: PRODUCTS.build/target/product/base.mk.INHERITS_FROM=build/target/product/embedded.mk
+build/target/product/locales_full.mk:3: PRODUCT_COPY_FILES=@inherit:build/target/product/languages_full.mk
+build/target/product/locales_full.mk:3: _include_stack=build/target/product/locales_full.mk 
+build/target/product/locales_full.mk:3: PRODUCTS.build/target/product/locales_full.mk.INHERITS_FROM=build/target/product/languages_full.mk
+external/svox/pico/lang/all_pico_languages.mk:17: PRODUCT_COPY_FILES=@inherit:external/svox/pico/lang/PicoLangDeDeInSystem.mk
+external/svox/pico/lang/all_pico_languages.mk:17: _include_stack=external/svox/pico/lang/all_pico_languages.mk 
+external/svox/pico/lang/all_pico_languages.mk:17: PRODUCTS.external/svox/pico/lang/all_pico_languages.mk.INHERITS_FROM=external/svox/pico/lang/PicoLangDeDeInSystem.mk
+external/svox/pico/lang/all_pico_languages.mk:18: PRODUCT_COPY_FILES=@inherit:external/svox/pico/lang/PicoLangDeDeInSystem.mk @inherit:external/svox/pico/lang/PicoLangEnGBInSystem.mk
+external/svox/pico/lang/all_pico_languages.mk:18: _include_stack=external/svox/pico/lang/all_pico_languages.mk 
+external/svox/pico/lang/all_pico_languages.mk:18: PRODUCTS.external/svox/pico/lang/all_pico_languages.mk.INHERITS_FROM=external/svox/pico/lang/PicoLangDeDeInSystem.mk external/svox/pico/lang/PicoLangEnGBInSystem.mk
+external/svox/pico/lang/all_pico_languages.mk:19: PRODUCT_COPY_FILES=@inherit:external/svox/pico/lang/PicoLangDeDeInSystem.mk @inherit:external/svox/pico/lang/PicoLangEnGBInSystem.mk @inherit:external/svox/pico/lang/PicoLangEnUsInSystem.mk
+external/svox/pico/lang/all_pico_languages.mk:19: _include_stack=external/svox/pico/lang/all_pico_languages.mk 
+external/svox/pico/lang/all_pico_languages.mk:19: PRODUCTS.external/svox/pico/lang/all_pico_languages.mk.INHERITS_FROM=external/svox/pico/lang/PicoLangDeDeInSystem.mk external/svox/pico/lang/PicoLangEnGBInSystem.mk external/svox/pico/lang/PicoLangEnUsInSystem.mk
+external/svox/pico/lang/all_pico_languages.mk:20: PRODUCT_COPY_FILES=@inherit:external/svox/pico/lang/PicoLangDeDeInSystem.mk @inherit:external/svox/pico/lang/PicoLangEnGBInSystem.mk @inherit:external/svox/pico/lang/PicoLangEnUsInSystem.mk @inherit:external/svox/pico/lang/PicoLangEsEsInSystem.mk
+external/svox/pico/lang/all_pico_languages.mk:20: _include_stack=external/svox/pico/lang/all_pico_languages.mk 
+external/svox/pico/lang/all_pico_languages.mk:20: PRODUCTS.external/svox/pico/lang/all_pico_languages.mk.INHERITS_FROM=external/svox/pico/lang/PicoLangDeDeInSystem.mk external/svox/pico/lang/PicoLangEnGBInSystem.mk external/svox/pico/lang/PicoLangEnUsInSystem.mk external/svox/pico/lang/PicoLangEsEsInSystem.mk
+external/svox/pico/lang/all_pico_languages.mk:21: PRODUCT_COPY_FILES=@inherit:external/svox/pico/lang/PicoLangDeDeInSystem.mk @inherit:external/svox/pico/lang/PicoLangEnGBInSystem.mk @inherit:external/svox/pico/lang/PicoLangEnUsInSystem.mk @inherit:external/svox/pico/lang/PicoLangEsEsInSystem.mk @inherit:external/svox/pico/lang/PicoLangFrFrInSystem.mk
+external/svox/pico/lang/all_pico_languages.mk:21: _include_stack=external/svox/pico/lang/all_pico_languages.mk 
+external/svox/pico/lang/all_pico_languages.mk:21: PRODUCTS.external/svox/pico/lang/all_pico_languages.mk.INHERITS_FROM=external/svox/pico/lang/PicoLangDeDeInSystem.mk external/svox/pico/lang/PicoLangEnGBInSystem.mk external/svox/pico/lang/PicoLangEnUsInSystem.mk external/svox/pico/lang/PicoLangEsEsInSystem.mk external/svox/pico/lang/PicoLangFrFrInSystem.mk
+external/svox/pico/lang/all_pico_languages.mk:22: PRODUCT_COPY_FILES=@inherit:external/svox/pico/lang/PicoLangDeDeInSystem.mk @inherit:external/svox/pico/lang/PicoLangEnGBInSystem.mk @inherit:external/svox/pico/lang/PicoLangEnUsInSystem.mk @inherit:external/svox/pico/lang/PicoLangEsEsInSystem.mk @inherit:external/svox/pico/lang/PicoLangFrFrInSystem.mk @inherit:external/svox/pico/lang/PicoLangItItInSystem.mk
+external/svox/pico/lang/all_pico_languages.mk:22: _include_stack=external/svox/pico/lang/all_pico_languages.mk 
+external/svox/pico/lang/all_pico_languages.mk:22: PRODUCTS.external/svox/pico/lang/all_pico_languages.mk.INHERITS_FROM=external/svox/pico/lang/PicoLangDeDeInSystem.mk external/svox/pico/lang/PicoLangEnGBInSystem.mk external/svox/pico/lang/PicoLangEnUsInSystem.mk external/svox/pico/lang/PicoLangEsEsInSystem.mk external/svox/pico/lang/PicoLangFrFrInSystem.mk external/svox/pico/lang/PicoLangItItInSystem.mk
+vendor/goso-common/device-vendor.mk:5: TARGET_PRODUCT is in PRODUCT_LIST
+vendor/goso-common/device-vendor.mk:21: PRODUCT_COPY_FILES=@inherit:vendor/qcom/proprietary/prebuilt_HY11/target/product/msm8974/prebuilt.mk
+vendor/goso-common/device-vendor.mk:21: _include_stack=vendor/goso-common/device-vendor.mk 
+vendor/goso-common/device-vendor.mk:21: PRODUCTS.vendor/goso-common/device-vendor.mk.INHERITS_FROM=vendor/qcom/proprietary/prebuilt_HY11/target/product/msm8974/prebuilt.mk
+vendor/goso-common/device-vendor.mk:25: no device-vendor-noship.mk found
+vendor/goso-common/device-vendor.mk:27: APN_PATH overrided
+vendor/goso-common/device-vendor.mk:29: before PRODUCT_COPY_FILES=@inherit:vendor/qcom/proprietary/prebuilt_HY11/target/product/msm8974/prebuilt.mk
+vendor/goso-common/device-vendor.mk:31: after PRODUCT_COPY_FILES=vendor/qcom/proprietary/common/etc/apns-conf.xml:system/etc/apns-conf.xml vendor/qcom/proprietary/common/etc/spn-conf.xml:system/etc/spn-conf.xml @inherit:vendor/qcom/proprietary/prebuilt_HY11/target/product/msm8974/prebuilt.mk
+
+为什么AOSP要设计这么个鬼东西呢?为什么不include呢?
+- https://blog.csdn.net/ayu_ag/article/details/74742842 -
+1、假如A.mk中定义PRODUCT_PACKAGES  := liba.so；B.mk中定义PRODUCT_PACKAGES := libb.so。C.mk想同时编译A.mk和B.mk中指定的模块，在C.mk中先include A，再include B，得到的是PRODUCT_PACKAGES := libb.so，但是我们想要的是PRODUCT_PACKAGES := liba.so libb.so
+
+2、重复include同一个文件的问题
+
+inherit-product行为: 
+按照正常人的思路,PRODUCT_*内容的顺序自然应该与调用inherit-product相同,那么,之所以proprietary apn conf会在后面,是因为inherit-product goso-common/device-vendor.mk的调用就在后面
+
+那么那么那么,怎么改呢?
+思路1,device/qcom/common/common.mk里inherit-product full_base_telephony.mk前面加inherit-product goso-common/device-vendor.mk.
+ - 但是引入的变化不可预料
+思路2,goso-common下单独增加apn-conf.mk引入apns-conf.xml,再在device/qcom/common/common.mk里inherit goso-common/apn-conf.mk
+
+今天的收获就是知道了有inherit-product这个东西,是调试AOSP build需要注意的,以及拿准其行为是顺序的
+
+那么,后面再debug AOSP build变量问题,要关注搜索inherit-product
+
+inherit-product发生在lunch还是build ?
+
+找回了一年前(maybe两年前?)解决问题的状态
+保持下去,在此基础上结合这一年的经验教训
+回归,否定之否定
+
+17:47 k8a的问题加上3139问题,这周又得花个两天时间
+      两天就两天吧,不要去赶
+             
+
+---
+
+20190430
+
+10:00 k8a-4g - 明通切网络只调setup_net:enc ?
+10:05 k8a-4g - TODO: 8939更新comm_prox binary
+10:48 k8a-4g - qmss21-8939-single-repo:
+               git reset --hard
+               git am --directory=LINUX/android/kernel/ 0001-Disable-selinux-for-K8A.patch
+               Succeed
+11:02 k8a-4g - But it took really fucking long time.
+14:18 k8a-4g - apn.xml没加？
+             - Nah. See vendor/qcom/proprietary/common/etc/apns-conf.xml
+15:10 k8a-4g - 导补丁。我在这边先打好再导出single repo版本的
+               主控: eben发过来的
+               通信: 183 single-repo
+
+15:21 activation - search for DB Sunspeedy-S3-20180504-282-cert.pem
+16:31 设计初期不要考虑过多，想太多会走不下去的
+      设计-迭代 大脑负担最小化
+16:31 k8a-4g - ./export_all_patch.sh old new
+               ./export_non0_patches.sh
+               git apply -3 --directory=xxxx xx.patch
+               git add xx
+               git commit -m "xx"
+               git format-patch HEAD^..HEAD
+
+---
+
+20190429
+
+11:52 wifi - iw list - valid interface combinations
+             android iw ??
+              - ln -s /home/zz/newDisk1/qmss20-8953/LA.UM.5.6/LINUX/android/external/iw .
+14:44 k8a-4g - export all goso patches and grep rmnet0
+15:49 k8a-4g - rc导出rmnet0/rmnet_data0环境变量然后其他地方使用?
+               也就是说主控板只要一套代码是吧 -> K8A目录是有分支的
+               问题是我从哪里导出这个interface name呢?
+               init.environ.rc
+               K8A目录是有分支的，可以这么改
+               淦！我为什么不用property呢?
+17:19 k8a-4g - 没有ukey offline消息?
+             - 脉冲?GPIO配置?GPIO对应原来的位置?
+             - 如何验证?写通讯板alert节点主控板会有消息?
+             - 可是验Ukey离身时的确有报警啊
+             - /sys/devices/soc.0/offline-alert.61/alert -> /sys/devices/soc.0/offline-alert.63/alert
+              - Damn !
+             改成0.offline-alert，测试通过
+18:29 k8a-4g - TODO: 验证MOBILE_DATA_INTERFACE环境变量脚本部分
+
+---
+
+20190428
+
+10:21 k8a-4g - selinux不在内核关了，ts6700.ko会有兼容问题
+之前8939-goso-ebens-20190426还是提交了
+15:26 TelephonyManager
+        .setDataEnabled
+          * goso Proxy/SysMode 里调的是ConnectivityManager.setMobileDataEnabled，和这里有何区别?
+        .getImei
+        .getCellLocation
+      packages/services/Telephony
+      frameworks Phone as an interface
+      Phone count is sim slot count
+      https://wladimir-tm4pda.github.io/porting/telephony.html
+      PHONE_TYPE_GSM  PHONE_TYPE_CDMA 
+      CDMALTEPhone extends CDMAPhone extends PhoneBase
+      PhoneBase
+        .mUiccController
+        .mCi - CommandsInterface
+      RIL extends BaseCommands implements CommandsInterface
+18:06 k8a-4g - switchMode - ProxyService.java - MSG_SYS_MODE
+19:19 k8a-4g - rmnet0 -> rmnet_data0 还是应该全局搜一下
+               update_traffic.sh - 安全管家流量监控
+               http://192.168.180.176:3000/issues/7711
+               readNetworkStatsSummaryDev
+20:10 echo "w" > /proc/sysrq-trigger - D状态进程stack dump
+
+---
+
+20190426
+
+10:58 TODO: 学习数据库设计范式
+10:58 昨晚评审，背景表述方面，一个是经验缺乏，一个的确是比较仓促，缺乏时间去考虑怎么让人明白，又没有框图之类的（即使有，感觉交互性也不够，听众可能更能对一个逐渐长出来的图更能产生印象。下次坐在白板旁边的位置
+
+在多大程度上完善前期设计，在多大程度上把设计的完善推给后续的迭代（甚至不同程度的重构），这个节奏需要摸索
+
+---
+
+20190425
+
+14:17 k8a-4g - V02 adb 端口插上去又消失，fastboot端口稳定。软件问题？？？
+重刷软件恢复。干
+14:55 k8a-4g - getenforce on COMM or MAIN, both Enforcing
+15:23 k8a-4g - How does androidboot.* become ro.boot.* ?
+             - init.c - import_kernel_nv()
+16:11 k8a-4g - pipe_proxy - setprop log.level.proxy 4
+17:23 k8a-4g - grep write_len= main-notime.log | less
+               grep resolve_packet comm-notime.log| less
+
+---
+
+20190424
+
+10:00 android - init.rc socket - init.c create_socket()
+10:14 k8a-4g - <11>[  853.903202] init: cannot find '/system/bin/dmsd', disabling 'dmsd'
+
+---
+
+20190423
+
+09:15 k8a-4g - 客户微信群,密通问题 pipeproxy_comm经常会关闭encsys socket
+               TODO: 看下相关源码
+不管了，优先看K8A问题
+10:16 k8a-4g - proxy_pipe
+          // proxy_encsys_client.c
+          struct proxy_clt_encsys clt_encsys = {
+              .initialized = 0,
+              .clt_name = "clt_encsys",
+              .init = proxy_encsys_init,
+              .open = proxy_encsys_open,
+              .close = proxy_encsys_close,
+              // encsys api
+              .read = proxy_encsys_read,
+              .write = proxy_encsys_write,
+          };
+
+
+          // proxy_encsys.c
+          // accept client
+          encsys_socket_thread()
+          // recv client data and queue it to proxy_pipe send_fifo
+          encsys_select_thread() {
+              pthread_cond_wait(encsys_data.client_cond);
+              encsys_client_recving() {
+                  /* <struct proxy_pkt> + <struct encsys_pkt> + <struct clt_encsys_req> */
+                  // client_fd = clt_encsys.open()
+                  recv(encsys_client.client_fd);
+                  encsys_pkt *ppkt;
+                  ppkt->local_fd = client->client_fd;
+                  ppkt->remote_fd = client->remote_fd;
+                  proxy_send_packet(PROXY_TYPE_ENCSYS,) {
+                      // proxy_pipe.c
+                      pipe_fifo_queue(send_fifo,);
+                      pthread_cond_signal(send_cond);
+                  }
+              }
+          }
+          pipe_fd = proxy_pipe_init("/dev/ttyHS0");
+          pipe_send_thread() {
+              pipe_data = pipe_fifo_dequeue(send_fifo);
+              write(pipe_fd, pipe_data);
+          }
+
+          // PEER
+          // proxy_pipe.c
+          pipe_recv_thread() {
+              read(pipe_fd);
+              pipe_resolve_packet() {
+                 pipe_fifo_queue(recv_fifo);
+              }
+          }
+          pipe_recvcb_thread() {
+              pdata = pipe_fifo_dequeue(recv_fifo);
+              proxy_pipe_dispatch(pdata) {
+                  proxy_svrs[type]->recv_callback() {
+                      // proxy_encsys.c
+                      proxy_encsys_send() {
+                          // 此时的ppkt代表的就是对端
+                          ppkt->remote_fd = client->client_fd;
+                          client->remote_fd = ppkt->remote_fd;
+                          send(ppkt->remote_fd,); // WTH ??
+                          // Unless...这玩意是通讯板发起，主控板接收？
+                          // encsys client在通讯板一侧?
+                          // pipeproxyd-comm -kgnruwstypx
+                          // pipeproxyd -kgnruwstypx
+                          // Damn it! 所有的服务都是两侧都有service！就连proxy_sys都他妈的是靠宏来分别控制两侧dispatch的行为的！是我先入为主了
+                      }
+                  }
+              }
+          }
+
+主控板和通讯板都可能调proxy_pipe_dispatch()
+
+两侧分别起pipeproxyd，维持各自的client_fd，也保存对端的fd - remote_fd
+
+WTH is encsys_client_getfd() ?
+
+So, 先搞清楚encsys是干什么用的
+- Got no answer about it.
+
+OK, 那先搞清楚remote_fd, local_fd, client_fd是怎么回事
+
+// proxy_pipe.h
+struct encsys_pkt {
+    int local_fd;
+    int remote_fd;
+    size_t data_len;
+};
+
+// proxy_encsys.c
+struct encsys_client {
+    int client_fd;
+    int remote_fd;
+    time_t time_stamp;
+    struct encsys_buf encbuf;
+};
+
+16:25 k8a-4g - 似乎明白了，encsys好像就是简单的透传？
+               OK, 那么回过头来看他们的问题是什么意思
+               pipeproxy_comm经常会关闭encsys socket
+
+---
+
+20190422
+
+09:14 TODO: activation - 远程维修设计文档
+            补丁脚本和编译脚本流程化也没个结果
+            patch的binary选项？
+
+---
+
+20190420
+
+15:26 activation - TODO: 输出证书脚本，包括发邮件
+15:42 activation - XXX: S3激活服务器，之前的数据库哪去了?
+NEO2:/sdcard/Activation/generate/output # ls -l
+total 330376
+-rw-rw---- 1 root sdcard_rw 168914944 2019-04-08 12:00 certkey_ki_devinfo-111.db
+-rw-rw---- 1 root sdcard_rw    135168 2019-04-08 14:06 certkey_ki_devinfo.db
+-rw-rw---- 1 root sdcard_rw     99008 2019-04-16 14:31 certkey_ki_devinfo.db-journal
+
+~/work/pokefi/multiTuple/certkey_ki_devinfo-20190420.db 应该是是个备份
+要去追溯吗
+上一批(2019-03-25的证书)设备信息入库没有？
+拿KI的那5台设备最后也没处理
+现在有32000台设备，数据库操作的速率会不会拖慢?
+生产速率的问题也没解决
+16:20 activation - certkey_ki_devinfo-111.db - 他妈的谁命名的这个玩意??
+NEO2:/sdcard/Activation/generate/output # mv certkey_ki_devinfo-111.db certkey_ki_devinfo.db
+数据库管理一直是个大问题
+
+---
+
+20190419
+
+activation远程维修设计
+
+---
+
+20190418
+
+10:48 git am -3, 3 way merge
+11:06 ./gen_patch_as_one.sh ~/work/k8a-4g/patch-8974-goso-ebens-20190320-8974-goso-ebens-20190411 "8974-goso-ebens-20190320 -> 8974-goso-ebens-20190411"
+      - Failed on applying Evt.apk - conflict
+      am 加了 -3选项，但这里并没有像merge一样得到conflict，而是直接失败
+      这种场景的冲突，也是个麻烦
+16:28 sql - subquery -
+      $ echo 'select key from certkey where owner = ( select hw_id from device_bind where sn = "865832022263966" ) ;' | sqlite3 certkey_ki_devinfo-20180425.db
+      Sunspeedy-S3-20180425-29-cert.pem
+18:01 activation - 远程维修设计
+
+---
+
+20190417
+
+09:44 k8a-4g - 串口波特率3000000
+10:30 k8a-4g - 北京做事方式-手动得比脑子快 - 不是以解决问题为导向，而是以“你看我在努力干活”为导向
+14:43 k8a-4g - 客诉死机，v02-0320，OTA包包含了新DDR参数的sbl1.mbn
+18:03 git am --directory=./xxx xxx failed
+      git am --directory=xxx xxx succeeded
+
+---
+
+20190416
+
+写软著
+
+---
+
+20190415
+
+11:37 man git apply -
+does not require them to be in a Git repository.
+Use git-am(1) to create commits from patches generated by git-format-patch(1) and/or received by email.
+
+稍微读一下git apply man page就能得到的信息，拖了这么久，唉。时间碎片化害死人
+
+14:18 k8a-4g - patching tutorial -
+               bash patch-8974-20190411/apply-patch-goso-20190411.sh 不行，会把android里面的.patch也find到，应该
+               cd patch-8974-20190411 && bash apply-patch-goso-20190411.sh
+               XXX: 为什么上次打主控板补丁没问题？
+15:33 k8a-4g - git format-patch HEAD^..HEAD
+               git am -3 -p1 --directory='xx/xxx/'
+               知识就是力量
+               真他妈的，以前都在干啥
+               不要按照以前员工的遗留脚本和经验来！自己从头学习，说不定有更有效的方法！
+               - 还有！我自己管理i2 wifi补丁时就可以利用这个！
+                 白费多少功夫，真是
+               这种事情，放在我刚来公司那一年肯定能想到！还是现在这种工作状态有问题。
+               学习意识和产出(交付)意识的平衡
+               现在每周有周会了，就更会有产出的压力。但是即便在这种情况下，不能以牺牲学习为代价去换取好看的产出数据，这是很亏的
+16:35 - XXX: Why can't I terminate an "echo `repo status`" with Ctrl-C ?
+17:28 - 把话说清楚a
+17:48 - python - 猜猜看，起一个线程运行，而主线程运行os.system("some command")
+                 会怎么样？
+                 - 起的线程会得不到调度，CPU全被command占用吧？毕竟不受python调度管理
+
+---
+
+20190413
+
+09:48 k8a-4g - 回想一下，前两天出版本和导补丁遇到的工作：
+               确认提交合并
+               APN补丁，验证
+               编8939 modem，提交
+               repo status, manually check
+               repo sync
+               编8974 AP时出错一次，COPY_TO_SERVER未设置，重编一次。copy to release3 disk failed，手动拷贝一次到release disk。
+               发布版本邮件
+               git tag BP repo
+               git tag AP repos
+               find last_tag
+               ./export_all_patch last_tag curr_tag
+               ./export_non0_patch.sh
+               ./edit_patch_path.sh or edit path manually
+               cp patch to local
+               zip patch
+               post email, write patching tutorial
+11:47 - How bash interprets ?
+e.x.
+
+```sh
+cmd="ls .. | grep e"
+$cmd
+```
+
+It interprets '..', '|', 'grep', 'e' as arguments.
+
+e.x.
+
+```sh
+cmd="ls .. | grep e"
+eval $cmd
+```
+
+It works as I expected.
+
+========
+
+➜  ~ varA=xxxa
+➜  ~ echo "echo varA=$varA" | bash /dev/stdin
+varA=xxxa
+➜  ~ echo 'echo varA=$varA' | bash /dev/stdin
+varA=
+➜  ~ echo "echo varA=$varA" | source /dev/stdin
+varA=xxxa
+➜  ~ echo 'echo varA=$varA' | source /dev/stdin
+varA=xxxa
+➜  ~ eval "echo varA=$varA"
+varA=xxxa
+➜  ~ eval 'echo varA=$varA'
+varA=xxxa
+
+========
+
+14:56 k8a-4g - shit. 直接改的buildandroid-K8A-4G.sh，忘了备份
+15:15 k8a-4g - sshpass -p Ubuntu ssh zz@192.168.180.54 "notify-send hello"
+               does not work.
+               当然，ssh里面是运行不了X命令的
+
+---
+
+20190412
+
+编版本，导补丁，试图改写编版本脚本
+
+---
+
+20190411
+
+09:41 TODO: 绩效考核表
+11:41 k8a-4g - SecurityManager -
+               UkeyClient.enable() -> cn.goso.proxy.IUkeyCall.enable()
+               -> { UkeyBinder extends IUkeyCall.Stub }.enable()
+               -> UkeyService.enable()
+11:54 k8a-4g - 关掉无线U盾开机认证，可以休眠下去。这个应该相当于关掉Bluetooth
+14:25 k8a-4g - APN #11397 - What's it about? MAIN AP? COMM AP? modem? QCN?
+16:43 TODO: give 3g_release a time, tag it
+17:58 k8a-4g - TODO: 打补丁，注意8x74 BP repo也要有tag和patch (vendor/qcom/proprietary)
+20:14 k8a-4g - 又特么重编，找点事做
+21:33 k8a-4g - ~/work/k8a-4g/patch-8974-20190411
+                mind 8x74 BP repo patch
+                K8A-4G-COMM-V04-2019-0411
+
+---
+
+20190410
+
+TODO: 等MMI BT/CT info完成，导补丁，出版本
+15:13 k8a-4g - 功耗测试方法，加密板断电命令
+18:03 k8a-4g - 休眠电流>100mA，main v02, comm v02, bp v02
+             comm - APPS_RIVA_BT_CMD prevent suspend
+             smd_tty_read() -> __pm_wakeup_event(&info->pending_ws, TTY_PUSH_WS_DELAY)
+             smd3 = &smdtty_apps_riva_bt_cmd;
+             全部清除重刷，作新机流程重测
+21:28 k8a-4g - ~/work/k8a-4g/logs/suspend_fail
+             有BLE设备存在则休眠不下去？
+             TODO: 上屏蔽箱！
+
+---
+
+20190409
+
+激活软著
+
+---
+
+20190408
+
+09:58 找自动割接脚本
+10:21 grep ' filename.*=.*\.sh' ./ohasiugn.default/Mail/pop3.gosomo.cn/Sent
+      Finally found device_info_daemon.sh
+16:38 diff buildandroid-Konnect_i2.old.sh buildandroid-Konnect_i2.sh
+73a74,84
+> echo "Checking repo status..."
+> if [ -n `repo status` ]; then
+>         echo "Repo status not clean, continue? [y/N]"
+>         read yorn
+>         if ! [ $yorn = "y" || $yorn = "Y" ]; then
+>                 exit
+>         fi
+> else
+>         echo "Repo status clean."
+> fi
+> 
+168c179,185
+<     #sshpass -p $RELEASE_PWD scp -r $TARGET_HOME $REMOTE_TARGET_HOME
+---
+>     if ! sshpass -p $RELEASE_PWD scp -r $TARGET_HOME $REMOTE_TARGET_HOME; then
+>         echo "Failed to copy to release server for some reason, run the following command after you fix it"
+>         echo "  sshpass -p $RELEASE_PWD scp -r $TARGET_HOME $REMOTE_TARGET_HOME"
+>     fi
+> 
+>     echo "To post release note with email:"
+>     echo "    thunderbird -compose \"to='SW16@GOSOMO.CN,cenzhuozhu@gosomo.cn,niejing@gosomo.cn',subject='${TARGET_PRODUCT}版本$(basename $TARGET_HOME)发布',body='$TAGET_HOME'\""
+
+
+
+
+---
+
+20190404
+
+10:00 k8a-4g - 解决eben编译网络不通问题，那帮孙子用的密通补丁
+14:02 k8a-4g - 加密板最高速率20M
+16:28 一个历史邮件，关于GATT Connection Parameter Update Request:
+        盒子侧的蓝牙传输由单独的协处理器(WCNSS)完 成，现 在的60mA应该是主处理器(AP)休 眠了但WCNSS未 休眠造成的。蓝牙握手阶段心贴 会发一个Connection Parameter Update Request的包给 盒子，这个request包 含三个连接参数，即Min Interval, Max Interval, Slave Latency。 目前心贴发送的Interval为7.5ms~8.75ms， 虽然心贴会有连续的9s没有数据上报，但盒子作为master需 要根据心贴 发送的Interval不 断地查询心贴的数据，所以过短的Interval可能导致WCNSS无法休眠。
+
+---
+
+20190403
+
+09:42 k8a-4g - learn abount Bluetooth BLE stuff, and source code
+      - First, learn about APP Level stuff.
+        Using the Bluetooth APIs, an Android application can perform the following:
+          . Scan for other Bluetooth devices
+          . Query the local Bluetooth adapter for paired Bluetooth devices
+          . Establish RFCOMM channels
+          . Connect to other devices through service discovery
+          . Transfer data to and from other devices
+          . Manage multiple connections
+        - https://developer.android.com/guide/topics/connectivity/bluetooth
+
+        - Read the code blocks -
+         . Work with profiles
+         . Find devices
+         . Connect devices
+         . Manage a connection
+        
+        15:09
+        - BLE
+        https://developer.android.com/guide/topics/connectivity/bluetooth-le.html
+        Now focus on LE scan
+        - BluetoothAdapter.startLeScan
+          BluetoothAdapter.LeScanCallback
+            public abstract void onLeScan (BluetoothDevice device, 
+                            int rssi, 
+                            byte[] scanRecord)
+          Callback reporting an LE device found during a device scan initiated by the BluetoothAdapter.startLeScan function.
+         
+          - BleScanCallbackWrapper.startRegisteration()
+           - IBluetoothGatt.registerClient()
+            - GattService.registerClient() - packages/apps/Bluetooth
+             - GattService extends ProfileService (GATT is a kind of Profile in Bluetooth)
+             - bluedroid - btgatt_interface_t btgattInterface
+             - btgatt_client_interface_t btgattClientInterface.register_client = btif_gattc_register_app
+
+         - BluetoothLeScanner.onClientRegistered()
+          - IBluetoothGatt.startScan() [ Fuck, SCAN starts here ]
+           - Bluetooth - gatt/ScanManager.startScan - MSG_START_BLE_SCAN
+            - bludroid - btgattClientInterface.btif_gattc_scan
+             - BTA_DmBleObserve - bta_scan_results_cb
+
+         - bluedroid command writing endpoint ? event reading endpoint ?
+
+        
+10:41 TODO: 今天的最后两个小时，用来总结k8a-4g工作。在此之前，研究Bluetooth
+11:59 自动化 - 版本输出完全脚本?
+18:00 k8a-4g - 提供8939补丁
+
+
+---
+
+20190402
+
+11:20 activation - 一台设备要维修。先整激活服务器
+                   好不容易想看看蓝牙的东西
+                   看来是看不成了
+                   下午还有K8A打补丁的事
+                   配置文件，DB路径，daemon和apk兼容性
+                   motherfucker
+14:40 k8a-4g - 解goso patch和eben patch冲突：
+               . recv k8a_vendor_20190402.zip from eben
+               . checkout 8x74-goso-ebens-3g_release in repo k8a
+               . replace repo k8a files with which in k8a_vendor_20190402, commit as commitA
+               . checkout 8x74-goso-ebens-3g_release
+               . git apply patch-20190329/vendor/ErenEben/k8a/patch, commit as commitB
+               . checkout commitA
+               . cherry-pick commitB, solve conflict
+                - But I saw no conflicts
+                - Remember git cherry-pick is smart
+17:52 k8a-4g - repo forall -c "git remote | xargs git push --tags"
+               - all up-to-date.
+19:49 external/bluetooth/bluedroid/btif/src/bluetooth.c -
+         struct hw_module_t HAL_MODULE_INFO_SYM = {
+             .tag = HARDWARE_MODULE_TAG,
+             .version_major = 1,
+             .version_minor = 0,
+             .id = BT_HARDWARE_MODULE_ID,
+             .name = "Bluetooth Stack",
+             .author = "The Android Open Source Project",
+             .methods = &bt_stack_module_methods
+         };
+      packages/apps/Bluetooth/jni/com_android_bluetooth_btservice_AdapterService.cpp -
+         static void classInitNative(JNIEnv* env, jclass clazz) {
+             ...
+             const char *id = (strcmp(value, "1")? BT_STACK_MODULE_ID : BT_STACK_TEST_MODULE_ID);
+             err = hw_get_module(id, (hw_module_t const**)&module);
+             ...
+         }
+
+---
+
+20190401
+
+11:10 k8a-4g - radio镜像全更新
+               TODO:
+               更新8939 modem，提交radio，更新8939版本ota包
+               主控板补丁已经给了，那么补丁涉及到的tag，及时提交
+               确认主控板camera问题，解决后提交
+               激活软著，较低优先级
+               维修优化整理与讨论，低优先级
+14:51 k8a-4g - Got a TS6700.rar from eben
+               ~/work/k8a-4g/from_eben/TS6700/ts6700.ko for MAIN BOARD
+               md5sum fc86d6eb0e63ecd20c7e0a512167c5ff
+               Test it - not working
+               Bullshit ! use the current one.
+15:43 k8a-4g - build radio imgs:
+          Looking for cache.img
+                  ----------------------------------------
+                  Searching for **/home/zz/newDisk2/qmss21-8939/LINUX/android/out/target/product/msm8916_32/cache.img**
+                  Searching  /home/zz/newDisk2/qmss21-8939/common/build/bin/asic_8916/sparse_images
+                  Cound't find file OR perhaps you don't have permission to run os.stat() on this file
+          
+                   _________________ ___________ 
+                  |  ___| ___ \ ___ \  _  | ___ \
+                  | |__ | |_/ / |_/ / | | | |_/ /
+                  |  __||    /|    /| | | |    / 
+                  | |___| |\ \| |\ \\ \_/ / |\ \ 
+                  \____/\_| \_\_| \_|\___/\_| \_|
+          
+          ERROR: Could not find file
+          python command returned error: 1
+          update_common_info.py:============ UPDATE COMMON INFO COMPLETE====================
+          generate_nonhlos sucess
+          ~/newDisk2/qmss21-8939
+          modem_out/CA7403/
+          Copy boot images file OK!
+          Copy mba images file OK!
+          Copy tz images file OK!
+          Copy rpm images file OK!
+          Copy NON-HLOS images file OK!
+
+     Does it matter ?
+
+16:55 k8a-4g - TODO: 等待解信号跳水的问题，编modem，编版本
+               按他妈的顺序，绝对不要颠倒
+18:22 activation - 8k的生产，5台设备拿不到ki卡
+                   db里有32024台设备，难搞了
+19:05 activation - 明天出货，我这么早给他解干嘛
+                   养成习惯，提前问deadline
+
+---
+
+20190329
+
+10:11 k8a-4g - TODO: 先补上tag 3g_release:
+               bootable/bootloader/lk - 55cf9c695b690abc2b5ac2a44ce6237278868d08
+               frameworks/base - 256b770939b1fceac13395c538224f4d4aadf457
+               frameworks/opt/telephony - d020d9a0a3c59d879771699cc06fa8e82dfe88b9 
+               packages/apps/GsCamera - 884e54fd37ce654f82b707ece5e1ecd4a78c9d98
+               kernel - 090e6dc 再单独加一个patch 857a4e0
+               vendor/ErenEben/k8a - 56e800158e8ffa97fcb6d41d402eefa5b5e208db 
+               device/qcom/common - 761197af319811d8356951e7f0dbb678349e6de3
+               其他均对应8x74-goso-ebens-20170322
+10:26 k8a-4g - repo forall -p -c "git tag -a -f -m 8x74-goso-ebens-3g_release 8x74-goso-ebens-3g_release 8x74-goso-ebens-20170322"
+11:26 k8a-4g - 思考，梳理打patch流程. take times
+15:50 k8a-4g - 打补丁，一件小事，我现在真的是很纠结，怎么把这件小事做对
+16:17 k8a-4g - 这个项目给人的感觉：乱。理顺？我可以把我自己这部分理顺，他们的部分我怎么理顺？我要理顺他们那边我就得替他们做很多事
+               先写脚本吧，甭管有没有价值了
+16:32 k8a-4g - 去你妈的，解决眼前事，patch先给过去再说，kernel补丁回头再说，打patch有问题也再说
+16:49 k8a-4g - TODO: 提交tag
+
+---
+
+20190328
+
+09:30 k8a-4g - TODO: 通讯板modem
+09:55 k8a-4g - drivers/tty/serial/msm_serial_hs.c
+          Mar 21 ,2017 Optimize:register/unregister pms wakeup callback in startup/shutdown.
+           - 20170321都不包含???
+            - eben自己改回去了?? - 不会吧
+10:22 k8a-4g - 3G release 考古:
+               bootable/bootloader/lk - 55cf9c695b690abc2b5ac2a44ce6237278868d08
+               frameworks/base - 256b770939b1fceac13395c538224f4d4aadf457
+               packages/apps/GsCamera - 884e54fd37ce654f82b707ece5e1ecd4a78c9d98
+               kernel - 不确定且奇怪 -
+                git log --pretty=format:"%h%x09%an%x09%ad%x09%s" -
+f844846 kesun   Tue May 23 17:04:08 2017 +0800  Fixed: wacom update firmware using uart2 failed.
+83bc054 kesun   Fri Apr 21 19:43:56 2017 +0800  Fixed: ultra high speed samsung 64G tf-card can't mount.
+090e6dc kesun   Fri Apr 14 13:58:38 2017 +0800  Fixed: spinlock magic invalid lead to kernel panic.
+5597467 hamming Tue Mar 21 14:16:55 2017 +0800  Merge "Optimize:register/unregister pms wakeup callback in startup/shutdown." into msm8x74-2163-ebens
+063480b ZhouZhuo        Tue Mar 21 11:20:50 2017 +0800  Fixed: build issue.
+857a4e0 hamming Tue Mar 21 09:50:31 2017 +0800  Optimize:register/unregister pms wakeup callback in startup/shutdown.
+9460046 hamming Mon Mar 20 20:22:40 2017 +0800  Fixed:__pm_runtime_resume may sleep in spi
+                这些补丁中eben缺失5597467
+15:12 i2 wifi - XXX: 又双叒叕他妈不行！！！How many fucking times ???????
+              - 开不了热点，开热点过程中logcat没看到wifi相关的log
+               - 183编的,libhardware_legacy补丁用错了：应该是这个：
+                http://192.168.180.185:8081/#/c/24455/
+                不搞了不搞了，合了再搞
+
+
+activation - 看似简单的一个东西，多模块，长期迭代，大工程该有的毛病全都有
+
+. 用敏捷掩盖流程和管理的缺失
+. 现有很多流程根本不足以成为流程.为什么流程总是不能被严格执行？因为流程太复杂了，而且根本不具有原子性(很多脚本局部错误还能继续往下跑，需要人为check错误)，人还得小心翼翼地确认。
+  项目开始前以及过程中花时间去整理流程和编写脚本是必要的，为此付出的时间和工作量是值得的，安排工作时得考虑到这个工作量
+
+
+---
+
+20190327
+
+11:09 k8a-4g - 补丁跳台blabla... -
+          smb://192.168.180.176/sw/xwb/k8a代码同步
+11:15 i2 wifi - msm8909-1155 kernel - msm-3.10
+                msm8909-3139 kernel - msm-3.18
+                不是同一个仓库。3139迁基线的任务和1155的任务就冲突了，烦死
+11:41 i2 wifi - 不合代码的话在服务器验证还是麻烦的一比,很难找到一个便利的工作流
+14:54 k8a-4g - http://192.168.180.185:8081/#/c/27969/
+               - TODO: this should be in msm-3.10 烦死
+17:07 k8a-4g - TODO:
+               通讯板：
+               Fixed:CHAP response is null with special CT ruim card
+               更新modem版本: ./build8916_all.sh CA7403 P1 V03 ?
+                 - the previous version named CA7403-P1-GENNS-211145-V02-171104, how did it come ?
+               主控板：
+               AP更新APN，出版本
+16:48 激活软著 - 篇幅好像没有想象中多，还有什么地方能凑字数的?
+               - 设备端加密存储方式
+                - 不，这个改为一个单独的主题-安全
+                - 系统设计目的：授权，并保障授权证书和种子卡的安全性。上面的安全与此呼应
+
+17:56 k8a-4g - TODO: 这个项目中哪些地方是没有按流程来引起的现在的问题，总结一下，设计一下这个流程怎么优化
+
+---
+
+20190326
+
+10:22 k8a-4g - TODO: eben将3G版最终代码发给我们，我们合入4G修改的部分(Settings网络制式以及一些应用BUG).
+                     不过还有一些不是本项目的底层补丁呢？
+                      - ./export_all_patch.sh 8x74-goso-ebens-20170322 8974-goso-ebens-20190215
+11:14 k8a-4g - ********************
+               密通代码baseline到底是哪个？？？？？？8x74-goso-ebens-20170322 ??????????????
+               密通单独开发代价太大
+               烦他妈死
+               梳理历史: 8x74-goso-ebens-20170322 8974-goso-ebens-20190215之间的提交到底在不在所里
+               git log 8x74-goso-ebens-20170322...8974-goso-ebens-20190215
+15:04 k8a-4g - 
+          commit 3c1dd3a5e77358e7cb75edc4c86110a5fd6dc228
+          Author: hamming <donghm@gosomo.cn>
+          Date:   Wed Aug 9 15:19:46 2017 +0800
+          
+              Add comm_prox file for prebuilt.
+              
+              Change-Id: If087892127a49f56a125d0f42f33205ddeb33fbb
+
+      - 20170809. 注意PP1.7是20170619
+       - 那么3g版本时所里pipeproxy用的是源码还是prebuilt？如果是源码，他们密通有没有定制？
+       - 是prebuilt，不过之前是一个单独的仓库，后面干掉了
+        - 这个补丁怎么搞？
+15:42 k8a-4g - 提交过一次主控板通讯板代码并更新过一次通讯板补丁到所里
+17:40 k8a-4g - 3g_release - /build/srv-build1/amss201-8x74/LINUX/android/repos_rev_170322-190215
+22:08 i2 wifi - TODO: what is in init.qcom.rtl_wifi.rc -> init.Konnect_i2.rc
+
+---
+
+20190325
+
+11:43 TODO: 
+          i2 wifi - . 能正常使用的版本？演示。
+                    . 验证8953 gosodrv 编译补丁 [Done]
+                    . 催董工合补丁，不然老是编译费劲半天还影响别的事情
+          msm8909-3139 - 补丁提交
+14:00 activation - TODO: 8k certs [Done]
+14:11 i2 wifi - XXX: 8953 编译问题, 仅exclude module Android.mk还是会参与编译
+                config to control source building for module ?
+                盲点 - Kconfig配置module Kbuild
+                source xxx/Kconfig in extern layer Kconfig
+14:38 k8a-4g - TODO: 主控Fota包
+                     主控后续也需要Fota
+15:15 i2 wifi - Who source wlan/prima/Kconfig ?
+16:47 msm8909-3139 - TODO: 补丁还剩system/sepolicy和device/qcom/sepolicy的一个
+19:35 k8a-4g - echo -n "--update_package=/sdcard/ota_update.zip\n--just_exit" > /cache/recovery/command
+20:06 XXX: 183 release3 no fucking space left -
+           rm -r K8A-4G-test-V01-2018-1128
+
+---
+
+20190323
+
+09:25 k8a-4g - 打patch -
+               . android/patch-8974-goso-ebens-20190215-8974-goso-ebens-20190320/export_non0_patches.sh
+               . export_all_patch.sh edit_patch_dir.sh
+10:57 k8a-4g - TODO: 把k8a刷回来 [Done]
+16:41 activation - TODO: 维修流程优化 ，整理一下
+16:41 k8a-4g - 网络问题没想到还挺多. TODO: QMI + pipeproxy 还是得整出来
+
+---
+
+20190321
+
+11:03 k8a-4g - XXX: 8974 single repo git status typechange WTF ???
+14:50 k8a-4g - TODO: 在211145 msm8916_32原始版本里把pipeproxy打通：
+               . 干掉servicemanager，测试QMI端口
+               . 如果OK，再把pipeproxy stuff加进去
+                 - 这个就不是瞎jb试了，理顺:
+                   . 底层，UART和SDIO通道，ts6700.ko driver (chmod 644
+                   . insmod ts6700.ko in init.target.rc
+                   . setup_net.sh - bring up enc0 and config routing stuff when switching net mode
+                   . pipeproxyd-comm - communicate with peer pipeproxyd, UART I/O, call real HAL functions
+                   . libpipeproxy.so - client side, serve HAL functions. seems not nessacery in COMM side
+                 - What I do -
+                   . cp init.rc from K8A
+                   . cp init.qcom.rc from K8A, but uncomment those services
+                   . add init.target.rc stuff from K8A -
+                     . by xugaoming@20151121 - setup_net, setup_enc, setup_ppp ..
+                     . on boot restart_level related
+                     . on fs insmod ts6700.ko
+                   . push ts6700.ko, chmod 644
+                   . out/target/product/K8A/update_proxy_stuff.sh, push setup_net.sh
+                    * usb suddenly becomes f000
+                   . repack boot.img-new (K8A dtb) and flash
+                     * ttyHS0 gone
+                   . missed a critical one - the UART driver patch !!
+                     . solved by copying K8A boot.img-kernel and repack
+15:06 activation - 维修激活服务器再度被擦除，得把这个版本整出来
+                   Anyone sorry for that ? Huh ??
+17:41 k8a-4g - TODO: 编8939版本，modem更新到4G，MBN OTA未导入
+                . check BP branch and status correct
+                . check AP branch and status correct
+19:22 k8a-4g - export-verify+comm-v02版本,空三角情况下无wifi图标
+               - 桥豆麻袋，连上才有图标吧
+
+---
+
+20190320
+
+09:50 k8a-4g - 出版本 -
+               8974:
+               git pull in BP, repo sync, repo status, commit sbl1.mbn, tag and push, build sbl1, make
+               8939:
+               APN, 2 patches verify, then merge, export patches, build
+
+11:00 k8a-4g - 通讯板MBN补丁，board-id，AP，cherry-pick，编译验证
+    root@k8a:/ # pbox cat /sys/devices/soc0/platform_subtype_id                    
+    1
+    1???不是0吗?
+11:07 k8a-4g - MBN OTA 改到211145分支了,切到wst-51分支重改
+    出一个版本要他妈的导patch，要他妈的验证
+
+11:34 k8a-4g - 8974 single-repo based on tag 0215 ?
+11:37 k8a-4g - sn尾号0039 QCN已导入MBN，待验证
+11:39 k8a-4g - 打patch，分几步 -
+                . ./export_all_patch.sh <base> <curr>
+                . remove all 0 size patches
+                . modify paths in patches
+                . patch them!
+               如何确保我没有少patch呢？得有个验证方法。人肉？
+               TODO: 优化export_all_patch.sh - 这次一定！
+               debug bash - set -x, set +x
+               path to file - dirname
+14:17 activation - 上次生产无KI卡的维修机?
+15:16 k8a-4g - 一个整体的仓库太过耗时，当时不如搞成多个仓库，每个仓库只有一个提交
+15:55 k8a-4g - 一个git diff跑了你妈一个小时还没跑完，这你妈没法玩，先编吧，导补丁
+               再说吧
+16:35 k8a-4g - QMI端口用msm8916_32原始版本编才能用，K8A的，uncomment qti service，rebuild boot.img，还是不行
+17:23 k8a-4g - build msm8939 modem ./build_8939all.sh A7403 (mpss, gen_nonhlos)
+20:45 k8a-4g - use build8916_all.sh for 8939 fucking modem build        
+21:35 k8a-4g - 编modem太慢，干掉无关项和clean和git reset --hard
+
+---
+
+20190319
+
+10:40 pwf39 - 两台疑无KI卡的机子
+        pbox busybox hexdump /dev/block/bootdevice/by-name/signature
+      查看，都有KI卡
+15:00 k8a-4g - 项目配置文档&meld对比项目配置目录
+15:42 split_bootimg.pl - 尝试修改之以解出dtblob，但msm8909 system/core/mkbootimg/bootimg.h 里面并无device tree，只有second stage，而msm8939 system/core/mkbootimg/bootimg.h 里面有device tree，也就是说，两个平台boot.img结构不一样?
+15:56 k8a-4g - make 211145 origin boot.img and system.img，开机无端口，
+               用K8A的boot.img-dt, comment build_boot.mk dtb building rules, make -f build_boot.mk repack，开机有adb端口了!
+20:30 k8a-4g - QMI端口finally get it! -
+    on property:sys.usb.config=diag,serial_smd,rmnet_bam,adb
+        stop adbd
+        write /sys/class/android_usb/android0/enable 0
+        write /sys/class/android_usb/android0/idVendor 05C6
+        write /sys/class/android_usb/android0/idProduct 9091
+        write /sys/class/android_usb/android0/f_diag/clients diag
+        write /sys/class/android_usb/android0/f_serial/transports smd
+        write /sys/class/android_usb/android0/f_rmnet/transports smd,bam
+        write /sys/class/android_usb/android0/functions diag,serial,rmnet,adb
+        write /sys/class/android_usb/android0/enable 1
+        start adbd
+        setprop sys.usb.state ${sys.usb.config}
+
+    Totally have nothing to do qti shit. 用用脑子！逻辑！瞎猜浪费了多少时间！
+    But, qti daemon需不需要? TODO: 明天看看
+
+---
+
+20190318
+
+11:51 dumpsys activity -h
+      Really powerful!
+      adb shell dumpsys activity top
+      View dump format - base/core/java/android/view/View.java
+      android.widget.TextView{41b406b8 V.ED.... ........ 24,0-566,64}
+      TODO: question: View 靠什么联结形成Hierarchy ?
+      或者说，如何加入View ?　在数据结构层面发生了什么 ?
+      xml里加入，或者在java里加入(dump里无id)，在xml里加入是否最后还是要在源码里加入？
+15:21 k8a-4g -
+      see Settings/src/com/android/settings/location/LocationSettings.java:
+      // Only show the master switch when we're not in multi-pane mode
+16:27 k8a-4g -
+      TODO: 写号流程再看一下
+16:38 repo sync will automatically rebase baseline named branch in repo
+17:01 k8a-4g - 又编了一遍原始源码仓库，make clean，产物中有pipe proxy stuff.奇怪，上次是怎么回事
+17:25 k8a-4g - TODO: 考虑eben的提议，主控板直接给patch到所里，所里在3G源码基础上升级
+17:34 k8a-4g - 可量产结论 - 3.29
+               密通验收已经delay了.
+               modem版本，吃了测试流程的亏
+
+---
+
+20190316
+
+15:33 ListPreferenece - summary, entry, entryvalue
+
+---
+
+20190315
+
+11:01 k8a-4g - find common base git merge-base
+14:34 k8a-4g - Telephony - amss201-8x74/LINUX/android/out/target/product/k8a/system/priv-app/TeleService.apk
+15:18 k8a-4g - 这个项目存在的问题：
+               . 测试机完整性没经过验证
+               . 旧版本定制的需求行为被当成BUG
+18:00 Android - the top bar in an activity is named ActionBar
+               
+
+---
+
+20190314
+
+13:58 k8a-4g - QMI端口问题，9091 qti,bam 8909同样的配置，8939连不上
+15:07 k8a-4g - try adding qti service
+15:51 k8a-4g - try building complete msm8939
+16:52 k8a-4g - qti service can be started if start as diag,serial_smd,rmnet_bam,adb ?
+17:20 k8a-4g - TODO: 问题过一遍，分配出去 [Done]
+18:10 k8a-4g - 4g/3g/2g - network_acq (Forgget this
+20:03 k8a-4g - src/com/android/keyguard/KeyguardStatusView.java - clockview
+21:13 k8a-4g - qmss11-8909/LINUX/android/packages/services/Telephony/res/values/strings.xml - preferred_network_mode_choices_lte_6_mode
+21:33 k8a-4g - adb shell am start -a android.settings.LOCATION_SOURCE_SETTINGS
+               - switch on top bar
+
+---
+
+20190313
+
+11:16 k8a-4g - widget界面时间不刷新，系统周期性刷新广播被堵 
+11:31 k8a-4g - smb://192.168.180.176/sw/doc/规范文档/项目定义文档/Android 新建项目模板服务器版0.1.1.doc
+11:44 k8a-4g - 通讯板export-test version USB端口没问题，9025
+11:48 k8a-4g - 很多问题我自己没想起来，如adb默认是否开启和build variant之间的关系，又如Launcher是独立于系统的应用，而且这个项目还是eben的Launcher
+14:16 k8a-4g - POWERFUL command - dumpsys activity
+15:22 WPS有autobackup文件
+16:46 k8a-4g - USB QMI function -
+               adb shell setprop sys.usb.config diag,diag_mdm,serial_hsic,rmnet_qti_ether,mass_storage,adb　后没端口
+               抓dmesg发现diag_mdm项报错
+               解决：~/work/k8a-4g/usb_enable_qmi.sh
+                - Does not work !
+                - 应该是要求前后操作在同一个进程
+               根据8909的9091配置改写
+20:17 8139 repo sync fail due to newDisk full
+
+---
+
+20190312
+
+10:56 k8a-4g - 通过安全管家升级export-verify-2失败
+             - 怎么查?
+11:29 activation - 0918 -10 later
+12:00 k8a-4g - 升级失败or升级成功但是没起来?内核有误?system有误?
+13:34 TODO: 命令看是否识卡？
+14:09 k8a-4g - export-verify-2 boot.img, system.img, modem 5 imgs线刷均正常开机且有9091
+             - 为何前面无端口?
+             - proxy_* 没通?
+              - 缺少pipeproxy stuff!!! WTF??
+               - 为何没编进去? make installclean, make clean
+                - XXX: 还得他妈的make clean再编??编译环境有问题!!
+14:18 k8a-4g - bullshit.　再编一个modem-update version
+15:05 k8a-4g - qmss21-8939　原始仓库make clean 编也不行？？？WTF????
+              - 先single-repo编，TODO: 后面再看
+15:34 k8a-4g - 我就不能先验单板ota没问题再验安全管家升级吗？？
+             - 4G mode OK
+15:59 k8a-4g - 第一次给代码树是基于8939-goso-ebens-20190223
+             - 本次更新modem - repo forall -p -c "git tag -f -a 8939-goso-ebens-20190312 -m 8939-goso-ebens-20190312"
+16:17 k8a-4g - 这次导补丁给具体路径的命令以及手动修改补丁内容的路径，TODO: 整出脚本
+20:01 k8a-4g - TODO: ADB default enabled 9039 after factory reset
+               - who deceide this ? settings global adb_enabled (any xml to config this ?) or persist.sys.usb.config, or persist.service.adb.enable=1
+               - but, after fastboot format userdata, it's f003.
+                 - BUT Wait! It becomes 9039 just a little while later!
+               - 8x74 4.4 - 并没有persist分区的prop文件存储persist.sys.usb.config
+                 persist.service.adb.enable也在system分区，有点混乱
+               - system/build.prop persist.service.adb.enable=0
+                 fastboot format userdata
+                 reboot
+                 9025 ??? diag,serial_smd,serial_tty,rmnet_bam,mass_storage,adb ???
+                 user版本？
+                 surfaceflinger crash on boot, 跟这个有关系吗
+20:54 k8a-4g - TODO: 检查git push --tag正确性
+
+---
+
+20190311
+
+09:45 登上183还花了不少时间
+09:52 k8a-4g - TODO: 验证导出的zip包，这个验过的，但是验证过程和结果没有详细记录。
+　　　　　这个值得详细记录，否则面临的就是重测
+11:46 k8a-4g - 等主控BUG复测结果
+14:57 k8a-4g - 导出zip包解压 -
+               编译
+15:12 msm8909-3139 - TODO: 等repo sync, 编译验证一些补丁
+16:06 k8a-4g - 软件死机，内核异常，重启原因进死机dump模式. PMIC_PON.BIN
+16:29 k8a-4g - unzip amss201-8x74-single-repo.zip and qmss21-8939-single-repo.zip
+               build K8A-export-verify-2019-0311 and K8A-COMM-export-verify-2019-0311
+               verify, WiFi mode OK!
+               XXX: 4G mode无状态栏图标，空三角都没有
+17:44 k8a-4g - 通讯板开机没有任何USB端口，只能pbox "sh -c 'reboot bootloader'"进fastboot
+17:54 k8a-4g - 8939原始仓库diag_*为binaries，build boot.img，测试 - WiFi mode OK, 4G mode空三角
+                           回退diag_* binaries补丁（至Dec 27状态），build boot.img，测试 - WiFi mode NG, 4G状态栏无图标
+18:40 k8a-4g - 两个板export-test版本也是空三角，搞半天是单板问题？？？
+19:44 k8a-4g - 换一台机，两个板export-test版本，4G OK. 但这台机通讯板刷export-verify版本，4G mode 空三角.刷回去看看？
+21:06 k8a-4g - 前面空三角的板，现在是主控板export-test, 通讯板export-verify, 3G OK了，fuck
+21:27 k8a-4g - 注意基带版本！！
+21:47 k8a-4g - FA1601-P1-V14. 迁基线时radio版本没注意,这个是8916的modem
+             - 测试时没用ota方式测4G
+21:56 k8a-4g - 测试时的刷机方式吃的亏
+
+
+验出问题是好事
+
+---
+
+20190309
+
+16:20 有deadline的事情还是得放在前面
+17:27 deadline推迟
+17:36 写文档，这次发作的一个导火线
+17:47 k8a-4g - 递交给eben的源码再梳理检查一遍，确认我的工作无误
+
+---
+
+20190308
+
+09:58 activation - 缺12月证书，上传服务器
+19:15 写一天的软著
+20:14 一个小时就画了个图，吃个饭后来就不知道怎么写了
+
+---
+
+20190307
+
+15:33 TODO: 好久没他妈的读过开源项目代码了，也好久没他妈的正儿八经思考和研究过一些
+            有意思的主题了 - 以前研究过的一些，文本处理，编译，llvm，等等相关的，
+            回想一下，记录下来，以后想到这方面的东西一定要他妈的记录。
+            这次解冲突发现一个机械化解冲突的场景：
+            sepolicy的冲突，git cherry-pick把基线的一些改动判定为补丁的上下文变化，
+            而我依然可以参考原补丁把它当做上下文无关的改动处理，这是一个机械化的
+            过程，但是其中有一个过程用普通的文本处理不那么好处理：
+            在下文部分找到对应原补丁的改动
+            用高级一点的文本处理应该有办法。得空研究一下（得个几把空
+            - 其实不难找吧？？直接整段查找不就完事了？
+16:59 sepolicy - TODO: WTF are private and public ?
+17:06 msm8909-3139是他妈的Android O? 8909要上O?
+      那就应该是新项目，以前的system/sepolicy不一定用得上
+      - 也许应该从8953那边迁过来？8.1好像没有诶
+17:23 k8a-4g - 客诉又一个死机问题，充电放着不动死机。刘登华在看
+17:53 i2 - 异常关机 -
+      03-07 13:52:35.672 D/ProxyService( 4760): shutdown due to low power
+      找liu问一下他的排查过程
+      等等，这个是真的低电关机，不是异常
+20:41 k8a-4g - 死机 - memory corruption, 疑似大电流场景？
+               Log中的"Modules Linked in:" 只是当前链接的Modules
+
+Energy - 不好不坏
+
+---
+
+20190306
+
+11:04 i2 wifi - XXX: 编出来PWF39不能正常使用, WLAN打不开
+11:39 i2 - 放着自动关机,有关机界面
+11:55 i2 wifi - PWF39 wifi打不开solved -
+          -static const char SUPP_PROP_NAME[]      = "init.svc.wpa_supplicant-1";
+11:58 i2 wifi - TODO:　提交两个repo:
+          . frameworks/opt/net/wifi
+          . hardware/libhardware_legacy
+16:30 尝试打开.odt，闪退的WPS，没保存的软著申请，600字变400字。行吧
+
+---
+
+20190305
+
+09:52 i2 wifi -
+in Konnect_i2.mk                              in Konnect_i2/AndroidBoard.mk
+export BOARD_USE_RTL_WIFI_REPEATER=true       true
+BOARD_USE_RTL_WIFI_REPEATER=true              true
+11:18 i2 wifi - XXX: in device/qcom/msm8909/AndroidBoard.mk
+      无论条件是ifneq ($(strip $(BOARD_USE_RTL_WIFI_REPEATER)),true)
+            还是ifeq ($(strip $(BOARD_USE_RTL_WIFI_REPEATER)),true)
+      拷贝到out/target/product/Konnect_i2/system/etc/hostapd/hostapd_default.conf
+      的都是原来的hostapd.conf ?????
+      正也不行,反也不行?????
+      起作用的根本不是device/qcom/msm8909/AndroidBoard.mk ???????
+11:23 i2 wifi - 破案了:
+      In Konnect_i2.mk:
+      export TARGET_CHIPCODE=msm8909_512
+      So, 起作用的是device/qcom/msm8909_512/AndroidBoard.mk !!!!!
+      我屮艸芔茻*!&^&*@%*&%^&#^$)(*^&*^$^&%$^&
+      OK.Fine.就是会花时间在这种屎问题上,认了,认了.Fine.Fine.
+11:35 Android Build - Copy类的编译目标,要先rm再make才会更新
+14:15 k8a-4g - TODO: 又来一堆问题,见邮件
+15:04 k8a-4g - TODO: 新编的版本里没有sdcard.img
+15:31 i2 wifi - TODO: 死机问题,dump解出是rtl wifi驱动
+15:38 k8a-4g - TODO: 测试前设备状态确认流程
+             - 还有他妈的我自己的出版本的流程规范
+             流程!!流程!!流程!!
+             规范!!规范!!规范!!
+             eben反馈的测试版本和问题很诡异
+15:46 i2 wifi - XXX: 死机问题 - test-V5
+          [sd_tx_rx_hdl 500] sdio_hisr=0xE0040049, SdioRxFIFOSize=28032
+          sd_recv_rxfifo - BUG_ON(size > MAX_RECVBUF_SZ);
+          SdioRxFIFOSize是从SDIO Host register里读出的
+          而且这个问题还是个低概率condition
+          出于什么原因改变了SdioRxFIFOSize??
+          要不在那个地方log跟踪这个值?
+16:00 i2 - XXX: IMEI1尾号4544295 - 开机过一会灭屏,插USB看见企鹅
+16:22 i2 wifi - TODO:还有他妈的其他项目的编译验证
+16:36 i2 wifi - 补丁同步到183流程:
+          . 本地检测,相关仓库分支正确,状态正确
+            - for r in `cat rtl_test_repos `; do echo $r: ; pushd $r; git branch; git status -s; popd; done
+            - 在此之前还有本地同步,他妈的 (TODO: script: sync with local cherry-picked ?)
+          . on 183: ./rtl_repo_sync.sh
+          . on 183: 还原, repo sync
+17:38 i2 wifi - XXX: 服务器上一编还真就编出问题了 -
+          /build/srv-build1/qcom-msm8909-1155/qmss11-8909/LINUX/android/kernel/drivers/gosodrv/rtl8192cd_92es/8192cd_hw.c:311:33: fatal error: data_PHY_REG_PG_88E.c: No such file or directory
+           #include "data_PHY_REG_PG_88E.c"
+17:49 i2 wifi - checklist for other projects build:
+          . 
+17:59 i2 wifi - IMEI1尾号4544295 - 异常掉电这台不是标准版本,刷机看看
+
+
+Energy - Morning: Not bad, but not so good.
+         Afternoon: 午睡过后问题全他妈来了,k8a-4g按说已经验收过的历史问题,搞不清楚测试版本和机器状态,i2 wifi屎一样的driver导致的死机问题.
+         反倒来精神了?
+
+---
+
+20190304
+
+09:58 i2 wifi - TODO: 测试唤醒，wake_up gpio [Done]
+14:03 i2 - USB端口老掉,更新charge_manage
+14:04 i2 wifi - init: skipping insecure file '/system/lib/modules/rtl8189es.ko'
+                - chmod 644 /system/lib/modules/rtl8189es.ko
+14:08 i2 wifi - E/WifiHW  (  802): Unable to open connection to supplicant on "@android:wpa_sta": No such file or directory
+                - XXX: getprop wifi.interface got ""
+                - 先手动改build.prop验证,再整体编system.img验
+14:28 i2 wifi - XXX:从内网其他设备ping mifi sta, 中断
+                - wakeup_gpio ? 试试老驱动?
+                 - 换老驱动后无ping中断
+                 - 老驱动与现在之间的差异 -
+                  - DTS wakeup_pin vdd vddio适配
+                  - IMCP log
+                - 前面测的时候是local dir make编的module, config没包含吧?
+15:03 i2 wifi - 这次ping直接Unreachale
+              - ping出去也一样
+              - ping网关也不通
+16:25 i2 wifi - 通过AP ping client, 周期性大延时, 周期约10s
+16:52 i2 wifi - 那是因为我ping的是NEO2,这是NEO2的问题.翻邮件记录找到的
+                - 交接文档里可能要写这个问题历史
+17:03 i2 wifi - 现在又变成WiFi打不开了
+17:39 i2 wifi - 打不开是因为system.img用的test-v5, wifi-service.jar用的又是本地编的
+19:16 软著 - 纸质文档是被打回来的那份
+19:30 i2 wifi - ping中断的问题,老驱动(test-v5)也有,不过是个概率问题
+                - 那我这一下午在干嘛?
+20:19 i2 wifi - TODO: rootdir/etc/init.qcom.rc - 兼容适配 - init.qcom.rc.rtl
+                - 这样一来ro.wifi.interface就不用了? [Done]
+
+Energy - 上午精力不行,午睡后到15:00恢复精力和效率.15:00碰到wlan0-vxd ping不通的问题,效率降低
+
+---
+
+20190301
+
+10:19 ramparse -
+        - msm8939:
+        ramparse.py -v ~/newDisk2/qmss21-8939/LINUX/android/out/target/product/K8A/obj/KERNEL_OBJ/vmlinux -g ~/newDisk2/qmss21-8939/LINUX/android/prebuilts/gcc/linux-x86/arm/arm-eabi-4.7/bin/arm-eabi-gdb -n ~/newDisk2/qmss21-8939/LINUX/android/prebuilts/gcc/linux-x86/arm/arm-eabi-4.7/bin/arm-eabi-nm  -j ~/newDisk2/qmss21-8939/LINUX/android/prebuilts/gcc/linux-x86/arm/arm-eabi-4.7/bin/arm-eabi-objdump -o Port_COM17/parse -a Port_COM17 --dmesg --32-bit
+        - msm8909:
+        ramparse.py -v ~/newDisk/qmss11-8909/LINUX/android/out/target/product/S3/obj/KERNEL_OBJ/vmlinux -g ~/newDisk/qmss11-8909/LINUX/android/prebuilts/gcc/linux-x86/arm/arm-eabi-4.8/bin/arm-eabi-gdb -n ~/newDisk/qmss11-8909/LINUX/android/prebuilts/gcc/linux-x86/arm/arm-eabi-4.8/bin/arm-eabi-nm -j ~/newDisk/qmss11-8909/LINUX/android/prebuilts/gcc/linux-x86/arm/arm-eabi-4.8/bin/arm-eabi-objdump -o Port_COM32/parse -a Port_COM32 --dmesg --32-bit
+10:22 XXX: home disk full
+11:12 k8a-4g - TODO: 拍照卡死, 3G版本PP1.7未见此问题
+11:20 k8a-4g - PP1.7到底他妈的发生过什么？
+14:54 TODO: 加密通道软件著作权申请，deadline - 3.10
+      - 那份纸质文档是什么？申请失败的那份？
+16:41 TODO: 3139基线迁移
+
+---
+
+20190228
+
+09:47 k8a-4g - adb push largefile /sdcard/
+               got "File too large" when the 12G file copied 33%
+10:48 k8a-4g - TODO: 编出的Fota包里面是否有modem?是否需要?
+14:10 activation - TODO: 发送证书8000+20 [Done]
+14:40 k8a-4g - copy large file to /sdcard -
+               liu推测是fatfs限制导致的File too large
+               但死机原因尚不明
+14:48 i2 wifi - TODO: 在183上再验一遍编译? [Done]
+15:11 i2 wifi - *** RTL8192CD BUILD PWD: /home/zz/newDisk/qmss11-8909/LINUX/android/out/target/product/Konnect_i2/obj/KERNEL_OBJ
+          - then, how do I get the REAL pwd in the source dir ?
+18:09 i2 wifi - EXTRA_CFLAGS
+21:31 i2 wifi - TODO: Customize and warnning fixing - Crash when insmod [Done]
+
+---
+
+20190227
+
+14:00 k8a-4g - XXX: K8A-4G-V01 也没有添加APN按钮
+14:25 思考 - C函数中的错误处理pattern:
+             我自己习惯上的两种模式:
+             1. goto到不同的出错处理标签
+              - 语句和goto标签(通常对应上一条语句)之间的耦合
+             2. goto到同一个出错处理标签,根据条件判断处理哪些错误
+             TODO: 其他人怎么做的?有时间展开一下,包括我自己的
+             - 但注意C的局限性,很可能这些就是没有完美的解决之道,如果确认了这一点,以后就带着这个不完美的方式来编码,不要再把精力花在纠结这种事情上
+14:41 xxx
+        正操作(enable) - 错误处理
+        反操作(disable) - 返回值都不管
+16:52 TODO ? - 工作日志 - 思维,心理,状态,精力
+17:02 k8a-4g - TODO: copy大文件死机问题,给刘登华看
+17:50 i2 wifi - rtl8192cd driver customized.
+          TODO: check the commits, verify [Done]
+
+--
+
+20190226
+
+11:09 i2 wifi - TODO: driver patch "Customize and warning fixing" - [Done]
+         . platform related -
+           . POWER
+           . GPIO, IRQ
+         . log stuff
+         . build stuff (in directory build, /home/zz ...)
+         . anything else... ?
+16:39 - interrupts = <34 0x1>;
+        kernel/Documentation/devicetree/interrupt-controller/interrupts.txt
+        - bits[3:0] trigger type and level flags
+         - TODO: 既然这里设置了flag,那request_irq时设置的flag呢?和这里会相互影响吗?
+17:25 - 太久没搞驱动了,驱动的generic practise都陌生了
+
+---
+
+20190225
+
+14:01 k8a-4g - TODO: Figure out how BD ADDR is read.
+15:35 k8a-4g - pbox nvread is bullshit.
+               nv_read tool - ~/newDisk2/qmss21-8939/LINUX/android/device/qcom/K8A/nv_read
+               pbox "/data/nv_read 447 | busybox hexdump"
+               nv_read shows f815e225 's BD ADDR: 64:26:56:54:64:56
+                             3e03be1c 's BD ADDR: empty
+15:55 k8a-4g - 测试保证设备的完整性,包括AP,BP,QCN版本,校准信息,写号
+               代码导出版本应该安排完整测试,包括发生过的各个bug?
+16:31 k8a-4g - git remote | xargs git push --tag
+               XXX: error - remote zzpc xx
+               git push --tag caf
+               XXX: error in device/qcom/K8A - caf not found
+17:43 Tip - Check network availability in Android -
+            connectivityManager.getNetworkInfo()
+                                getActiveNetworkInfo()
+
+---
+
+20190223
+
+15:40 k8a-4g -
+cp -r about.html add-commit-msg.sh boot_images build8916_all.sh build8939_all.sh common contents_UG_8916.xml contents_UG_8939.xml contents_UG_NO1X_8916.xml contents_UG_NO1X_8939.xml contents_UG_NO1X.xml contents_UG.xml contents_VG_8916.xml contents_VG_8939.xml contents_VG_NO1X_8916.xml contents_VG_NO1X_8939.xml contents_VG_NO1X.xml contents_VG.xml contents.xml fixed_crs.xls goso known_issues.xls LINUX/fixed_crs.xls LINUX/known_issues.xls modem_proc rpm_proc trustzone_images wcnss_proc .gitattributes .gitignore ../qmss21-8939-single-repo/ 
+cp: will not overwrite just-created `../qmss21-8939-single-repo/fixed_crs.xls' with `LINUX/fixed_crs.xls'
+cp: will not overwrite just-created `../qmss21-8939-single-repo/known_issues.xls' with `LINUX/known_issues.xls'
+cp: cannot stat `.gitignore': No such file or directory
+
+17:15 8939 tag 20190223 password goso-zhou-190223 zip
+18:17 TODO: 案例引导新人
+20:13 k8a-4g 特么添加APN界面哪去了?? - 根据卡动态生成
+
+---
+
+20190222
+
+09:32 k8a-4g - 现在是需要解绑Ukey的方法. Android平板...
+10:20 k8a-4g - 意外找到另一个Ukey - 但是也用不了,被绑定了
+11:22 k8a-4g - Eben蓝牙地址?
+               TODO: 没办法连Ukey测,那么就单看BD ADDR有没有变化呢?
+11:31 k8a-4g - TODO: 为什么通讯板可以重复升级同一个版本?K8A-4G-export-test-COMM-2019-0215
+11:31 k8a-4g - 从Log上看verify pid可能真的不是APP发起的.得认真看看了
+14:37 k8a-4g - 3e03be1c BD ADDR:
+                       mAddress: 08:00:00:ee:6e:a5
+14:49 k8a-4g - 升级3e03be1c通讯板
+                        BD ADDR:
+                       mAddress: 08:00:00:4b:b6:bc
+               Got ya!
+16:02 k8a-4g - bluedroid运行于通讯板,那么BD ADDR是否也应取决于通讯板?
+16:15 k8a-4g - f815e225 BD ADDR: 64:26:56:54:64:56
+               也跟Settings版本信息里显示的不同
+18:02 k8a-4g - ukey_bt bt_opt.init() { hw_get_module(BT_STACK_MODULE_ID,) }
+               - 在通讯板侧
+
+20190221
+
+09:42 k8a-4g - enable adb on comm board
+10:24 k8a-4g - pbox shits 大buffer情况下输出的错误,注意这个坑
+               这根本没办法你妈正常调试好吧
+11:54 脚本, 一劳永逸
+      脚本的幂等性
+14:04 ~/work/k8a-4g/logs/ukey_bind
+      ~/work/k8a-4g/logs/ukey_connect
+      ~/work/k8a-4g/logs/ukey_unbind
+14:17 k8a-4g - 绑定Ukey, 清通讯板userdata, 重启后Ukey仍可连接
+               这说明通讯板userdata中不包含绑定信息
+14:32 k8a-4g - 通讯板升级后Ukey无法连接. 还真是这样
+14:35 k8a-4g - TODO: 手动执行通讯板OTA升级,排除安全管家自作主张清除绑定信息的可能性 [Not needed]
+14:39 k8a-4g - 再度绑定,成功.我测之前似乎有手动解绑过....再测一次
+14:56 k8a-4g - 通讯板升级成功后,Ukey仍可连接. 仍!可!连!接! 虚惊一场
+15:45 k8a-4g - BUG情况下进入无线U盾是原绑定的Ukey的界面,但点击呼叫,无连接
+16:02 k8a-4g - XXX: flash id为3e03be1c的设备的确是存在升级后连不上的问题
+               3e03be1c是没插卡的,另一台测试OK的设备是有插卡的
+               TODO: 插卡和不插卡的对比测试
+17:59 k8a-4g - 留意这个comm_prox补丁 - 5f2bb7fa81858cee3b527bc493aa2a8ab95fdce2
+               老版本的k8a编出的binary是不包含这个的,why?
+
+---
+
+20190220
+
+09:34 tc - TODO: flow_control.sh, limit动态分档 [Done]
+                 限速的最低值为下行128kbps,即16kB/s
+10:25 k8a-4g - 如果Phone ID指的就是Android里面那个Phone ID呢?
+               TODO: 打Log看看. [Not needed]
+11:03 k8a-4g - XXX: SecurityManager.apk解出来的结果,总觉得不大对
+11:56 tc - limit动态分档[Done]. ~/work/la0916/flow_control.sh
+15:32 k8a-4g - 搞不好连接绑定到另一台设备的Ukey就是这个结果(ErrVerifyPid)呢?
+               TODO: 试试 [Done]
+15:43 k8a-4g - 还真是. 走偏了. 那么应该是升级过程中丢失了设备侧的绑定信息?
+               或者一开始绑的就是错的? 等Ukey来了复测
+
+---
+
+20190219
+
+09:53 LOCAL_MODULE_KBUILD_NAME - what does this do
+10:07 k8a-4g - 升级前绑定的Ukey,升级后无法连接
+10:10 i2 wifi -
+        gpio wakeup
+        customize and warning fixing
+        build stuff
+         => rtl8192cd_92es: Customize and warning fixing.
+10:22 TODO: 继续阅读Bluetooth spec.
+            之前那种阅读节奏应该是不行的
+            本次目标 - start from 状态转换
+10:39 k8a-4g
+    01-05 02:01:27.241 D/UkeyService( 1619): ===parseEventData: 1c:5f:ff:3b:c7:f0|STATE_VERIFY_PID|00000000
+    01-05 02:01:27.241 I/UkeyClient( 2235): onErrVerifyPid : 1c:5f:ff:3b:c7:f0
+    01-05 02:01:27.241 I/SecureUKey( 2235): event = EVENT_ERROR_PID
+     - 这个是关键? 先连接上了,这个事件触发后又断了.
+      - 也不一定,留个心
+     - 第一个问题, WTH is PID ?
+      - PID: Phone ID ?
+        UID: Udisk ID ?
+        - 相当于双向认证?
+     - ukey_send_request() - 这个是给谁处理的?
+      - req.s_board & req.d_board
+     - CMD_UKEY_VERIFY_PHONE_ID (main board) => ukey_bt_stack_get() (comm board) => gatt_write(addr, buf, len)
+      - so, 最终是Ukey处理的
+     - SEND_PHONE_ID, VERIFY_PHONE_ID, CLEAR_PHONE_ID
+      - 应该就是Phone ID变化,比较失败
+       - 那么回到问题, Phone ID是啥?
+       - TODO: 反编译安全管家 [Done with problem]
+     - 升级成功判断依据 - factory_check - last_install
+     - 聂晶说是从K8A-4G-export-test-COMM-2019-0215升到K8A-4G-export-test-COMM-2019-0215
+     - 我之前用的java decompiler是啥来着??
+     - Update system default java version
+      - update-alternatives --config java
+      - https://askubuntu.com/questions/121654/how-to-set-default-java-version
+     - VERIFY_UID是command, VERIFY_PID是状态机驱动的?
+     - TODO: 找到另一个Ukey, 弄清无法连接情况下如何清除Ukey侧绑定信息
+17:41 BT - <ref> http://www.wowotech.net/sort/bluetooth
+
+---
+
+20190218
+
+14:14 i2 wifi - 全编译 -
+      XXX: E/WifiStateMachine-STA(  788): Failed to start supplicant!
+14:20 libhardware_legacy - wifi - SUPP_PROP_NAME
+      XXX: 之前怎么没问题??
+14:23 i2 wifi - XXX: 没有用hostapd-rtl.conf
+14:41 i2 wifi - device/qcom/msm8909/AndroidBoard.mk里的log没打出来
+      压根就没用这个???玩儿呢???
+15:02 k8a-4g - XXX: 机器NG,通讯板没起来or串口不通?
+               - 通讯板FPC坏
+               - 下次让他自己拿两个机子对比排查
+16:42 android build -
+      build/target/board/Android.mk
+       -include vendor/BRAND/MODEL/AndroidBoard.mk
+        - include vendor/goso-common/AndroidBoard.mk
+         - include device/qcom/CHIPCODE/AndroidBoard.mk
+      so, Konnect_i2.mk里定义的BOARD_USE_RTL_WIFI_REPEATER变量传不进去?
+17:20 i2 wifi - ifdef $(BOARD_USE_RTL_WIFI_REPEATER)
+        Am I fucking retarted ??
+        正确的写法难道不是
+        ifeq ($(strip $(BOARD_HAS_QCOM_WLAN)),true)
+17:59 i2 wifi - 改了还是不行, WTFFFFFFF
+
+---
+
+20190216
+
+10:33 183 server - /build/srv-build1/qmss21-8939/LINUX/android/cp-to-182.sh
+10:53 android - CTS 要求自己生成release-key
+      k8a-4g - 那么通讯板就还是用test-key吧,不改了.
+               TODO: 但是这个key的作用原理和流程要搞清楚
+               https://source.android.com/devices/tech/ota/sign_builds
+11:03 k8a-4g - sim card APN - test - bjlenovo02.xfd2.njm2mapn
+11:47 android - 升级后的应用必须是被同一个key签名的,这样才能访问原始应用的数据.
+                被同一个key签名的两个应用才能共享user ID,也才能共享数据
+                OTA升级包必须被一个系统认可的key签名
+11:55 k8a-4g - XXX: 位置信息没有开关
+11:57 TODO - 摸索PM平台Redmine
+15:41 i2 wifi - XXX: E/WifiHW  (  799): insmod: init_module() error: Operation not permitted
+                Not Again!! WTH is this ??
+                Well, WIFI_DRIVER_MODULE_PATH should be undefined
+
+---
+
+20190215
+
+09:55 k8a-4g - vendor/qcom/proprietary/common/scripts/SecImage/signed/
+               Generated when building android ?
+10:36 TODO - Write ssh and scp expect scripts. [Done, sshpass is OK]
+14:29 git tag - lightweight VS annotated
+14:32 k8a-4g -
+builder@gososw:/build/srv-build1/qmss21-8939/LINUX/android$ repo forall -p -c "git tag -f -a 8939-goso-ebens-20190215 -m 8939-goso-ebens-20190215"
+qmss21-8939-single-repo is based on 8939-goso-ebens-20190215
+15:08 k8a-4g - XXX: 编译脚本用哪个版本release目录?
+16:41 k8a-4g - build with release-key
+               PRODUCT_DEFAULT_DEV_CERTIFICATE
+               How came the previous msm8916 ebens using release-key ?
+               - Fuck it. Never mind. Just set PRODUCT_DEFAULT_DEV_CERTIFICATE.
+18:00 k8a-4g - XXX: 通讯板down过一段时间,主控板handshake write pipe_fd失败
+20:27 k8a-4g - TODO: 发布export test 版本 [Done]
+
+---
+
+20190214
+
+10:30 k8a-4g - 加密版5.3.64_F17010501_18013001 是最新的
+14:41 TODO: 常用程序模板? 如getopt
+17:06 k8a-4g - find exclude path:
+               find -name "patter" -not -path "./exclude_dir/*"
+
+---
+
+20190130
+
+10:16 i2 wifi - before test -
+          adb shell settings put global wifi_on 0
+          adb shell settings put global wifi_ap_on 0
+10:48 i2 wifi - XXX: `setprop ctl.start wpa_supplicant-vxd` does not work ?
+10:56 i2 wifi - <11>[    1.851892] init: /init.qcom.rc: 686: invalid service name 'wpa_supplicant-vxd'
+         mother fucker!
+         strlen(name) > 16, 狗屎
+11:26 i2 wifi - 想名字...
+                TODO: 还有个daemon的作用不清楚 - iprenew_wlan0
+                TODO: 近几天i2 wifi的修改待提交
+
+--
+
+20190129
+
+09:52 i2 wifi - XXX: E/WifiHW  (  799): insmod: init_module() error: Operation not permitted
+09:59 k8a-4g - 3G 通讯板连USB,刷版本测试
+10:07 i2 wifi - XXX: hardware - wifi - WIFI_DRIVER_MODULE_PATH should be undefined
+10:48 i2 wifi - XXX: stuck in mWifiNative.loadDriver()
+11:02 i2 wifi - XXX: 死循环,set_mib pwrlevelCCK_A=2E2E2E2E2E2E2E2E2E2E2E2E2E2E, damn, 但是改了就没验通过
+11:38 i2 wifi - fixed, wrong usage of strtok_r()
+                XXX: still with problem
+                E/hostapd ( 1693): Driver does not support configured HT capability [GF]
+11:46 i2 wifi - fixed, wrong hostapd.conf
+                XXX: but fucking still with prolem
+                cannot disable AP, cannot enable STA
+15:21 k8a-4g - 通讯板串口不通,主控板侧也会报open error: No such file or directory
+15:35 k8a-4g - 通讯板FPC断了一个
+15:55 k8a-4g - check the fucking board-id !!! 狗屎
+                手上3G板 board-id是0, C版本本应是56
+16:23 k8a-4g - 3G板 改comm_prox board-id, COMM PP1.5, MAIN PP1.5, 数据通道通
+                                          COMM PP1.5, MAIN PP1.6, 数据通道不通
+16:45 k8a-4g - 主控PP1.7 ts6700.ko - a3fbcd84d83b47c69c89433f13abab56, the older one
+                   PP1.6 ts6700.ko - 276b37671b4a78ae5afaa032fe34758a, the latest one
+                大致如我所料吧
+
+---
+
+20190128
+
+11:17 activation - TODO: try to build a activation server based on baseline 3022
+11:49 activation - server 5b7fcc6e - XXX: 热点有时不出现,出现了有时也连不上
+11:58 activation - 维修激活服务器制作流程:
+                   BP: FA5301-P0-V01-GEN-3017-0412
+                   AP: NuAns-NEO2-V26-01-2018-0522
+                   ~work/pokefi/activation_server/2026/:
+                    boot-permissive-2026.img
+                    multiTuple
+                    libsocketipc.so
+                    sqlite3
+                    ../ActivationMonitor.apk
+16:11 tc - https://unix.stackexchange.com/questions/100785/bucket-size-in-tbf
+16:21 i1 - fastboot 正数第四个点
+16:42 tc -
+           sh /etc/flow_control.sh redirect rmnet_data0 ifb0
+           sh /etc/flow_control.sh set rmnet_data0 16000
+           sh /etc/flow_control.sh set ifb0 16000
+           sh /etc/flow_control.sh unredirect rmnet_data0
+17:43 tc -
+          ->ifb0->tc qdisc queue->rmnet_data0
+          高速率传输时,设备端速率切到16K,发送尚未感知到延时,高速率包快速将tbf limit queue堆满,此时新的请求的响应会排到队末,很久后才响应.
+          TODO: 对策 -
+           * 根据速率调节limit档位 [Done]
+
+---
+
+20190126
+
+10:00 k8a-4g -
+         两个版本主控setup_net.sh相同
+         iptable -S result different in 2 main ctl versions
+         ~/work/k8a-4g/logs pp1.5-main and pp1.6-main
+         mainly bw_costly_rmnet_data0 quota stuff
+11:11 k8a-4g -
+         replaced pp1.6 comm_prox stuff with pp1.5-t
+         got same iptable -S
+         but ping Internet still fucking Unreachable
+         还是分析问题吧,别他妈的对比了
+11:33 k8a-4g -
+         comm ip - 172.110.110.2
+         main ip - 172.110.110.1
+         搞错IP了,From 172.110.110.1: icmp_seq=1 Destination Host Unreachable
+         主控根本就连自己的enc0都没出去
+         检查enc0驱动
+         果然是ts6700.ko改了
+         PP1.5-t到底是个他妈的什么版本?为什么用这个ts6700.ko才可以.服务器提交记录还找不到这一版ts6700.ko
+         还有个他妈的问题,为什么在PP1.6里面用PP1.5-t的ts6700.ko不会自动加载?手动又可以他妈的加载且完全他妈的可以用
+         PP1.5-t的ts6700.ko是这个:
+
+         commit 429d8d2e1a05001b7aafc7a4a333dc12bf620387
+         Author: 熊卫波 <xiongweibo@gosomo.cn>
+         Date:   Sun Oct 9 20:09:28 2016 +0800
+
+             Update ts6700 to 20M
+             
+             Change-Id: I1e5c645ae42e90d45c758c27dd4fa509b900b77d
+
+14:50 k8a-4g - XXX:
+         会不会是通讯板ts6700.ko编的是错的?
+         也可能加密板固件版本不对
+         没有记录,没有文档,不遵循流程,后人就得他妈的去猜.
+         引以为戒
+15:00 k8a-4g -
+         三个板子,硬件软件各种版本排列组合起来能搞死人,能不能整个时间线出来?
+17:25 k8a-4g -
+         PP1.5-t之谜 -
+         - 为什么display id 是PP1.6? 且日期是2017.5.24?
+         - 为什么设置菜单不一样，且我们的rev里搜不到相关定制(如加密板版本号)?
+         - 为什么编译日期是5.24, 编进去的却是Oct 9, 2016的ts6700.ko而非Apr 14, 2017的?
+         PP1.5-2017-0327的行为也和PP1.6类似,唯独这个PP1.5-t特立独行
+
+
+---
+
+20190125
+
+10:10 i2 wifi - 又是这个,工作碎片化严重.又碰到已经碰到过的编译错误,又要花时间去找.一鼓作气搞完!
+11:16 k8a-4g - TODO: 代码释放
+14:27 k8a-4g - 176 /build/srv-build/qcom-msm8916-ebens/LINUX/android/export_all_patch.sh
+               GOSO打tag,提供补丁,所里同步patch编密通版本?相当于两边平行的?
+15:05 i2 wifi - compiled with rtltest, seems WifiController enter ApEnabledState
+          without any action?
+              - 这是配置了<bool name="def_wifi_ap_on">true</bool>的缘故啊
+16:16 i2 wifi - rtl8189es.ko not built in the system
+17:03 k8a-4g - TODO: remove all .git, tag origin repo
+               tag naming convention example:
+               - 8916-goso-ebens-20160506-8916-goso-ebens-20160518.patch
+               - 8916-goso-ebens-20160506
+17:03 activation - store device port state failed, port_mode field兼容错误
+                   TODO: add port_mode compatibility
+17:49 activation - XXX: 维修激活服务器热点没信号,重启后恢复.不稳定??
+18:06 k8a-4g - V01 验过没有??
+               XXX: V01好像有问题,主控板??
+               ping 220.181.57.216 -
+               main, comm
+                v01,  v01 - Unreachable
+            pp1.5-t,  v01 - OK
+              pp1.6,  v01 - Unreachable
+
+              介于 pp1.5-t, pp1.6之间的某个修改导致的!!!
+
+            pp1.5-t-2017-0602 display pp1.6???? sys-k8a.1.f2dea6.20160724.user
+            
+            pp1.5-t -
+                [ro.build.characteristics]: [tablet]
+                [ro.build.date.utc]: [1495596822]
+                [ro.build.date]: [Wed May 24 11:33:42 CST 2017]
+                [ro.build.description]: [k8a-user 4.4.4 sys-k8a.1.f2dea6.20160724.user eng.shelby.20170524.112942 release-keys]
+                [ro.build.display.id.internal]: [PP1.6]
+                [ro.build.display.id]: [PP1.6]
+                [ro.build.host]: [tc2]
+                [ro.build.id]: [sys-k8a.1.f2dea6.20160724.user]
+                [ro.build.product]: [k8a]
+                [ro.build.tags]: [release-keys]
+                [ro.build.type]: [user]
+                [ro.build.user]: [shelby]
+                [ro.build.version.codename]: [REL]
+                [ro.build.version.incremental]: [eng.shelby.20170524.112942]
+                [ro.build.version.release]: [4.4.4]
+                [ro.build.version.sdk]: [19]
+
+            pp1.6 -
+                [ro.build.characteristics]: [tablet]
+                [ro.build.date.utc]: [1502274522]
+                [ro.build.date]: [Wed Aug  9 18:28:42 CST 2017]
+                [ro.build.description]: [k8a-user 4.4.4 KTU84P eng.builder.20170809.182732 release-keys]
+                [ro.build.display.id]: [PP1.6]
+                [ro.build.fingerprint]: [ErenEben/k8a/k8a:4.4.4/KTU84P/eng.builder.20170809.182732:user/release-keys]
+                [ro.build.host]: [gososw]
+                [ro.build.id]: [KTU84P]
+                [ro.build.product]: [k8a]
+                [ro.build.tags]: [release-keys]
+                [ro.build.type]: [user]
+                [ro.build.user]: [builder]
+                [ro.build.version.codename]: [REL]
+                [ro.build.version.incremental]: [eng.builder.20170809.182732]
+                [ro.build.version.release]: [4.4.4]
+                [ro.build.version.sdk]: [19]
+
+            主控版本搞清楚!!!
+
+---
+
+20190124
+
+11:25 k8a-4g - PP1.6, v0.5, 灭屏插已绑定的Ukey, 死机(还有一次是重启), 9025
+              - 单机问题? 绑定问题? 通讯板版本?
+14:24 activation -
+          XXX: 维修,adb shell "multituple -c xxx &" 失败, pc adb 版本兼容问题, 1.0.32
+          XXX: 两台设备数据库没给到测试部
+          XXX: 20180911数据库有两个,不知道哪个是最终版本
+          给测试部数据库涉及数据库和证书压缩包,为何不在脚本里解析证书?这涉及到一个秘钥. 那么,作为一个代替方法,写一个流程化的脚本吧
+15:59 i2 - XXX: 接程控电源,反复重启,死机,memory corruption
+
+---
+
+20190123
+
+10:03 Restart gvfsd:
+      killall gvfsd
+      nautilus -q  # Close all Nautilus windows/instances
+      nautilus
+10:19 k8a-4g - V01 主控和PP1.6是一样的,没问题
+11:50 k8a-4g - TODO: 看BT和Ukey的架构
+14:22 BT - <ref> Specification of the Bluetooth System, v4.2
+      BR/EDR/LE
+       - unlicensed 2.4 GHz ISM band
+      LE Stack -
+      ----------------
+      Host -
+      |  GAP   | GATT
+      |  | SM  | ATT
+      |  |  | L2CAP
+      ----------------
+      Controller -
+            HCI
+            LL
+            PHY
+      ----------------
+
+      L2CAP - Logical Link Control and Adaptation protocol
+      LL - Link Layer protocol
+      LM - Link Manager
+
+      Bluetooth core system - A Host and one or more Controllers.
+      Host - above HCI
+      - Controller - below HCI
+       - Primary Controllers
+        - BR/EDR
+        - LE
+        - BR/EDR & LE
+       - Secondary Controllers
+        - AMP
+
+      - BR/EDR
+       - a piconet is formed with
+        - one Master
+         - provides synchronization reference and hopping pattern
+        - a group of Slaves
+         - synchronized to a master’s clock and frequency hopping pattern
+
+        - use a physical radio channel -
+         - sub-divided into time units known as *slots* (like 802.11 MAC ?)
+          - full duplex transmission - Time-Division Duplex (TDD)
+
+        - physical link - formed within a physical channel
+        - scan channels - non link
+
+        - logical links -
+         - multiplexed onto the physical link
+         - by occupying slots assigned by a scheduling function in the resource manager
+
+        - LMP (Link Manager Protocol)
+          - over logical links
+          - for baseband and phy layers
+        
+        - ACL logical transport
+         -  a default asynchronous connection-oriented used to transport the LMP protocol signaling
+        
+        - <ref> Figure 2.1: Bluetooth core system architecture
+
+      - LE
+        - physical channel 
+         - sub-divided into time units known as *events*
+          - Advertising Events
+          - Connection Events
+         - 40 PHY channels
+          - 3 as advertising channels
+          - 37 as data channels
+        
+        - advertiser & scanner
+        - advertising event
+         - advertiser send Adv packets in one or more Adv Channels 
+          - <ref> Figure 1.3: Advertising Events
+
+        - unidirectional or broadcast communication
+         - just use advertising events
+        - pair-wise bidirectional communication
+         - use data channels, but use advertising events to establish the communication
+        
+        - <ref> Figure 1.4: Connection Events
+
+        - How is a connection established -
+         - in a advertising event
+         - the initiator listens for a connectable adv packet
+         - the initiator makes a connection req when recved the connectable adv packet
+         - the advertiser accepts, the connection event begins
+         - the initiator becomes the master, the advertiser becomes the slave
+         - channel hopping at the start of each conn event
+         - the master is to initiate and to end a conn event
+
+         - hopping pattern is determined by the conn req
+
+        - the hierarchy -
+         - physical channel, physical link, logical transport, logical link, L2CAP channel. 
+         - Link Layer functions, LL protocol
+         - default LE ACL, LL sinaling
+         - L2CAP layer provides a channel based abstraction to applications and services
+         - on top of L2CAP, there are
+          - SMP - use a fixed L2CAP channel
+          - ATT - ditto
+
+        - C - control links - LMP, LL messages
+        - U - L2CAP links - L2CAP PDUs
+
+        - LE reliability
+         - LL - CRC
+         - Broadcast - no ACK
+
+17:16 k8a-4g - 发新闻
+
+--
+
+20190122
+
+10:38 k8a-4g - V0.9 主控没有enc0
+               - 第二次看就有了,不稳定啊这个!
+14:30 i2 - 看IDT P9221 spec. 掉电问题
+20:12 k8a-4g - V01 主控跟PP1.5不一样? 设置可以进去,安全管家里面进不了设置
+
+---
+
+20190121
+
+09:20 k8a-4g - TODO: 早点在183编出新comm_prox的版本,发布,测试 [Done]
+09:54 k8a-4g - Serveral commits in qmss21-8939 have no change-id.
+11:43 k8a-4g - TODO: 灭屏模式切换正常行为确认 [Done]
+14:31 k8a-4g - TODO: device/qcom/K8A没提交?? [Done]
+          当时只关注了ebens-51-repos-all (branch msm8916-211145-51)的仓库
+15:16 k8a-4g - 临时措施的记录
+17:37 k8a-4g - device/qcom/K8A -
+          git log e073ab7
+          git log f44e35e
+          both have ancestor 25554df, but those 2 25554df have different ancestors !! WTF ??!!
+17:52 k8a-4g - V0.9 comm_prox prebuilts没编进去? V0.5是从源码编进去的?
+20:21 k8a-4g - device/qcom/K8A/Android.mk -
+          This empty Android.mk file exists to prevent the build system from automatically including any other Android.mk files under this directory.
+
+---
+
+20190118
+
+11:26 k8a-4g - 183 compilation -
+          make: *** No rule to make target `out/target/common/obj/JAVA_LIBRARIES/mms-common_intermediates/classes.jar', needed by `out/target/common/docs/api-stubs-timestamp'.  Stop.
+          之前碰到过的编译错误,没有记录下来
+14:34 k8a-4g - PROXY_ANDROID=true - 主控板
+14:48 k8a-4g - V0.1 built comm_prox revision 7ec03cb. How came this?
+               - It was wrong!
+               Will checkout remotes/origin/master in next building.
+18:04 k8a-4g - TODO: update comm_prox bins [Done]
+
+---
+
+20190117
+
+10:03 i2 - erase recovery, then flash. In recovery adb, pull init, changes took effect !!
+10:07 i2 - Got ya!!! -
+           ro.build.fingerprint is loaded from default.prop in recovery.
+           那么先前的那次是单独编译recovery导致的差异?
+           后来本地编的recovery.img flash到了不同的地方?没有覆盖原来的?运行时load的还是原来的?
+10:29 i2 - 量产日期不明
+      i2 - TODO: wifi补丁整理验证
+      k8a-4g - 写号方案
+      k8a-4g - TODO: 代码提交, manifests.xml [Done]
+10:52 k8a-4g - 通讯板最后以engirneering mode运行,工厂写号已做好
+11:32 git remote add zzpc zz@192.168.180.54:/home/zz/newDisk2/qmss21-8939/LINUX/android/.repo/manifests/.git
+14:24 花两个小时审审代码吧 wireless charging
+14:57 repo init - .repo/manifests/.git follow upstream first
+
+---
+
+20190116
+
+11:08 i2 - test-V4全升包,接着test-V4-test-V5增量包,这个路径没错
+11:14 i2 - 版本名过长,setprop失败,修改vsim_upgrade.sh
+16:33 i2 - vsim_upgrade.sh - change_m2_prefer_netwrokmode 9,1
+16:40 android property -
+      normal properties are in ram (of init process property_service) -
+        setprop example.prop.a bbb
+        reboot
+        getprop example.prop.a
+        null
+      and so are ro.* properties
+      non persist properties -
+        __system_property_add() or __system_property_update()
+      persist properties -
+        write_persistent_property()
+      build properties -
+        load_properties_from_file(PROP_PATH_SYSTEM_BUILD, NULL);
+17:23 echo -n "--update_package=/sdcard/ota_update.zip\n--just_exit" > /cache/recovery/command
+17:25 i2 - adb shell is available in Android 5.1 !! /system partition !
+           我记得Android 7里面是没有的,难道架构变了? -
+         - Nope! 只是进recovery的话没有mount system, 升级的话会mount
+         要知道recovery menu里可是有mount system的呀!
+20:04 i2 - recovery.img 里的init log改了,flash recovery.img,recovery 运行log没改,神奇
+           In recovery adb, pull init, not changed, wired
+           But getprop ro.build.fingerprint got ro.build.fingerprint=NUU/Konnect_i2/Konnect_i2:5.1.1/LMY47V/builder11081133:userdebug/release-keys which is correct
+           So where the fuck is recovery ramdisk loaded ??
+
+---
+
+20190115
+
+10:42 /firmware/image modem 
+10:54 i2 - TODO: 做diff包,此前用最新版本测,set +x
+14:51 i2 - Can't install this package (Mon Dec 10 11:27:58 CST 2018) over newer build (Sat Dec 15 12:21:39 CST 2018).
+        降级失败
+14:59 i2 - make ota diff package -
+      ./build/tools/releasetools/ota_from_target_files -x pagesize=4096 -k ./build/target/product/security/releasekey -v -i ~/newDisk/images/konnect/NUU-Konnect_i2-test-V3-2018-1108/image/android/unsigned-ota/Konnect_i2-target_files-eng.builder.zip ~/newDisk/images/konnect/NUU-Konnect_i2-test-V5-2018-1215/image/android/unsigned-ota/Konnect_i2-target_files-eng.builder.zip ~/newDisk/images/konnect/KONNECT_I2-test-V3-test-V5-diff.zip
+      - Must in android building environment and must in android source top dir.
+16:02 i2 - 仅提供vsim041和rom目录给NUU, vsim_upgrade_info.php已废弃?
+17:48 i2 - getprop in normal system:
+         [ro.build.fingerprint]: [NUU/Konnect_i2/Konnect_i2:5.1.1/LMY47V/builder11081133:userdebug/release-keys]
+         getprop in recovery:
+         ro.build.fingerprint=NUU/Konnect_i2/Konnect_i2:5.1.1/LMY47V/builder11081137:userdebug/release-keys
+         How does this happen???
+21:31 i2 - My fault!
+           proxy_update - 先建一个空的/data/update.zip,再往里面写接收的
+           如果第二次执行呢?会不会没清除就往里写?(幂等性
+           builder11081133 means 11.08 11:33
+      所以,不要焦躁,我是会犯错的
+21:42 i2 - 上面的问题还在,TODO: build fingerprint的基础知识
+
+---
+
+20190114
+
+16:00 neo2 - exfat selinux issue - untrusted_app_25 create folder failed
+             正常来说untrusted app创建目录是通过content provider, 不会有直接本进程创建的
+16:07 i2 - TODO: 做vsim升级包
+      192.168.0.204
+      /sz1link/boss/crm/fota/release/NUU/KONNECT_I2
+20:29 i2 - vsimd启动时 HTTP request -
+        http://www.mangaclub.me:8082/release/POKEFI/H1/vsim_upgrade_info.php?svr=101&id=78a8c4
+        get vsim_upgrade.sh来升级vsimd升级包
+
+---
+
+20190112
+
+11:36 k8a-4g - 操作流程,产品手册,这个一开始不就应该有吗?!
+14:01 activation - TODO: 客户端wifi enable前置条件 - 设备信息正常,设备没被激活过,前置工位条件满足 - 加到log里面 - log 过滤条件统一. 总结,同样的问题坚决不要浪费两次时间
+15:09 k8a-4g - 读功耗联动代码.
+      目的 - 一侧唤醒,另一侧也唤醒. 一侧有数据,另一侧唤醒,关键是另一侧唤醒后读数据还不会有丢数据,怎么做呢,start_tx前wake_peer并set hw_stopped=1,确认peer唤醒(peer_pm_state)之后 set hw_stopped=0, 再start_tx.
+      逻辑上原wakeup_isr(主要处理inject_rx什么的)的中断源由RX GPIO变为了我们的WAKEUP_IN GPIO. Anyway, 我们好像没用这玩意
+15:50 k8a-4g - 会议模式和飞行模式都是密态待机,加密板断电,前者有RF
+16:23 k8a-4g - 切到飞行模式后WiFi还在. 如果是主控的问题应该以前就发现了吧,这么容易测出来. 切换的时候某个过程(关WiFi?)失败了? 模式切换这一套怎么走的? 命令?
+      - 走的ProxyService
+      - 下次再复现时让liu跟一下这个问题
+
+---
+
+20190111
+
+17:11 activation - 维修
+          .start_activation.sh脚本包名更新
+          .热点名错了 - 操作人员如何快速定位?
+          .C/S协议兼容问题
+          .libsocketipc.so兼容问题 - 激活结果显示问题
+      零散的模块 - multiTuple server, multiTuple client, libsocketipc.so, Activator.apk, libsiminfo_storage & libcertkey_storage,certkey_ki_devinfo.db
+      零散的版本 - server的版本, client的版本, libsocketipc.so的版本, Activator.apk的版本, client存储的版本, 数据库结构的版本
+      零散的服务器分布 - 工厂激活,维修激活,按批次分?按项目分?服务器版本,热点名
+      零散的数据库 - 各个批次,分别存在于多个工厂激活服务器,维修激活服务器,割接服务器,数据难以管理
+      明明看似简单的工作,引申出了很多隐式的工作量
+20:40 k8a-4g - 功耗联动:
+      __uart_start() => wake_peer() => sub_pms_wake_peer =>
+      gpio_set_value( wake_out ) >-+
+      +----------------------------+
+      +-> sub_pms_isr() => 
+
+---
+
+20190110
+
+14:56 activation - FIXME:
+         现在无法兼容的组合:new server & old client. 维修的话可以要求升级client, 但割接的时候会不会成为一个坑? 假如割接server也基于最新的源码编译呢?
+15:51 activation - 每次看框架部分都要想,一眼看不明白,反直觉,烂代码无疑
+         1. client throws() a tuple_t to server (thus client decides the version)
+         2. server recv tuple_t in postSkt()
+         -- 放弃把tuple_t.method字段改成version, 不碰这坨鸟东西.
+            把devhandshake.hw_id尾部拿2 byte出来作version字段
+            天无绝人之路. 多个保留字段总是好的
+20:37 activation - TODO: server版本重编, DBPath错误
+20:56 activation - TODO: remember to update client multiTuple binary
+
+---
+
+20190109
+
+09:42 i2 - 编出的版本热点起不来
+09:42 k8a-4g - 今天的任务:提交补丁
+10:03 k8a-4g - 这4个仓库肯定是不用提交:
+       ./frameworks/native
+       ./frameworks/ex
+       ./frameworks/base
+       ./frameworks/av
+10:33 k8a-4g -
+       . 113508公共补丁不提交,仅提交有msm8916-113508-ebens分支的仓库 
+       . 关注board-id和comm_prox的判断,主控和通讯板
+         - 有重复,comm_prox要加宏控制
+10:57 k8a-4g - build仓库提错 - git push caf HEAD:msm8939-211145-wst
+11:12 k8a-4g - git remote add tmp git@192.168.180.185:/code/gb/qct/platform/build.git
+15:22 activation - old client & new server的兼容是个死局(client option字段设计问题)
+                   现象为:
+                   E TupleVirtKi: int TupleVirtKi::handleServer(int)[14]: recv device info error
+                   但如果维修设备统一升级到新版本就好说
+16:28 activation - 又双叒叕是操作问题!!下次有问题先让她把操作发给我看看
+16:36 activation - 两个问题:
+                   UI版本兼容
+                   数据库版本兼容
+
+                   一下子出来几个问题. TODO:
+                   - 加verbose log
+                   - 加数据库兼容
+                   - 流程: client, server, APP 状态都要是最新. 协议兼容没法做了
+
+---
+
+20190108
+
+15:30 k8a-4g - system/core - 出现了重复的提交,连change-id都重复.
+       How is it Possible? - 主要是有的几个提交互相抵消,来回滚
+       但是是怎么出现的呢?哪里操作出错了?
+       现在解决的话就是把重复的干掉,先把重复的拎出来.
+18:15 k8a-4g - 已完成提交:
+       system/core
+       device/qcom/common
+
+---
+
+20190107
+
+10:22 activation - TODO: 产能优化,工厂抓log
+20:26 好久没读代码了,这段时间干的都是些什么活
+20:46 空闲时就写总结,从wifi repeater,以调试时间顺序为线索,碰到知识点就展开
+
+---
+
+20190105
+
+15:37 k8a-4g - setup_net.sh - rmnet0 => rmnet_data0
+15:45 k8a-4g - 打通4G和在系统增加4G选项是并行任务,当初可以安排liu搞的.没有提前把任务整理出来
+15:50 k8a-4g - TODO - 新版本:
+               主控 - 新增4G选项
+                    . setprop persist.radio.network_feature 7
+                    . packages/services/Telephony/com/android/phone/Constants.java
+               通讯 - ts6700.ko, setup_net.sh, netmgrd
+17:26 k8a-4g - android/device/qcom/K8A仓库有两个补丁,建分支划不来,想办法做兼容
+
+---
+
+20190104
+
+10:43 i2 量产日期?
+11:28 k8a-4g - check list:
+               .v0.1
+               .K8A/boot.img
+               .ts6700.ko
+               .update_proxy_stuff.sh
+11:38 k8a-4g - ts6700: Unknown parameter `tx_gpio_enable'
+      看起来是新版本里的,说不定还是要等那边编好
+      推测 netpass=1 = 明通
+11:46 k8a-4g - wifi模式切换成功,没有扫描列表.怎么还倒退了??
+11:54 k8a-4g - 原因找到,wlan.ko模块需重编
+16:13 k8a-4g - msm8974 side - WifiStateMachine.java - setupNet("wifi_connect")
+               => setup_net.sh - wifi_connect() => 
+               pbox setprop ctl.start setup_net:wifi_connect =>
+msm8916 side - setup_net.sh - wifi_connect()
+17:06 k8a-4g - msm8974 side - wifi_connect()没调?
+17:25 k8a-4g - 干嘛不用sshd要用teamviwer???脑子抽了
+             - 机器在内网
+17:51 k8a-4g - msm8974 side - wifi_connect()没调?
+             -> WifiStateMachine(  895): non private net don't need setupNet
+18:31 k8a-4g - 新ts6700.ko. 数据通道通了
+19:40 k8a-4g - 待迁补丁 - msm8926 vendor/qcom -
+               30d7711ed27f87e18d39922b93ce1229a489c614
+
+---
+
+20190103
+
+11:11 i2 wifi - frameworks/opt/net/wifi/service/Android.mk halutil单独编就是会有问题,全编就没问题
+
+---
+
+20190102
+
+14:31 TODO: i2 wifi 补丁适配收尾,验证其他项目的编译
+15:00 i2 wifi - BOARD_HAS_QCOM_WLAN到底要不要?
+      影响: WIFI_DRIVER_FW_PATH_AP
+            netd: QsoftapCmd.cpp, QSAP_WLAN
+      如果不要,HAS_RTL_WIFI时要定义WPA_SUPPLICANT_VERSION
+17:07 i2 wifi - rm BOARD_HAS_QCOM_WLAN,暂且放弃,去掉后编译问题太多,原生那一套太多平台无关的东西和平台相关的东西混在一起
+17:09 以前在这个问题上花过时间,还有记录,damn it!
+17:34 i2 wifi - 版本中未集成rtl的iwpriv和libiw.so, 调试时需单独推入
+
+---
+
+20181229
+
+10:25 i2 activation, wifi - 自动起热点,先改settings试试
+14:25 ABI 兼容性导致的crash有时会让人摸不着头脑
+14:33 SettingsProvider
+15:43 SettingsProvider/res/values/defaults.xml def_wifi_ap_on
+      修改后format userdata才生效(why?加载config的代码只有第一次开机会跑?
+
+---
+
+20181228
+
+10:45 i2 activation - failed to export device '251e3890' to file
+      已经搞过的为什么会出现新的问题?
+      流程!!!!!!!!!!!!!!
+      出activation server的完整版本,不然后面会被搞死的
+16:50 k8a-4g - 发配置给左江重编module
+
+---
+
+20181227
+
+09:59 activation - 维修multiTuple用老版本(client option字段设计问题). 除非client升级新版本
+10:55 维修activation兼容,成功判断,数据库字段
+      各模块版本兼容,稀烂 - multiTuple server / client, ActivationMonitor, storage
+16:00 k8a-4g - module兼容
+      ts6700: disagrees about version of symbol module_layout
+      - 修改config - 增加DEBUG_* - 死机 - WARN语句dereference NULL ?
+20:35 k8a-4g - 死机进程ptt_socket_app, qcom-system-dae. 都是高通的?
+21:00 k8a-4g - Revert过的补丁的最终状态,专门看一下
+21:25 k8a-4g - 死机解决,兼容问题依旧
+
+---
+
+20181226
+
+11:15 TODO: activation server updated, then qurier should be updated
+11:48 TODO: i2 激活,wifi适配要改的不多,就是出版本麻烦
+14:12 k8a - enc0 - ts6700.ko
+15:20 i2 - 没端口
+17:08 activation - TMD几件事都是激活相关的,整维修激活服务器,整i2激活服务器,整S3激活数据库,整i2激活wifi问题
+17:51 i2 activation - 热点地址跟server冲突
+21:14 activation - 维修激活问题
+
+---
+
+20181225
+
+10:00 TODO: read comm_prox source code
+16:52 TODO: write a script to manage binary program releasing
+
+---
+
+20181224
+
+解决KI卡读取失败问题,obfuscate lib BUG
+
+---
+
+20181221
+
+11:26 TODO: fread(buffer,1,N,fin) vs fread(buffer,N,1,fin)
+16:20 activation - 用有效的设备的ki卡激活无效ki卡设备,ki卡有效.确认是写入库的问题
+17:45 activation - 记得把server恢复原样,conf,db
+
+---
+
+20181220
+
+14:06 k8a-4g - 113508和113508-ebens的差异部分,迁到基于211145-wst的211145-wst-51
+16:38 activation - 15/8000 设备vsim test判别有问题
+      TODO: 解出IMSI号对比判别
+17:57 activation - 存储有问题?
+
+---
+
+20181219
+
+10:34 k8a-4g - cma: Found modem_adsp_region@0, memory base 0x86800000, size 78 MiB, limit 0xffffffff
+      这个不是k8a DTS里面配的,说明DTS匹配错了. rm fa16*后启动成功
+17:36 k8a-4g - 折腾串口,转接板,通了
+
+---
+
+20181218
+
+10:01 k8a-4g - export PATH=`cat env_PATH`; source build/envsetup.sh
+10:15 k8a-4g - jarjar.jar在prebuilts/misc里,之前拷贝错了
+10:33 k8a-4g - msm8939-211145-wst项目ll .repo/manifest.xml -> manifests/msm8916-113508-ebens.xml ??
+      冷静,这应该是之前为了迁补丁进行的旧基线同步,此前应该进行过msm8916-211145-k8a.xml的同步
+11:13 k8a-4g - vendor/qcom patchs done (maybe)
+      Don't use "git reset --hard" when you can use "git cherry-pick --abort" instead !
+15:40 k8a-4g - 严重疏漏:没有goso补丁的仓库都没有切到msm8939-211145-wst分支!
+      这是否意味着前期步骤规划有问题?
+      for r in `cat myproject-msm8916-113508-ebens.list`; do pushd $r > /dev/null; if ! git branch| grep test ; then echo $r; git checkout caf/msm8939-211145-wst; fi; popd > /dev/null; done
+16:01 k8a-4g - 编译通过!开测
+16:35 k8a-4g - 刷boot,system,userdata,其余全是wst软件,启动没有9025,一段时间后9025端口闪,电流从0.29掉到0.1,QHSUSB BULK volume闪烁,像是死机
+17:44 k8a-4g - volume up接GND进fastboot.把线头挂地的夹子上
+18:10 k8a-4g - enable kernel serial console:
+      . boot cmdline - console=ttyHSL0,115200,n8
+      . kernel config - CONFIG_SERIAL_MSM_HSL_CONSOLE=y
+21:30 k8a-4g - pil-q6v5-mss 4080000.qcom,mss: modem: Failed to allocate relocatable region of size 5500000
+
+---
+
+20181217
+
+14:43 k8a-4g - device/qcom/common
+               done
+15:39 k8a-4g - bootable/bootloader/lk
+               bootable/recovery
+               build
+               external/bluetooth/bluedroid
+               hardware/libhardware_legacy
+               hardware/qcom/bt
+               hardware/ril
+               done
+16:08 k8a-4g - system/core
+               done
+17:56 k8a-4g - 编译过程显示合代码有问题,有时间的话从补丁里面解决
+19:18 k8a-4g - kernel: revert ab0d0409d temply
+20:18 k8a-4g - 两个补丁改变顺序cherry-pick带来的错误
+21:04 k8a-4g - make: *** No rule to make target `out/host/linux-x86/framework/jarjar.jar', needed by `out/target/common/obj/JAVA_LIBRARIES/conscrypt_intermediates/classes-jarjar.jar'.  Stop.
+               裁剪不到位?
+
+---
+
+20181215
+
+15:51 k8a-4g - sbl1可能不能直接用wst的,至少还有offline alert相关的补丁
+
+---
+
+20181214
+
+11:49 git cherry-pick 还能从一个路径自动迁到另一个?这么神奇的吗?(跟commit里的rename判定有关?)
+      NOTE: 因此自动迁过来的补丁是值得怀疑的,git diff 7b15d53 HEAD里k8awst的部分可能需要退掉
+16:54 k8a-4g - kernel patches 告一段落
+17:13 device/qcom/K8A 也是块硬骨头,明天再说
+      lk下面unsolved多数是LCD相关的patch,先不管
+      build下面...要不也先不管吧,先着眼产品部分,也就是虚拟机裁剪和comm_proxy等部分
+
+---
+
+20181213
+
+10:30 i2 诡异的编译错误- 
+cp: cannot stat ‘hardware/ril/rild/Kbuild’: No such file or directory
+make: *** [hardware_ril_rild] Error 1
+10:45 上述错误make hardware_ril_rild可复现之,那么hardware_ril_rild是在哪里定义的呢?
+20:05 scan_results - cfg80211_inform_bss
+21:08 make vendor_qcom_opensource_wlan_prima可以编wlan.ko.
+      但make hardware_ril_rild这个目标到底怎么来的??
+21:13 What the fuck ? - 
+including ./hardware/ril/rild/Android.mk ...
+including ./kernel/drivers/gosodrv/rtl8192cd_92es/Android.mk ...
+device/qcom/common/dlkm/AndroidKernelModule.mk:1: LOCAL_PATH=hardware/ril/rild
+
+21:24 LOCAL_PATH := $(call my-dir)
+      - 不要小看这一句的作用,这可能作为两个Android.mk的边界!
+      一天过去了,damn it.
+
+---
+
+20181212
+
+10:00 i2 wifi BOARD_HAS_QCOM_WLAN到底要不要?好像并非全部是平台相关的东西
+10:40 common/msm8909/BoardConfigVendor.mk, BOARD_HAS_QCOM_WLAN会影响的地方 - WPA_SUPPLICANT_VERSION, libhardware_legacy wifi, netd
+15:00 board id : wst <8 0>, k8a <8 6>, k8a_p1 <8, 54>
+15:30 k8a - msm8916-goso-k8awst.dtb.dts.tmp msm8916-goso-k8a_p1.dtb.dts.tmp
+17:37 TODO: la0916出版本,产线几个问题,包括WiFi fasttest
+
+---
+
+20181211
+
+11:20 TODO: i2 wifi iwlist level=0 ?
+17:00 i2 wifi 补丁初步整理完成
+17:30 k8a-4g - 先前的错误操作:cherrypickall msm8916-113508 msm8939-211145-wst , 问题在于那些revision不是msm8916-113508的仓库.好在kernel里面msm8916-113508多出的补丁不多
+
+---
+
+20181210
+
+10:43 TODO: 先把i2 wifi搞完合了,夜长梦多
+14:04 i2 wifi iwlist CONFIG_RTL_COMAPI_WLTOOLS=y ?
+16:45 new <java-symbol> declared in symbols.xml should be defined in configs.xml or there comes the error - Symbol 'xxx'declared with <java-symbol> not defined
+
+---
+
+20181207
+
+10:30 项目迁移注意project repo下board相关的配置!
+14:50
+(02:51:01 PM) hamming:
+下面请作为了解：
+persist.radio.network_feature=5 （LTE/WCDMA/GSM）
+PWF39种子通道使用USSD走的CS业务，所以不能开启4G（4G只能提供PS域业务），如果PWF39开启4G会导致每次发送USSD时从4G回落到3G/2G，导致USSD发送时延更大，鉴权失败的概率会加大。所以
+PWF ro.telephony.default_network 1,3，
+I2 ro.telephony.default_network 9,1
+(02:51:35 PM) hamming:
+9对应：LTE/WCDMA/GSM   3: WCDMA/GSM  1:GSM only
+
+21:42 sbl1_main_ctl CDT pbl
+
+---
+
+20181206
+
+看LA0916 charging相关
+
+---
+
+20181205
+
+11:00 kernel第一遍冲突补丁cherry-pick完成.第一步应该是迁移项目相关部分,包括project repo和kernel配置部分
+11:20 TODO: LA0916出试产版本
+11:40 start_activation.sh更新,参数合法性判断.论防呆的重要性
+19:32 k8a - kernel 还剩6个补丁
+
+---
+
+20181204
+
+11:20 msm8916-113508-ebens.xml repo synced
+16:20 k8a - cherrypickall msm8916-113508 msm8939-211145-wst done, except many unresolved conflicts
+16:35 尽量留有痕迹,可回溯,不用单独记录
+16:38 别忘了还有revision不是msm8916-113508的commits!!
+16:55 unresolved_commits_without_garbage done
+
+---
+
+20181203
+
+11:20 rmnet_data0已经up的情况下,up wlan0,在一段时间里,rmnet_data0仍然up,
+      ip route show的结果中,rmnet_data0在wlan0上面,但此时ping外网,监测
+      /proc/net/dev,会发现traffic走的确实是wlan0.
+      ip route show table 0 | grep default的结果,两个default开头的,wlan0 在上面,
+      不知道能不能说明什么.
+      对linux routing table的了解还不够. (RPDB?)
+19:12 k8a - msm8916-211145-k8a.xml repo synced
+
+---
+
+20181201
+
+15:11 k8a - system/core 1519e24c f8af2fc
+16:19 i2 wifi test -
+      test-v3 boot.img
+      zz-test system.img
+      hostapd
+      wifi-service.jar
+      hostapd_default.conf
+      rtl8189es.ko
+      Settings.apk
+      libhardware_legacy.so
+17:02 i2 wifi - 上行routing policy还要改
+
+---
+
+20181130
+
+10:20 k8a 4G failure due to wrong QCN
+11:40 特殊场景充不进电
+16:30 i2 wifi connect crash at log() when StateMachine.mDbg = true - fixed
+16:45 DO use .equals() for string comparation!!
+      充不进电是charge_manage daemon的问题
+17:04 i2 wifi connected !!!
+
+---
+
+20181129
+
+11:20 50 certkeys for PWF39 activation
+14:00 检查k8a软件,刷软件
+14:50 k8a CA7403-P1-GENNS-211145-V02-171104最小系统有问题?死机
+14:50 TupleManager::probeServerAddr(char*): got server addr: 192.168.43.208
+      WTF ???
+      进程重启后正常，握草 - 原因不明
+15:00 有KI报没KI! - 改配置文件没重启
+15:14 激活效率,产能优化
+15:45 k8a - missed partition hyp! Spent 1 hour on it!
+16:20 start working on i2 wifi framework crashing issue
+18:00 TODO: 还是把WifiStateMachine好好研究一遍吧
+20:00 激活服数据库批次管理,稀烂
+
+---
+
+20181128
+
+10:30 k8a-4g - copy manifests from msm8916-211145-wst.xml, rebuild
+11:40 i2 wifi - zz-test system.img, test-v3 boot.img
+15:08 i2 test-v3 忘更新modem images,下次出版本前记得提交
+15:48 k8a-4g - same comm-board hw as wst
+16:04 ported script buildandroid-K8A-4G.sh
+16:19 k8a-4g - build error generating ota
+Traceback (most recent call last):
+  File "./build/tools/releasetools/ota_from_target_files", line 1074, in <module>
+    main(sys.argv[1:])
+  File "./build/tools/releasetools/ota_from_target_files", line 1059, in main
+    WriteIncrementalOTAPackage(input_zip, source_zip, output_zip, OPTIONS.fota)
+  File "./build/tools/releasetools/ota_from_target_files", line 955, in WriteIncrementalOTAPackage
+    script.AddToZip(target_zip, output_zip)
+TypeError: AddToZip() takes at least 4 arguments (3 given)
+
+16:44 i2 wifi - hostapd Z, conf err
+16:49 i2 wifi - Got scan list in concurrency!
+16:55 i2 wifi - connecting fail. UI crash
+20:44 i2 wifi - err in ~/work/wifi_repeater/logs/new-framework/2.log -
+ com.android.server.connectivity.NetworkAgentInfo.name()' on a null object reference
+
+ concurrency issue? (because there's 2 WifiStateMachine s)
+ note the WifiWatchdogStateMachine log
+
+---
+
+20181127
+
+15:57 设备865832022490866,16日维修并在割接服务器擦除,测试误走维修激活流程,流程没定义好.找不到种子卡.重启远程激活未启动,原因不明
+16:19 激活故障排查方法,log方面可能要完善
+ 目前已知的一些原因:
+ .不识卡,client读IMSI时卡住
+ .libvendorconn.so问题,server直接卡住
+ .维修-start脚本参数给错,db not found
+21:04 k8a-4g - 9025 but adb unavailable
+      i2 wifi - STA failed with log
+
+---
+
+20181126
+
+11:16 i2 wifi - refer to QcApStaEnabledState in Android O
+17:22 维修激活服务器给的boot.img不对,不应启动actvtn_svr.重刷V26-01 boot.img开不了机,verity?
+20:49 k8a: serveral repos not available. javac: target release 1.5 conflicts with default source release 1.7.
+      k8a: export PATH=`cat PATH`
+
+---
+
+20181124
+
+18:00 激活服务器libvendorconn.so问题,重启
+
+---
+
+20181123
+
+11:29 Activator数量统计,cen建议加一个复位数据按钮,这样就不用纠结如何处理批次了,只需无脑累加.不错的建议
+14:31 激活服务器准备checklist: multiTuple & libsocketipc版本,配置文件
+14:40 i2 wifi framework, plan: signle WifiController, double WifiStateMachine
+14:45 测Activator KI格式.error code -2025194239 when sucess?
+15:27 i2 wifi framework, CMD_DEVICE_IDLE, 注意修改对功耗的影响
+16:13 Android设计上既没有考虑wifi repeater产品,也没有考虑no screen的产品(这个影响功耗控制策略,好在i2是有屏的),我们自己也没有从产品角度来规划这个差异性
+
+---
+
+20181122
+
+10:25 激活成功，显示失败
+ E TupleVirtKi: int TupleVirtKi::handleServer(int)[12]: client failed to switch port mode, need manual fix
+ D SERVER  : read result(0) fail,waiting client connect. Error(Success)
+10:40 i2 wifi framework. wifi-service.jar, framework.jar, Settings.apk, libhardware_legacy.so
+10:50 Android StateMachine 为Hierarchical State Machine, 注意其行为. addState()定义的就是层次关系
+16:21 i2 wifi framework - 要不搞2个WifiStateMachine?
+17:57 激活设备110bdce7
+18:50 一个小时过去了.本次生产的板子,激活过,换了sn,由于激活程序和DB结构的版本过渡,花了很久来处理这台
+
+---
+
+20181121
+
+10:58 TODO: 输出一个激活测试Tips
+11:27 TODO: LA0916功耗
+14:50 TODO: 完成activation error code扩展
+15:16 测试，激活成功，未擦除，WiFi未连接
+15:58 activation error code完成，待对接
+16:05 讨论Activation多项目方案
+
+---
+
+20181120
+
+编译multiTuple-server
+在必要的仓库提交activation wifi script
+10:54 验证单通道激活，设备信息字段手动赋值
+10:59 i2 activator binary and conf updated
+11:04 测试设备连到PWF39的激活服务器,upexpected.测试设备存储m2证书失败。改了SSID以后他妈的维修怎么办？？维修一个项目手动改SSID？
+11:29 导出4台设备，他妈的3台是10.17的，还得单独去找
+11:36 单通道测试设备他妈的激活完成
+11:50 SSID问题，设备端4个仓库提交完毕
+14:07 Activation改善思考，多项目扩展，APP和DB中定义激活项目（brand, model, configurations)
+14:13 TODO 驱动测试i1生产激活流程；Activator启停接口
+15:40 study on Java I/O stream
+16:45 Java try-with-resource & AutoCloseable 解决异常丢失
+16:54 TODO activation error code
+19:55 activation报错不直观，基本的排错都必须依靠代码，设计问题
+
+---
+
+20181119
+
+Plan: 激活APP非KI卡情形测试 - 生成、激活、导出、解绑、证书验证
+一上午晨会
+下午开始处理激活SSID问题
+15:25 激活SSID功能完成，待测
+16:00 generate 100 certs 20181119-1-cert.pem ~ 20181119-100-cert.pem, for testing
+16:04 找到丢失的维修激活服务器，竟然就是i1产线用的那台！搞什么鬼？？
+16:20 测试ActivationMonitor.apk，功能问题，ANR
+16:38 TODO: 激活APP配置与启停接口
+17:13 APP exported实现有问题，finally block Exception overwrite
+17:13 activator配置文件没改，测试设备拿到的证书不对.导入新的ActivationMonitor.apk的同时务必更新激活服务相关的东西，在启停功能做好之前
+17:41 echo "$var" (mind the *quote*) if there is newline in var
+18:06 activation failed - state NOT NULL - update multiTuple
+18:14 build multiTuple on 183 server 7.1 - script
+
+---
+
+20181117
+
+并行激活工位，不同项目使用不同SSID
+激活APP讨论
+14:30 激活APP siminfo加密格式错误，cipher定义不明，写例子
+追溯多出的一条KI卡
+多出KI卡顺延到下次，风险:重复使用
+15:10 查出多出的一条KI - 454030242100808
+16:00 加密格式解决，设备vsim check失败，版本问题or PB格式问题？note vsim check种子卡默认值
+16:45 PB格式问题
+16:45 维修with_ki配置文件错误？？没有颁发ki？？
+16:54
+sn: 865832022264402,  deviceId :e8f562b,   certificate:   Sunspeedy-S3-20180425-109-cert.pem
+sn: 865832022490866,  deviceId :206d363, certificate:   Sunspeedy-S3-20180504-23-cert.pem
+从证书名看是割接设备，但后台激活DB里全找不到。用新证书算了
+17:00 维修设备激活，用新证书。激活失败，没读号。给测试讲解一些排查方法:
+ ps | grep <process name>
+ logcat | grep <pid>
+ getprop | grep <service name>
+ netcfg
+ logcat | grep -i <keyword>
+ 仅靠这些应该不一定能理解/记忆。学习意愿是有的。耐心和方法
+i2 wifi无进展，没时间
+激活，不同SSID，未完成. connect_to_activator_hotspot.sh
+
+---
+
+20181116
+
+计划重新实现i2 wifi concurrent framework
+
+整一台维修激活服务器
+激活服务器APP生成数据库增加exported字段
+解绑请求，网络问题，域名停用，换配置文件。擦除失败，配置文件错了，更新。擦除成功
+割接维修，已割接过，维修换板。增加割接维修流程。拆机开端口，从上数第3个点。重启割接失败
+查询设备有没有推回来，一台，导出数据包
+16:00 i2 wifi concurrent work
+16:50 pwf39 4k入库
+17:00 4k入库未处理完，又来一台维修的，sn 86开头，但不是割接设备
+17:13 4k导包没证书，修。351502100645720激活到i1的激活服务器上了
+
+---
+20181115
+
+记录琐事，发现目前工作存在的问题，研究效率改善的方法
+
+解绑产线两台维修机，产线反馈未见激活成功
+
+---
+certkey_ki_devinfo-20181102.db
+Pokefi-PWF39-20181102-1-cert.pem => NUU-i1-20181102-1-certificate.pem
+---
+PWF39产线reboot LED不亮问题排查
+---
+20181109
+---
+
+Try to figure out who is calling a method ? add this in the method -
+Log.d(TAG, Log.getStackTraceString(new Exception()));
+
+---
+8909 build python import bz2 failure, export PATH=`cat env_PATH`
+---
+20181015
+---
+
+协议格式、存储格式，兼容性搞死人
+协议和存储格式设计中加一个version字段，会有用处的
+
+---
+
+即便是测试也要用完整的测试版本，尤其改动部分较多时，拼拼凑凑会下地狱的
+
+---
+
+command tmux attach-session -t <session-num>
+
+---
+
+流程化，相关环节一次想到位，不用每次都去想
+
+Power Management
+
+http://www.wowotech.net/pm_subsystem/autosleep.html
+
+---
+
+Prepare activation server - ~/work/pokefi/activation_server/prepare.sh
+
+---
+~/work/wifi_repeater/log.txt
+---
+
+Bash iterate items with white spaces
+
+find . -iname "foo*" | while read f
+do
+    # ... loop body
+done
+
+---
+
+WiFi EAPOL 4-way handshake
+
+See ~/work/wifi_repeater/logs/auth_fail/auth_succ.cap
+
+In which layer are EAPOL frames generated ?
+
+RSN Capabilities - Management Frame Protection Capable
+
+If Management Frame Protection is required on AP but STA doesn't support it, there will be a auth issue. [??]
+
+---
+2018.8.1
+---
+adb shell date -s `date +"%Y%m%d.%H%M%S"`
+---
+
+kernel/drivers/soc/qcom/watchdog_v2.c - Bark if CPU starving.
+
+---
+
+python requests, cookies
+
+---
+
+Kernel config header file: include/generated/autoconf.h
+
+---
+
+To disable "error, forbidden warning" : option -w
+
+---
+
+C volatile
+
+Pointer to a volatile variable (very commonly used):
+volatile uint8_t * p_reg;
+
+Volatile pointer to a non-volatile varialble (rarely used):
+uint8_t * volatile p_x;
+
+volatile VS Memory Barrier
+Important note:
+The trouble with volatile - https://lwn.net/Articles/233479/
+Documentation/volatile-considered-harmful.txt
+
+---
+
+SDIO
+sdio_func - Standard SDIO Functions - e.x.: cameras, Bluetooth cards ...
+
+sdio_device_id { class, vendor, device }
+sdio_match_one(sdio_func *func, sdio_device_id *id) {
+        id->class == func->class ?
+        id->vendor == func->vendor ?
+        id->device == func->device ?
+}
+sdio_init_func() {
+        func->vendor = func->card->cis.vendor;
+        func->device = func->card->cis.device;
+}
+sdio_cis
+
+
+---
+
+TODO: Figure out how system.img file mode generated.
+ - system/core/libcutils/fs_config.cpp
+ rm -r out/host/; make installclean
+ Still doesn't work. WTH ? - Path must be placed before item { ..., 0, 0 } !
+ generate-userimage-prop-dictionary - build_image.py - mkuserimg.sh - make_ext4fs
+
+build/tools/releasetools/build_image.py out/target/product/NEO2/system out/target/product/NEO2/system_image_info.txt system.img out/target/product/NEO2/ 
+Running:  out/host/linux-x86/bin/mkuserimg.sh out/target/product/NEO2/system system.img ext4 system 5242880000 -D out/target/product/NEO2/ -L system                              
+make_ext4fs -T -1 -L system -l 5242880000 -a system system.img out/target/product/NEO2/system out/target/product/NEO2/
+
++---------+
+|2018.7.11|
++---------+
+
+XML中Preference的android:layout属性是如何被解析的?
+涉及到的部分：
+. frameworks/base/core/res/res/values/attrs.xml:
+```
+  <declare-styleable name="Preference">
+      ...
+      <attr name="layout" />
+```
+
+. framworks/base/core/java/android/preference/Preference.java:
+```
+  case com.android.internal.R.styleable.Preference_layout:
+```
+
+So, <Preference> 和 <com.android.settingslib.RestrictedPreference> 分别使用的是哪个
+layout呢?
+
+--
+
+Android O Settings Preference用的是哪个layout?
+packages/apps/Settings/res/layout/preference.xml or frameworks/base/core/res/res/layout/preference.xml ?
+
+--
+
+multiTuple移植到msm8953-3017基线，运行时卡在log()和socket()处。最后发现是高通的libc
+wrapper libvendorconn的问题，把libvendorconn.so干掉问题就没了。
+所以说不要信任高通的不稳定基线！做移植工作时要考虑到平台bug的可能性，尽量避免被平台
+坑。以及，Fuck高通！
+
+--
+
+Enable WLAN Hotspot:
+ConnectivityService.startTethering(TECHERING_WIFI)
+
+--
+
+用老版本git提交代码到公司的gerrit，否则会出现：
+error: unpack failed: error Missing tree xxxxxx
+
+--
+
+"debugerd -b <pid>" to see process stack trace in Android.
+
+--
+
+2018.6.13
+
+bash $IFS - Internal field separator
+
+2018.6.11
+
+一个坑：Andorid N和O的bionic ABI不兼容
+
+TODO: 搭Android NDK，不依赖源码树编译Native程序
+       - 马格机，NDK编译搞不定，缺对源码树的依赖(headers, libs)
+      ninja模块编译方法
+
+2018.6.6
+
+MLME Stands for Media Access Control (MAC) Sublayer Management Entity. MLME is the
+management entity where the Physical layer (PHY) MAC state machines reside.
+Examples of states a MLME may assist in reaching:
+
+    Authenticate
+    Deauthenticate
+    Associate
+    Disassociate
+    Reassociate
+    Beacon
+    Probe mac80211's MLME management implementation is currently handled by
+    net/mac80211/ieee80211_sta.c - This handles only the STA MLME
+
+In mac80211 the MLME is done in the kernel for station mode (STA) and in userspace
+for AP mode (hostapd). 
+
+The mac80211 subsystem moves all aspects of master mode into user space. It depends 
+on hostapd to handle authenticating clients, setting encryption keys, establishing 
+key rotation policy, and other aspects of the wireless infrastructure. Due to this, 
+the old method of issuing 'iwconfig <wireless interface> mode master' no longer 
+works. It also means that user space programs like hostapd need a way to
+send/receive management frames. 
+
+Hostapd implements part of the MLME AP code which is not in the kernel and probably
+will not be in the near future.
+For example: handling association requests which are received from wireless clients.
+
+FullMAC is a term used to describe a type of wireless card where the MLME is 
+managed in hardware. You would not use mac80211 to write a FullMAC wireless driver. 
+
+[hostapd] wpa_driver_nl80211_set_ap => NL80211_CMD_NEW_BEACON =>
+[kernel] nl80211_start_ap => rdev_start_ap => [driver] cfg80211_ops.start_ap
+
+2018.4.26
+
+非阻塞写面临的问题：select fd，系统会通知fd可写，但可写buffer有多大不可知，这意味着
+可能需要不断重试
+
+2018.4.24
+
+路由器项目
+
+主板上电后，4G板USB Vbus最先上电，Vbatt没电，此时设备在SBL模式，处于低电量充电状态。
+
+稍后Vbatt上电，设备会从SBL模式启动到Android charger模式，再在charger模式下接收开机信
+号开机。如果开机信号发出时设备还没有启动到charger模式，那么开机信号就被漏掉了。
+
+目前的规避方案是disable charger screen
+
+2018.4.21
+
+Android源码：如果删除了某些东西，clean/clobber后再编
+
+ninja: error: 'out/target/common/obj/JAVA_LIBRARIES/com.nxp.nfc.nq_intermediates/javalib.jar', needed by 'out/target/product/NEO2/dex_bootjars/system/framework/arm64/boot.art', missing and no known rule to make it
+解决：grep TARGET_USES_NQ_NFC -r device/
+设为false
+
+2018.4.2
+
+TODOs:
+
+1. wifi repeater. 系统是否支持双wlan concurrent ?
+
+2. 激活文件上传地址及端口
+
+3. 路由器4G模块系统问题
+
+2018.3.22
+
+McastBcastFilter=0，亮屏时连wifi，灭屏，可接受广播，但耗时长
+
+2018.3.21
+
+写号->读号->激活. 如果写号后立马完成激活并关机，读号这一步就无法进行
+
+采集到设备，不重启激活服务，查询不到 -- 只出现过一次
+
+2018.3.20
+
+debuggerd -b <pid>
+
+从fibocom采购模块，有什么要求
+
+qcom's wlan driver is in vendor/qcom/opensource/wlan
+
+
+sh -c "while [ `ls xxx`x != xxxx ]; do echo fuck; sleep 1; done"
+
+The above "ls xxx" would ONLY execute ONE fucking time !!
+The right way to do this:
+
+sh -c 'while [ `ls xxx`x != xxxx ]; do echo fuck; sleep 1; done'
+
+2018.3.2
+
+gpio: /sys/kernel/debug/pinctrl
+
+2018.2.26
+
+How to enable pr_debug() ?
+
+CONFIG_MESSAGE_LOGLEVEL_DEFAULT=8
+CONFIG_DYNAMIC_DEBUG=y
+echo 'file drivers/mmc/core/core.c line 964 +p' > <debugfs>/dynamic_debug/control
+See Documentation/dynamic-debug-howto.txt .
+
+TODO:
+割接激活文档，包括脚本的使用
+
+boot log level, strings vmlinux | grep msg, sd card debug log.
+
+2018.2.8
+
+note:
+
+device_add(&card->dev) <- mmc_add_card(host->card) <- mmc_attach_sdio(host)
+        <- mmc_rescan(work /* &host->detect */ )
+        <- mmc_detect_change() /* periodically */
+        <- store_polling() /* platform hci driver polling store func */
+
+qcom平台SDHC以查询方式探测SDcard. 验证方法：
+echo 0 > /sys/devices/soc/7864900.sdhci/polling
+再插卡，没反应
+echo 1 > /sys/devices/soc/7864900.sdhci/polling
+再插卡，可以探测到
+
+2018.2.7
+
+note:
+
+linux building module的秘密:  .module_name.ko.cmd
+
+2018.1.30
+
+note:
+
+SSL_get_verify_result() tells the verification result. But even if it's not OK, the connection could still be used !
+
+Fuck gcr-viewer !!!
+
+After SSLv3, SSL was renamed to TLS.
+
+2018.1.26
+
+note:
+
+PF_RANDOMIZE
+
+2018.1.24
+
+note:
+
+SELinux MLS:
+
+MLS的关注点在于信息的secret level，不管是subject还是object。
+
+信息可以从subject流向object，这是write，
+
+信息可以从object流向subject，这是read，
+
+无论subject还是object都有MLS Level，MLS规定信息不能从high secret level流向low secret level
+
+
+2018.1.10
+
+note:
+
+RMNET (and BT, maybe), QMI, SMD, MODEM
+
+netmgr_tc <= qmi_client <= qmi_server <= smdcntl <= modem     (maybe) [update: WRONG]
+
+modem QMI_QOS_ACTIVATED_EV <=> AP QMI_QOS_FLOW_ACTIVATED
+
+network interface get up => netmgr_netlink => netmgr_kif => netmgr_tc
+
+
+2017.11.30
+
+note:
+
+错误处理！！一定要有log！！不要懒得写！
+
+
+2017.11.18
+
+note:
+
+bear + vim-rtags
+
+
+2017.11.10
+
+note:
+
+并发RPC程序有必要用单独的thread来传输数据
+
+
+2017.11.9
+
+note:
+
+. TCP三路握手过程不需要accept调用参与 ref - http://blog.csdn.net/maxlovezyy/article/details/70338456
+
+. 查看连接状态/proc/net/nf_conntrack, netstat (/proc/net/tcp), 前者基于netfilter中的conntrack，后者基于TCP协议层，所以读到的状态不一定一样，可以根据这张图来判断连接卡在了哪个地方https://commons.wikimedia.org/wiki/File:Netfilter-packet-flow.svg
+
+. tcpdump由内核中的af_packet提供支持
+
+. ingress链路层和网络层的分界 - netif_rx() / netif_receive()
+
+
+2017.10.22
+
+本周计划——补习硬件知识
+
+
+2017.10.13
+
+note:
+
+TBF调参心得：
+
+burst: 这个可视为令牌桶的大小，这个参数需要与rate/HZ相适配，busrt设置过小会导致由于系统调度频率低导致不能把流量以足够速率送出。
+
+limit: 这个参数限制了令牌桶FIFO的大小，假设我们的目的是使得TCP连接被限制到一定速率同时避免丢包，那么此参数需要调到能产生足够大的延时来将TCP连接限制到指定速率
+
+ref: https://unix.stackexchange.com/questions/100785/bucket-size-in-tbf
+
+
+HTB没有limit参数？其实queue一个pfifo就可以了。TBF之所以自带limit参数就是因为它是non-hierarchical的
+
+
+2017.10.12
+
+note:
+
+tc丢包用tc -s qdisc show 看
+
+
+2017.10.10
+
+note:
+
+wlan内网流量也计入了wlan interface的流量统计，这个行为与网桥不太一样。这是由wifi链路层决定的还是只是由高通的架构导致的？
+
+
+2017.10.9
+
+note:
+
+要研究NAT的行为或实现，研究iptables即可（NAT跟通信协议不是同一类东西
+
+TCP hole punching, SO_REUSEADDR
+
+
+2017.9.17
+
+note:
+
+busybox devmem
+
+
+2017.9.22
+
+TODO: 研究一下listen的backlog参数。这个参数似乎会影响多连接情况下的accept阻塞时间
+
+
+2017.9.12
+
+Windows USB驱动装不上，改.inf文件试试
+
+
+2017.8.16
+
+AsyncTask类中只有一个static sHandler，故对于XXAsyncTask extends AsyncTask，多次new XXAsyncTask().excute()，这些XXAsyncTask实例的执行过程是串行的
+
+
+2017.8.15
+
+近来两个由我的工作导致的问题：
+
+将SD卡格式化为exfat后会弹出错误提示
+
+原因：没有覆盖测试
+
+Osaifu-Keitai        is locked
+
+原因：没有正式切换基线时忽略了老基线的维护
+
+
+2017.8.12
+
+没有正式通知切到新基线时，新老基线同步维护！
+
+
+2017.8.9
+note:
+改framework编出framework.jar发现改动没生效？把framework.jar删了还能跑？注意这个文件：boot.oat
+/system/framework/arm/boot.oat
+/data/dalvik-cache
+WITH_DEXPREOPT
+
+
+为了免受这种烦扰以后编完版本还是多编一个no dex pre opt版的system.img吧
+
+
+2017.8.7
+note:
+adb authorize:
+
+device端丢一个随机数据包给host，host用私钥（.android/adbkey或$ADB_VENDOR_KEYS）对其签名后发回device，device用/adb_keys和/data/misc/adb/adb_keys中的公钥尝试验证。若验证失败则要求host把其公钥（.android/adbkey.pub）发给自己，然后弹出对话框要求用户确认信任此公钥，即信任此host。用户确认信任后则将此公钥存入/data/misc/adb/adb_keys.
+
+
+2017.8.2
+
+note:
+
+realloc, getline
+
+
+2017.7.31
+
+note:
+
+1. 局域网流量经过MAC层的网桥转发，与路由无关。
+
+2. 通过TC对LAN网卡egress限速的方法来限制WAN网卡ingress的速率，
+
+incoming rate of WAN interface = outgoing rate of LAN interface + dropping rate
+
+TC在IP层以下实现，要实现TCP限速唯一的办法就是丢包，所以这个偏差不可避免。也就是说跟WAN ingress dropping得到的效果是一样的？？ 【update: 这个偏差可以调节，注意latency参数！！】
+
+
+2017.7.29
+
+note:
+
+编写iter next()函数应当注意：
+
+输出值可作下次的输入值；
+
+以特殊的输出值作为break条件，且此特殊值也可作为输入。
+
+
+2017.7.27
+note:
+linux dns - gethostbyname() - /etc/resolv.conf
+也就是说glibc里实现了DNS协议！
+一般系统里会使用一个caching DNS server，这时/etc/resolv.conf里应填写caching DNS server的信息
+如dnsmasq在localhost:53提供DNS服务，/etc/resolv.conf里就应填写nameserver 127.0.0.1。这时真正的DNS server信息应在caching DNS server中配置
+
+
+2017.7.26
+note:
+创建network namespace nns0
+创建veth对 veth0 veth1
+将veth1加入到nns0
+nat veth0 traffic to physical eth, enable ip_forward
+apply egress tc on veth0
+
+
+2017.7.24
+
+note:
+
+添加新的module勿忘添加PRODUCT_PACKAGES
+
+tc:
+
+ingress不容易精确限速，计划用一个veth interface转发，再在egress上作文章
+
+
+2017.7.19
+note:
+
+UMTS: 与GPRS核心网类似，漫游时对外暴露的IP位于归属地
+
+LTE SAE:
+SGW - Serving Gateway. 扮演类似GCN中SGSN的角色
+PGW - PDN Gateway. 扮演类似GCN中GGSN的角色
+PLMN - Public Land Mobile Network. 有HPLMN(Home PLMN)和VPLMN(Visiting PLMN)
+S5/S8 Interface - SGW和PGW之间的接口，其中S8是位于不同PLMN的SGW和PGW间的接口
+LTE漫游时如果使用local breakout机制，SGW和PGW间以S5 interface连接，同位于VPLMN，对外暴露的IP位于当前位置
+
+
+2017.7.18
+note:
+GPRS Core Network:
+
+GSN - GPRS Support Node. 两个变种：GGSN和SGSN
+
+GGSN - Gateway GPRS Support Node. GGSN是GPRS网络主要组件之一，位于GPRS网络和Internet之间，从外网的视角看，GGSN相当于一个子网的router。GGSN扮演Mobile IP中Home Agent的角色。当收到属于特定用户的数据，它检查用户是否active，是则将数据转发给正在服务该用户的SGSN，否则丢弃数据。GGSN维持一个active移动用户的记录以及用户当前附着的SGSN。GGSN为移动用户分配IP地址，GGSN的任务还有计费。
+
+SGSN - Serving GPRS Support Node. 负责在它的地理位置服务区域内从移动台接收或向其发送数据包。它的任务包括数据包路由和传输、可移动性管理（mobility management，附着/分离和位置管理）、逻辑链路管理（logical link management）以及鉴权和计费功能。SGSN的位置寄存器存储所有在它上面注册的GPRS用户的位置信息（例如，当前蜂窝、当前VLR）和用户概要（例如IMSI、包数据网络中所使用的地址）。将来自GGSN的GTP包（下行）去隧道化（detunnel）。将去往GGSN的IP包（上行）隧道化（tunnel）。当待机（Standby）模式的移动电话从一个路由区域移动到另一个路由区域时，实现可移动性管理（mobility management）。
+
+GTP - GPRS Tunneling Protocol. GPT承载当前为subscriber提供服务的SGSN到处理会话的GGSN的数据。三种形式的GTP:
+GTP-U - 在多个独立的隧道中为每个PDP context传输用户数据
+GTP-C - 用于控制：PDP上下文的建立和删除，GSN的reachability验证，subscriber从一个SGSN移动到另一个SGSN时的更新
+GTP' - 从各个GSN向charging function传输计费数据
+
+refs:
+http://www.telecomabc.com
+https://zh.wikipedia.org/wiki/GPRS%E6%A0%B8%E5%BF%83%E7%BD%91
+
+2017.7.17
+note:
+Mobile IP (MIP):
+
+mobile node - A mobile node is an Internet-connected device whose location and point of attachment to the Internet may frequently be changed. 传统网络假定设备有固定的IP,故而设备从一个子网移动到另一个子网，必须获取新的IP。IETE制定了Mobile IP标准以简化mobile connection对用户的复杂度。
+
+百度百科:移动IP技术是移动节点(计算机/服务器/网段等)以固定的网络IP地址，实现跨越不同网段的漫游功能，并保证了基于网络IP的网络权限在漫游过程中不发生任何改变。
+
+基于IPv4的移动IP定义三种功能实体：移动节点（mobile node）、归属代理（home agent）和外部代理（foreign agent）。归属代理和外部代理又统称为移动代理。移动IP技术的基本通信流程如下：
+（1）远程通信实体通过标准IP路由机制，向移动结点发出一个IP数据包；
+（2）移动结点的归属代理截获该数据包，将该包的目标地址与自己移动绑定表中移动结点的归属地址比较，若与其中任一地址相同，继续下一步，否则丢弃；
+（3）归属代理用封装机制将该数据包封装，采用隧道操作发给移动结点的转发地址；
+（4）移动结点的拜访地代理收到该包后，去其包封装，采用空中信道发给移动结点；
+（5）移动结点收到数据后，用标准IP路由机制与远程通信实体建立连接。
+
+
+2017.7.14
+
+Keep: 研究tc - traffic control
+
+note:
+
+tc:
+
+qdisc - queuing discipline，队列规程。 内核将packet发送给interface前会将packet enqueue在qdisc上。qdisc有不同的类型，这些类型使用不同算法进行traffic shaping。最简单的qdisc是pfifo
+
+class - classful qdisc.
+
+filter - 用来决定packet应该被enqueue到哪个class。
+
+
+2017.7.12
+
+Keep: MSM8953平台exfat支持完成。
+
+Plan:  研究kernel memory management, block device
+
+
+2017.7.6
+
+note:
+
+vold: framework MountService NativeDaemonConnector.execute() -> vold CommandListener
+
+
+2017.6.28
+
+TODO:
+
+la0911软件需求扫一遍，需要确认的问题：bootloader锁，升级方案；生产方案。
+
+
+2017.6.26
+
+note:
+
+如果在JNI函数里的循环中创建对象，需手动调用DeleteLocalRef释放引用
+
+
+2017.6.23
+
+note:
+
+file_context, ueventd parse都不认软链接 (why?)
+
+
+2017.6.21
+
+note:
+
+NFC: HandoverClient, SnepClient, NdefPushClient的连接创建对应的native层接口是一致的，这意味着handover, snep, ndefpush协议是用户层实现的。
+
+NOTE: LA0911 libgoso_crypt.a 的debug信息一定要关掉！
+
+
+2017.6.19
+
+NOTE: 读代码不要忽略一些判断条件，甚至要主动去找是不是有这么个判断条件。方向找错了很浪费时间的。
+
+
+2017.6.16
+
+note:
+
+一个off-by-one问题：
+
+char *a=malloc(10);
+
+a[10]='x';
+
+真正发生时不借助valgrind我可能到死也定位不出……
+
+所以valgrind是个好东西，调试内存overwrite基本不需要脑子。当然这是在踩到的是invalid mem的情况下，如果踩到的是valid mem呢？那就有的查了
+
+
+TODO:
+
+    la0911原理图修改
+
+    TP总结完善
+
+    NFC auto tune function项目适配
+
+
+2017.6.12
+
+奇葩的java synchronized关键字－－可嵌套！！
+
+这玩意其实是合理的，这样一来加锁的java代码里的方法名就不用像C/C++里那样加一些_locked之类的后缀了。
+
+
+2017.6.7
+
+TP的升级逻辑改成根据CRC判断，所以：
+
+每次拿到新的配置时一定先检查文件的CRC跟IC的CRC是否匹配！
+
+
+2017.5.31
+
+wifi开关问题：在开启scan_mode的条件下，打开wifi热点，再直接打开wifi开关，打开失败。
+
+note:
+
+WifiController State: ApEnabledState -> DeviceActiveState [OK] / StaEnabledState [NG] ?
+
+CMD_SET_AP和CMD_WIFI_TOGGLED的时序问题 ?
+
+NetworkControllerImpl.setWifiEnabled {
+
+ WifiManager.setWifiApEnabled(false) {
+
+  sendMessage(CMD_WIFI_TOGGLED);
+
+ }
+
+ WifiManager.setWifiEnabled(true) {
+
+  sendMessage(CMD_SET_AP);
+
+ }
+
+}
+
+这个时序没法改
+
+注意Android里的StateMachine是Hierarchical State Machine
+
+已解决：set pending state to DeviceActiveState when received CMD_WIFI_TOGGLED in ApEnabledState
+
+这次花的时间主要是不敢质疑Android原生代码逻辑，然而从新的AOSP补丁来看这个解决办法是对的
+
+
+2017.5.24
+
+TP概率性失效问题解决，原因：唤醒时enable_irq()太晚，导致第一个中断没有及时读出
+
+
+2017.5.9
+
+note:
+
+Interrupt triggered but zero messages 应该是中断处理不及时导致的，第一次处理时事实上已经有了两个中断，所以第一次处理会读两个点，第二个中断（the pending one）处理就会读到zero messages。多点触摸很容易出现这个
+
+
+2017.5.6
+
+note:
+
+tsocks trick: env LD_PRELOAD
+
+https似乎比ssh快得多【爆出翔
+
+
+2017.5.4
+
+note:
+
+$ man 5 proc
+
+TODO: getevent -tl， 绘制触摸速率曲线
+
+
+2017.4.27
+
+note: Jack编不了static java library. 如果要编，加上这一句：LOCAL_JACK_ENABLED := disabled
+
+编版本之前检查185、182服务器开了没
+
+183 python环境重新配一下
+
+modem不要在183编
+
+
+2017.4.25
+
+note: 改完AndroidManifest.xml重启
+
+ClassNotFound in jar lib. Try add xml in /etc/permissions
+
+
+2017.4.22
+
+note: 异步调用不可怕，可怕的是弄多条异步执行队列。
+
+
+2017.4.21
+
+Keep: NFC AUTO TUNE 功能完成，TP fw update bug解决
+
+Problem: NFC Calibrate快速点NfcService会崩溃，似乎只有这个时候出现RF:CMD SET_ROUTING len=22 21011600010212010300000000000000000000000000000000
+
+
+2017.4.16
+
+Keep: TP开机fw update死机问题定位：mxt_load_fw->mxt_free_object_table
+
+          死机是free导致的，但固件升级失败很有可能是mxt_wait_for_completion被interrupt导致的(Wait for completion interrupted) -- 解决办法：fw update过程放到work_queue里做
+
+
+2017.4.15
+
+Problem: 开机过程中触摸TP，开机后触摸无效，getevent有报点。
+
+                 TP开机fw update问题
+
+
+2017.4.6
+
+添加新的驱动先添加Kconfig menu再make kernelconfig配置。不要手动加。
+
+
+2017.4.5
+
+TODO: NFC MMI测试后设置里面无法打开
+
+Note:
+
+input MT protocol
+
+selinux MLS
+
+Domain Transition
+
+init进程fork service时会发生Domoin Transition. 实现DT的方法有两种:
+
+1. 对于SELinux-aware程序,可以用setexeccon()来设置exec()调用将进程所label的
+   context. 与此同时，必须声明这一规则:
+   allow init self:process setexec;
+
+2. 对于非SELinux-aware程序,可以用声明
+   type_transition init daemon_exec:process daemon;
+   这一语句的效果是init type的进程对daemon_exec type的binary执行exec()调用
+   自动transition到daemon type. 与此同时,必须声明这一规则:
+   allow init daemon:process transition;
+
+* 从以上可以看出class process对应的并非实际意义上的process,而是executable binary.
+
+
+2017.4.1
+
+前几天一直在纠结SELinux的权限问题，一句看似正确的规则却没有生效，结果问题不是规则写错了或是Android的配置方面的问题，而就是因为对SELinux本身了解的模棱两可导致的问题。把模棱两可的认识当成经验来用，问题也就成了疑难杂症
+
+
+2017.3.31
+
+Note:
+
+1.SElinux MLS
+
+2.seapp_contexts label过程：
+
+ a.ActivityManangerService通过PackageManagerService解析/system/etc/security/mac_permissions.xml
+
+得到APP的seinfo (这一步尚不确定)；
+
+ b.ActivityManangerService请求Zygote创建APP进程，通过socket给其传递seinfo等信息；
+
+ c.Zygote通过libselinux的seapp相关函数，用seapp_contexts文件中的规则，以seinfo等为依据得到进程的selinux label
+
+
+2017.3.30
+
+Problem: sepolicy 'allow platform_app payment_lockd:unix_stream_socket connectto'未生效
+
+note: why noinline ? function results in a big stack frame
+
+Note: Flexible Array!! 可能是网络编程利器！
+
+
+2017.3.23
+
+经验：要确认TP鬼点是否因为贴合问题，试试大力按
+
+TODO: TP reset过程中手按TP，reset完成后断线
+
+
+2017.3.22
+
+Keep: 1. 解决TP双击唤醒后断线issue：用reset代替写寄存器
+
+           2. 解决TP跳点：更新配置(v1.2)，增加跳频功能
+
+           3. 优化亮屏时间：把TP resume过程放到work_queue里进行
+
+TODO: la0911 level shifter上电时序问题
+
+resume中disable_irq_wake的目的：降低功耗
+
+
+2017.3.17
+
+Note: 提防全局量的状态，每个全局变量都可能隐含状态
+
+
+2017.3.14
+
+TODO: NEO2 NFC在mmi中增加工厂初始化 -- 写入EEPROM Data，设置autotune
+
+
+2017.3.13
+
+init service 和 libcutils 里的property_set trigger ？
+
+note: 使用ninja mm动态库没有install，不用ninja可以编. 原因不明.
+
+          注意32-bits还是64-bits
+
+          snprintf里的size参数includingthe terminating null byte ('\0')
+
+Keep: Double-tap-to-wake feature完成
+
+           设置项出现条件：config_supportDoubleTapWake && persist.sys.has.gesturenode=1
+
+            默认开启：def_double_tap_to_wake
+
+
+2017.3.10
+
+Problem: TP resume延时较大
+
+
+2017.3.8
+
+Keep: NEO2 TP double-tap-to-wake功能基本实现
+
+TODO: double-tap-to-wake功能代码整合
+
+
+2017.3.7
+
+TODO: Android 7.x Build System issues：
+
+    enable ninja后的make kernelconfig
+
+    ko模块编译
+
+    lib编译
+
+
+2017.3.6
+
+TODO: 1. 第一次升级TP时概率性死机并伴随I2C错误log，查一下原因。
+
+             2. Sony NFC 编译控制. all in one repo
+
+
+2017.2.28
+
+update_fw节点写两次问题：
+
+添加在on boot下的setprop会导致相应的trigger被触发两次，无论是测试还是分析代码逻辑都得到这个结论。
+
+此过程过程伪代码描述：
+
+1. TQ.Q(`late-init`);
+2. TQ.Q(`queue_property_triggers`);
+3. execute `late-init`{setprop(`aaa.bbb=ccc`), TQ.Q(`on boot`)};
+4. execute `queue_property_triggers`{TQ.Q(`empty`), set `property_triggers_enabled`};
+5. execute `on boot`{setprop&TQ.Q(`tp.fw.update=1`)};
+6. execute `empty`{execute `on aaa.bbb=ccc` `on tp.fw.update=1`};
+7. execute `on tp.fw.update=1`;
+
+
+Q: 需要中断唤醒功能的驱动里往往在suspend时先disable_irq()再enable_irq_wake()，而在resume时先disable_irq_wake()再enable_irq()。由于->resume()的调用可能是有延时的，故这种做法会导致从系统唤醒时中断服务不能实时运行。然而还是有很多驱动会这样设计，why？
+
+
+2017.2.27
+
+Keep: 1. TP的Double Tap Wakeup功能在驱动层实现并测试
+
+           2. NFC相关Kconfig重新配置，解决make kernelconfig时NFC相关配置丢失
+
+Plan: 找到on boot下面的property trigger触发2次的原因
+
+
+2017.2.25
+
+TODO: TP会cfg没有升级的情况出现，cfg升级的判断逻辑需要优化
+
+
+2017.2.24
+
+Keep: 驱动层实现TP的Double Tap Wakeup功能。试图用状态机方式实现。
+
+Note: 状态机编程不仅要注意状态的转换，还要注意触发状态转化的事件是否存在，如果存在，什么时候发生。
+
+
+2017.2.23
+
+TP的update_fw和update_cfg节点写2次的原因：
+
+system/core/init/readme.txt:
+Property triggers are additionally evaluated and triggered accordingly during the initial boot phase of init.
+对应system/core/init/init.cpp: 651行
+
+在on boot下添加能触发on property trigger的setprop语句，在Android 5.1和Android 7.1下表现不同，5.1下只触发1次，7.1下触发2次
+
+
+2017.2.22
+
+Keep: NEO2 NFC编译控制
+
+Problem: TP的update_fw和update_cfg节点开机被写了2次
+
+note: Android build: inherit-product函数会修改PRODUCT_BRAND,PRODUCT_NAME变量
+
+
+2017.2.21
+
+* note:
+
+TP的休眠唤醒应跟随LCD的亮灭，而非系统的休眠唤醒
+
+TODO: 目前的TP驱动里没有在休眠时关掉AVDD。如果关掉，对功耗的影响如何？对唤醒时间的影响如何？
+
+
+2017.2.17
+
+* note:
+
+NFCC发现Endpoint后发送RF_INTF_ACTIVATED_NTF, 其中包含的RF Interface,RF Protocol等信息将被DH NCI driver作为分发处理（如：作为Peer还是作为Tag）消息的依据
+
+
+2017.2.16
+
+Keep: LA0911充电图标issue：昨天的推测证实。LA0911用的是smb358-charger，Q908(LA0902)用的是qpnp-linear-charger，二者对charger full status的处理逻辑不同。按照这个推理，msm8909平台用smb358的项目应该都有这个问题。
+
+Problem: 按照相同的逻辑对smb358-charger driver作了修改（加了个USB online的条件），满电时拔USB，LED会概率性先灭后亮，对应内核节点状态变化为Full -> Discharging -> Full。USB online的判断有概率性BUG？
+
+
+2017.2.14 ~ 2017.2.15
+
+* note:
+
+RF Interface:
+
+DH通过RF Interface来使用NFCC实现的协议栈上的特定协议层。DH只能使用Discovery过程中被激活的(activated) RF Interface来与NFC Remote Endpoint通信.
+
+Poll Mode中，若只有一个只支持一种RF Protocol的Endpoint被发现，则由RF_DISCOVER_MAP_CMD定义的该Protocol对应的RF Interface被自动激活；若有多个Endpoint或一个支持多个Protocol的Endpoint，则需要由DH发送RF_DISCOVER_SELECT_CMD来选择Endpoint和Protocol.
+
+启动时NFC NCI的典型交互时序：
+
+CORE_RESET_NTF
+
+CORE_RESET_CMD/RSP
+
+OPTION_GET_VERSION_CMD/RSP
+
+OPTION_GET_INTERNAL_VERSION_CMD/RSP
+
+OPTION_PATCH_VERSION_CMD/RSP
+
+CORE_RESET_CMD/RSP
+
+CORE_INIT_CMD/RSP -- rsp中包含NFCC支持的各项特性
+
+CORE_SET_CONFIG_CMD/RSP -- libnfc-nci.conf里相关配置项：NFA_DM_START_UP_CFG    
+
+RF_SET_LISTEN_MODE_ROUTING_CMD/RSP -- 设定listen mode routing table -- 用来决定listen mode接收到的数据route到哪个NFCEE (NFCEE ID 0表示DH-NFCEE). 三种类型: AID-based, Protocol-based, Technolegy-based.
+
+...(write registers, check version...)
+
+RF_DISCOVER_MAP_CMD/RSP -- mapping表项:RF Protocol, Mode, RF Interface
+
+CORE_SET_CONFIG_CMD/RSP
+
+NFCEE_DISCOVER_CMD/RSP -- NFCEE Discovery enable. 发现连接在NFCC上的NFCEE. 回复个数
+
+NFCEE_DISCOVER_NTF -- NFCEE的ID,Status,支持的Protocol等。NTF的个数与上条RSP中返回的一样
+
+CORE_CONN_CREATE_CMD/RSP -- connection有Loop-back, Remote NFC Endpoint, NFCEE类型的，这里创建的是NFCEE类型的。DH和Remote NFC Endpoint之间的RF connection是static的，无需创建
+
+DATA -- 这里是与NFCEE间的数据交互。数据的交互又涉及其他协议（HCI, T3T ...）
+
+
+2017.2.15
+
+Problem: LA0911充电图标问题：拔出USB后充电图标不变且LED仍亮着。
+
+Try: 1. 复现规律稳定：充电到100%后拔出USB复现，电量降至99%后恢复正常；MMI测试项显示并无异常
+
+        2. 进一步测试发现状态栏充电图标显示正常（电充满时闪电图标消失）
+
+        3. 读BatteryService源码，发现满电时LED亮是正常的。但用Q908的机器测试发现拔USB后LED很快熄灭。推测Q908的机器在拔USB后内核节点状态很快由full变成not charging，而LA0911则等到电量变为99%时充电状态才改变。待验证
+
+Plan: 验证上述推测（可以用一个脚本轮询节点状态）。如果推测正确，则继续在驱动里找原因
+
+
+2017.2.13
+
+Keep: 结合NCI spec读libnfc-nci源码
+
+Plan: 1. 同昨天
+
+          2. NFC: 实现开机更新EEPROM data
+
+          3. 整理并提交NFC补丁
+
+* note:
+
+    得到NFC NCI数据交互：
+
+    adb logcat | grep 'DbgNci[RX]'
+
+
+2017.2.11
+
+Plan: 这几天尝试将NFC在几个模式工作时的NCI协议交互流程和Android NFC子系统对应的响应总结出来
+
+* note:
+
+    NCI spec 3.2.1: After sending a Command, the DH SHALL NOT send another Command until it receives a Response for that Command.
+
+    -- 这应该就是为什么Fuji Soft要把EEROM Data和Register Data的读写放到应用层去做了。统一经过libnfc-nci，确保不会与NFCC并发地交互。
+
+
+2017.2.10
+
+K: 1. FA5301 NFC问题。邢彦超调整了几个电容，我这里也调节了一个可调电容相关的参数和一个由使用差分电路变为使用单端结构的参数，NFC P2P模式可以正常工作了，Android Beam测试可传输文件
+
+    2. i1 LED 问题SBL1补丁验证
+
+P: 1. NFC R/W模式仍有问题——在贴完手机后紧接着贴卡上去有反应，过了几秒再贴卡就没反应了
+
+    2. i1 LED: 插USB充电时会耗几十秒在USB枚举步骤（为什么进入充电模式需要进行USB枚举？），导致插上USB几十秒后才能看到LED闪烁
+
+P: NFC问题: 读代码，读spec。Fuji Soft在R/W模式也碰到了问题，这边可能要等他们提供参数给我们才能解决
+
+    i1 LED: 没有找到好的修改办法
+
+NFC验证机器发送给天线厂前的checklist:
+
+a. 打上Fuji的补丁，包括selinux相关的文件，编译
+
+b. 刷boot.img, system.img, userdata.img，加入felica.cfg，修改NfcServicePrefs.xml
+
+c. 固件文件push到/vendor/firmware/cxd224x_firmware.bin
+
+d. 写入EEPROM Data, 注意后面的两次更新：addr 0x60（可调电容）, addr 0x10（单端电路）
+
+
+2017.2.8
+
+K: FA5301 NFC问题
+
+P: 分别测试NFC的三种模式：
+    1. CE：可以被pos机识别为卡；
+    2. P2P：用Q908的机子测试，靠近时可以看到有log输出，但Android Beam并没有响应；
+    3. R/W：贴IC卡没有log输出
+T: 从NCI spec 5.2 State Machine一节得知：
+    1. Data Messages的交互发生在POLL_ACTIVE state；
+    2. DISCOVERY state发现Remote NFC Endpointi并确定protocol后激活之，然后发送INTF_ACTIVATED_NTF给DH，进入POLL_ACTIVE state；protocol激活失败则发送CORE_GENERIC_ERROR_NTF
+   从今天测试的log中看，NFCC始终没有进入POLL_ACTIVE state。后面发现昨晚保存的log中竟然有成功discovery tag并进入POLL_ACTIVE state的情况。
+
+P: 继续查spec,抓log,跟代码
+
+
+2017.2.7
+
+K: 1. i1 电源灯问题：GPIO93问题系平台BUG，讨论后将需求修改为预充电时四个白灯不断闪烁。已修改验证
+
+    2. FA5301 NFC代码导入：一开始碰到NFC设置无法使能的问题，跟踪log和代码发现原因是少了一个配置文件。配置文件加入后NFC可以使能，从log上看是开始工作了，但功能应用上仍有问题
+
+P:
+
+T:
+
+P: 把NFC相关代码再系统地阅读一遍
+
+
+2017.2.6
+
+K: 1. i1_d项目battery LED需求的SBL1部分
+
+   2. 阅读MSM8953 sensor架构文档
+
+P: battery red LED（对应GPIO93）在SBL1里无法开启
+
+T: 从邢彦超那里了解到GPIO93开机默认为高
+
+P: 尝试把开LED的程序加到其他位置
+
+
+
+

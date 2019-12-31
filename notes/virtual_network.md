@@ -28,7 +28,7 @@ ip route add default via 192.168.2.1
 
 ```
 
-Let's get 2 "machines"!
+Let's get 2 "hosts"!
 
 ``` sh
 

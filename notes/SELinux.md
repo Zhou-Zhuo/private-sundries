@@ -13,3 +13,13 @@ init进程fork service时会发生Domoin Transition. 实现DT的方法有两种:
    `allow init daemon:process transition;`
 
 * 从以上可以看出class `process`对应的并非实际意义上的process,而是executable binary.
+
+###MLS
+
+MLS的关注点在于信息的secret level，不管是subject还是object。
+
+信息可以从subject流向object，这是write，
+
+信息可以从object流向subject，这是read，
+
+无论subject还是object都有MLS Level，MLS规定信息不能从high secret level流向low secret level
